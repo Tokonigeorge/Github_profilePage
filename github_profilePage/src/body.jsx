@@ -4,7 +4,7 @@ import HamburgerMenu from "./sections/hamburgerMenu";
 
 const Body = () => {
   return (
-    <div>
+    <div className="bg-navbg h-screen">
       <Navbar />
       <HamburgerMenu />
     </div>

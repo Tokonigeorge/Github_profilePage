@@ -7,6 +7,8 @@ module.exports = {
       colors: {
         navbg: "#161B22",
         navIcon: "#F0F6FC",
+        searchbg: "#0D1117",
+        searchring: "#F0F6FC",
       },
     },
   },

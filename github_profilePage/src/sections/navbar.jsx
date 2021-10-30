@@ -52,7 +52,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-navbg flex justify-between items-center py-4 px-3">
+    <div className="bg-navbg flex justify-between items-center py-4 px-4">
       <button type="button">
         <HamburgerIcon />
       </button>
