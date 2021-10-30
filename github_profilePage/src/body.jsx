@@ -8,7 +8,9 @@ const Body = () => {
     <div className="bg-navbg h-screen  sm2:bg-bodyBg">
       <Navbar />
       <Topbar />
-      <Sidebar />
+      <div className="hidden md:block">
+        <Sidebar />
+      </div>
     </div>
   );
 };
