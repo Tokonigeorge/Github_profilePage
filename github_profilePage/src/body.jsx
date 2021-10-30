@@ -1,12 +1,10 @@
 import React from "react";
 import Navbar from "./sections/navbar";
-import HamburgerMenu from "./sections/hamburgerMenu";
 
 const Body = () => {
   return (
-    <div className="bg-navbg h-screen">
+    <div className="bg-navbg h-screen  sm2:bg-bodyBg">
       <Navbar />
-      <HamburgerMenu />
     </div>
   );
 };

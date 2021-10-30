@@ -9,6 +9,13 @@ module.exports = {
         navIcon: "#F0F6FC",
         searchbg: "#0D1117",
         searchring: "#F0F6FC",
+        bodyBg: "#0D1117",
+      },
+      screens: {
+        sm2: "527px",
+      },
+      spacing: {
+        68: "17rem",
       },
     },
   },

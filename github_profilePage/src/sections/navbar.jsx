@@ -1,7 +1,11 @@
 import React from "react";
+import Search from "../components/Search";
+import "../utils/iconStyles.css";
 
 const Navbar = () => {
   //set the transition to hover color change
+
+  const navList = ["Issues", "MarketPlace", "Explore"];
   const BellIcon = () => {
     return (
       <svg
@@ -52,13 +56,81 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-navbg flex justify-between items-center py-4 px-4">
-      <button type="button">
-        <HamburgerIcon />
-      </button>
-      <GithubIcon />
-      <BellIcon />
+    <div className="bg-navbg">
+      <div className="flex justify-between items-center py-4 px-4 md:hidden">
+        <button type="button">
+          <HamburgerIcon />
+        </button>
+        <GithubIcon />
+        <BellIcon />
+      </div>
+
+      <div className="hidden justify-between items-center py-4 px-4 md:flex lg:px-8">
+        <div className="items-center flex">
+          <GithubIcon />
+          <div className="w-68 mx-4">{Search()}</div>
+          <div>
+            <a
+              href="#"
+              className="text-navIcon text-sm font-medium mr-4 lg:hidden"
+            >
+              Pulls
+            </a>
+            <a
+              href="#"
+              className="text-navIcon text-sm font-medium mr-4 hidden lg:inline-block"
+            >
+              Pull Requests
+            </a>
+            {navList.map((i, indx) => (
+              <a
+                href="#"
+                key={indx}
+                className="text-navIcon text-sm font-medium mr-4"
+              >
+                {i}
+              </a>
+            ))}
+          </div>
+        </div>
+        <div className="flex items-center">
+          <BellIcon />
+          <span className="flex items-center mx-4">
+            <PlusIcon />
+            <span className="dropDown-icon ml-1"></span>
+          </span>
+          <span className="flex items-center">
+            <img
+              src=""
+              alt=""
+              width="20"
+              height="20"
+              className="bg-navIcon rounded-full"
+            />
+            <span className="dropDown-icon ml-1"></span>
+          </span>
+        </div>
+      </div>
     </div>
+  );
+};
+
+const PlusIcon = () => {
+  return (
+    <svg
+      aria-hidden="true"
+      height="16"
+      viewBox="0 0 16 16"
+      version="1.1"
+      width="16"
+      data-view-component="true"
+      className="fill-current text-navIcon hover:text-gray-300"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M7.75 2a.75.75 0 01.75.75V7h4.25a.75.75 0 110 1.5H8.5v4.25a.75.75 0 11-1.5 0V8.5H2.75a.75.75 0 010-1.5H7V2.75A.75.75 0 017.75 2z"
+      ></path>
+    </svg>
   );
 };
 
