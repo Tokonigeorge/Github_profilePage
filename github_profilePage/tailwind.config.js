@@ -10,6 +10,7 @@ module.exports = {
         searchbg: "#0D1117",
         searchring: "#F0F6FC",
         bodyBg: "#0D1117",
+        textColor: "#C9D1D9",
       },
       screens: {
         sm2: "527px",
