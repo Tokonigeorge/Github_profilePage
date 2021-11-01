@@ -18,6 +18,7 @@ const Body = () => {
           name="Tokoni"
           location="Lagos, Nigeria"
           twitter="@_tokoni_"
+          // status="I'm bowling in heaven"
         />
       </div>
     </div>

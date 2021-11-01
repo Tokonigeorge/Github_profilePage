@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { PersonIcon, StarIcon, EmojiStatus } from "./topbar";
 
-const Sidebar = ({ github_name, name, location, twitter }) => {
+const Sidebar = ({ github_name, name, location, twitter, status }) => {
+  const [hover, setHover] = useState(false);
   return (
     <div className="w-72 pl-6">
       <div className="mt-10 mb-4 relative">
@@ -12,9 +13,22 @@ const Sidebar = ({ github_name, name, location, twitter }) => {
           height="256"
           className="rounded-full ring-1 ring-gray-400 ring-opacity-50"
         />
-        <div className="absolute top-3/4 left-3/4 bg-navbg rounded-full w-10 h-10 text-gray-400 hover:text-blue-400 ml-4">
-          <span className="absolute top-1/4 left-1/4">
+        <div
+          className={`absolute top-3/4 left-3/4 bg-navbg rounded-full h-9 text-gray-400 ml-4 ring-1 
+        ring-gray-400 ring-opacity-30 ${
+          hover ? (status ? "w-44" : "w-24") : "w-9"
+        }`}
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
+        >
+          <span
+            className={`absolute top-1/4 flex items-center left-1/4 mt-px hover:text-blue-400 ${
+              hover ? (status ? "-ml-8" : "-ml-4") : "ml-px"
+            }`}
+          >
             <EmojiStatus />
+            {hover && !status && <p className="text-xs ml-3">Set status</p>}
+            {status && hover && <p className="text-xs ml-3">{status}</p>}
           </span>
         </div>
       </div>
