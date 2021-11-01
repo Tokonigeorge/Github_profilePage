@@ -16,7 +16,7 @@ const Sidebar = ({ github_name, name, location, twitter, status }) => {
         <div
           className={`absolute top-3/4 left-3/4 bg-navbg rounded-full h-9 text-gray-400 ml-4 ring-1 
         ring-gray-400 ring-opacity-30 ${
-          hover ? (status ? "w-44" : "w-24") : "w-9"
+          hover ? (status ? "w-44 shadow" : "w-24 shadow") : "w-9"
         }`}
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
