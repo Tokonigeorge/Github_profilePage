@@ -4,17 +4,17 @@ import { PersonIcon, StarIcon, EmojiStatus } from "./topbar";
 const Sidebar = ({ github_name, name, location, twitter, status }) => {
   const [hover, setHover] = useState(false);
   return (
-    <div className="w-72 pl-6">
+    <div className="w-72 pl-6 lg:w-96 lg:pl-20">
       <div className="mt-10 mb-4 relative">
         <img
           src="https://avatars.githubusercontent.com/u/65655487?v=4"
           alt=""
-          width="256"
-          height="256"
+          width="340px"
+          height="340px"
           className="rounded-full ring-1 ring-gray-400 ring-opacity-50"
         />
         <div
-          className={`absolute top-3/4 left-3/4 bg-navbg rounded-full h-9 text-gray-400 ml-4 ring-1 
+          className={`absolute top-3/4 lg:left-60 left-3/4 bg-navbg rounded-full h-9 text-gray-400 ml-4 ring-1 
         ring-gray-400 ring-opacity-30 ${
           hover ? (status ? "w-44 shadow" : "w-24 shadow") : "w-9"
         }`}
