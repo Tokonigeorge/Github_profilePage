@@ -1,6 +1,6 @@
 import React from "react";
 
-const Topbar = () => {
+const Topbar = ({ github_name, name, status }) => {
   return (
     <div className="md:hidden px-4">
       <div className="flex items-center">
@@ -11,14 +11,25 @@ const Topbar = () => {
           height="200"
           className="rounded-full h-auto w-1/7 ring-1 ring-gray-400 ring-opacity-50"
         />
-        <p className="text-xl text-gray-200 text-opacity-60 font-light ml-4">
-          Tokonigeorge
-        </p>
+        <div>
+          {name && (
+            <p className="text-2xl text-navIcon font-medium ml-4">{name}</p>
+          )}
+          {github_name && (
+            <p className="text-xl text-gray-200 text-opacity-60 font-light ml-4">
+              {github_name}
+            </p>
+          )}
+        </div>
       </div>
-      <div className="rounded-md w-full ring-1 ring-gray-300 ring-opacity-20 flex items-center py-2 mt-8 px-2 text-gray-400 hover:text-blue-400">
-        <EmojiStatus />
-        <p className="text-xs inherit ml-2">Set status</p>
-      </div>
+      {status ? (
+        <p className="text-xs text-navIcon mt-10">{status}</p>
+      ) : (
+        <div className="rounded-md w-full ring-1 ring-gray-300 ring-opacity-20 flex items-center py-2 mt-8 px-2 text-gray-400 hover:text-blue-400">
+          <EmojiStatus />
+          <p className="text-xs inherit ml-2">Set status</p>
+        </div>
+      )}
       <button
         type="button"
         className="bg-gray-500 bg-opacity-10 hover:bg-opacity-20 text-sm text-textColor w-full py-2 font-medium rounded-md 

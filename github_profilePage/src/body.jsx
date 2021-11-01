@@ -7,9 +7,13 @@ const Body = () => {
   return (
     <div className="bg-navbg h-screen  sm2:bg-bodyBg">
       <Navbar />
-      <Topbar />
+      <Topbar
+        github_name="Tokonigeorge"
+        name="Tokoni"
+        // status="These are just the before pictures"
+      />
       <div className="hidden md:block">
-        <Sidebar />
+        <Sidebar github_name="Tokonigeorge" name="Tokoni" />
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import { PersonIcon, StarIcon, EmojiStatus } from "./topbar";
 
-const Sidebar = () => {
+const Sidebar = ({ github_name, name }) => {
   return (
     <div className="w-72 pl-6">
       <div className="mt-10 mb-4 relative">
@@ -18,9 +18,11 @@ const Sidebar = () => {
           </span>
         </div>
       </div>
-      <p className="text-xl text-gray-200 text-opacity-60 font-light">
-        Tokonigeorge
-      </p>
+      {github_name && (
+        <p className="text-xl text-gray-200 text-opacity-60 font-light">
+          {github_name}
+        </p>
+      )}
       <button
         type="button"
         className="bg-gray-500 bg-opacity-10 hover:bg-opacity-20 text-sm text-textColor w-full py-2 font-medium rounded-md 
