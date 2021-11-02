@@ -3,6 +3,7 @@ import Navbar from "./sections/navbar";
 import Sidebar from "./sections/sidebar";
 import Topbar from "./sections/topbar";
 import OverviewTab from "./sections/overviewTab";
+import OverviewBar from "./sections/overviewBar";
 
 const Body = () => {
   return (
@@ -24,6 +25,7 @@ const Body = () => {
           twitter="@_tokoni_"
           // status="I'm bowling in heaven"
         />
+        <OverviewBar />
       </div>
       <div className="md:hidden">
         <OverviewTab repo_number="12" />
