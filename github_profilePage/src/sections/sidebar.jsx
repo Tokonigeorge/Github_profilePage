@@ -3,18 +3,19 @@ import { PersonIcon, StarIcon, EmojiStatus } from "./topbar";
 
 const Sidebar = ({ github_name, name, location, twitter, status }) => {
   const [hover, setHover] = useState(false);
+  //lg pl-20
   return (
-    <div className="w-72 pl-6 lg:w-96 lg:pl-20">
-      <div className="mt-10 mb-4 relative">
+    <div className="w-72 pl-8 lg:w-80 flex-none">
+      <div className="-mt-8 mb-4 relative">
         <img
           src="https://avatars.githubusercontent.com/u/65655487?v=4"
           alt=""
           width="340px"
           height="340px"
-          className="rounded-full ring-1 ring-gray-400 ring-opacity-50"
+          className="rounded-full ring-1 ring-gray-400 ring-opacity-80"
         />
         <div
-          className={`absolute top-3/4 lg:left-60 left-3/4 bg-navbg rounded-full h-9 text-gray-400 ml-4 ring-1 
+          className={`absolute top-3/4 lg:left-56 left-3/4 bg-navbg rounded-full h-9 text-gray-400 ml-4 ring-1 
         ring-gray-400 ring-opacity-30 ${
           hover ? (status ? "w-44 shadow" : "w-24 shadow") : "w-9"
         }`}
@@ -91,7 +92,6 @@ const Sidebar = ({ github_name, name, location, twitter, status }) => {
 export const LocationIcon = () => {
   return (
     <svg
-      class="octicon octicon-location"
       viewBox="0 0 16 16"
       version="1.1"
       width="16"
@@ -101,6 +101,7 @@ export const LocationIcon = () => {
     >
       <path
         fillRule="evenodd"
+        fill="currentColor"
         d="M11.536 3.464a5 5 0 010 7.072L8 14.07l-3.536-3.535a5 5 0 117.072-7.072v.001zm1.06 8.132a6.5 6.5 0 10-9.192 0l3.535 3.536a1.5 1.5 0 002.122 0l3.535-3.536zM8 9a2 2 0 100-4 2 2 0 000 4z"
       ></path>
     </svg>

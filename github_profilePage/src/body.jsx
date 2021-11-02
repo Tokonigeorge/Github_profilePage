@@ -14,6 +14,9 @@ const Body = () => {
         // status="These are just the before pictures"
       />
       <div className="hidden md:block">
+        <OverviewTab repo_number="12" />
+      </div>
+      <div className="hidden md:flex md:items-start">
         <Sidebar
           github_name="Tokonigeorge"
           name="Tokoni"
@@ -22,7 +25,9 @@ const Body = () => {
           // status="I'm bowling in heaven"
         />
       </div>
-      <OverviewTab />
+      <div className="md:hidden">
+        <OverviewTab repo_number="12" />
+      </div>
     </div>
   );
 };

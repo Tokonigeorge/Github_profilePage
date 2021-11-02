@@ -101,7 +101,7 @@ const Navbar = () => {
           </span>
           <span className="flex items-center">
             <img
-              src=""
+              src="https://avatars.githubusercontent.com/u/65655487?s=40&amp;v=4"
               alt=""
               width="20"
               height="20"
