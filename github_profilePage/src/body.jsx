@@ -29,6 +29,7 @@ const Body = () => {
       </div>
       <div className="md:hidden">
         <OverviewTab repo_number="12" />
+        <OverviewBar />
       </div>
     </div>
   );

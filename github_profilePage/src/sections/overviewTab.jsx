@@ -3,14 +3,14 @@ import React from "react";
 const OverviewTab = ({ repo_number }) => {
   return (
     <div className="mt-10 text-sm text-navIcon flex items-center pl-4 border-b border-gray-400 border-opacity-20 pb-3 md:pl-74 lg:pl-88">
-      <a href="#" className="pr-8 pl-4 flex items-center">
-        <span>
+      <a href="#" className="pr-8 md:pl-4 flex items-center">
+        <span className="hidden sm2:block">
           <OverviewIcon />
-        </span>{" "}
+        </span>
         <span className="ml-2">Overview</span>
       </a>
       <a href="#" className="pr-8 flex items-center">
-        <span>
+        <span className="hidden sm2:block">
           <RepoIcon />
         </span>
         <span className="ml-2">Repositories</span>
@@ -19,13 +19,13 @@ const OverviewTab = ({ repo_number }) => {
         </span>
       </a>
       <a href="#" className="pr-8 flex items-center">
-        <span>
+        <span className="hidden sm2:block">
           <ProjectIocn />
         </span>
         <span className="ml-2">Projects</span>
       </a>
       <a href="#" className="flex items-center">
-        <span>
+        <span className="hidden sm2:block">
           <PackageIcon />
         </span>
         <span className="ml-2">Packages</span>
