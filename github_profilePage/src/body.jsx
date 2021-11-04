@@ -7,6 +7,7 @@ import OverviewBar from "./sections/overviewBar";
 import ContributionsTab from "./sections/contributionsTab";
 import Activity from "./sections/activity";
 import YearButton from "./components/YearButton";
+import Footer from "./sections/footer";
 
 const Body = () => {
   return (
@@ -48,6 +49,7 @@ const Body = () => {
         <OverviewBar />
         <ContributionsTab />
         <Activity />
+        <Footer />
       </div>
     </div>
   );
