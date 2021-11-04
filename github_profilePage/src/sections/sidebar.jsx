@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import { PersonIcon, StarIcon, EmojiStatus } from "./topbar";
 
-const Sidebar = ({ github_name, name, location, twitter, status }) => {
+const Sidebar = ({
+  github_name,
+  name,
+  location,
+  twitter,
+  status,
+  highlights,
+  organization,
+}) => {
   const [hover, setHover] = useState(false);
   //lg pl-20
   return (
@@ -85,6 +93,38 @@ const Sidebar = ({ github_name, name, location, twitter, status }) => {
           </div>
         )}
       </div>
+      {highlights && (
+        <div className="mt-4 border-t border-gray-400 border-opacity-20 ">
+          <p className="pt-4 text-gray-200 text-opacity-90 font-medium">
+            Highlights
+          </p>
+          <div className="flex items-center mt-2">
+            <span className="text-gray-400">
+              <StarIcon />
+            </span>
+            <span className="ml-1 ring-1 ring-purple-500 py-0.5 px-2 rounded-full text-purple-500 text-xs font-medium">
+              {highlights}
+            </span>
+          </div>
+        </div>
+      )}
+      {organization && (
+        <div className="mt-4 border-t border-gray-400 border-opacity-20 ">
+          <p className="pt-4 text-gray-200 text-opacity-90 font-medium">
+            Organizations
+          </p>
+          <div className="flex items-center mt-2">
+            <img
+              src="https://avatars.githubusercontent.com/u/89197363?s=64&amp;v=4"
+              alt="@zurichat"
+              size="32"
+              height="32"
+              width="32"
+              className="ring-1 ring-gray-900 rounded-md"
+            ></img>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
