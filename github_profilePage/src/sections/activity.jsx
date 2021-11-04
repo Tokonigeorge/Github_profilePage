@@ -28,6 +28,12 @@ const Activity = () => {
       >
         Show more activity
       </button>
+      <p className="text-xs text-gray-400 mt-4">
+        Seeing something unexpected? Take a look at the{" "}
+        <a href="#" className="text-blue-400">
+          Github Profile guide.
+        </a>
+      </p>
     </div>
   );
 };
