@@ -6,6 +6,7 @@ import OverviewTab from "./sections/overviewTab";
 import OverviewBar from "./sections/overviewBar";
 import ContributionsTab from "./sections/contributionsTab";
 import Activity from "./sections/activity";
+import YearButton from "./components/YearButton";
 
 const Body = () => {
   return (
@@ -31,7 +32,15 @@ const Body = () => {
         />
         <div className="flex-auto">
           <OverviewBar />
-          <ContributionsTab />
+          <div className="flex items-start">
+            <div className="flex-auto">
+              <ContributionsTab />
+              <Activity />
+            </div>
+            <div className="w-32">
+              <YearButton />
+            </div>
+          </div>
         </div>
       </div>
       <div className="md:hidden">

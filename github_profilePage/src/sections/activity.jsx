@@ -2,7 +2,7 @@ import React from "react";
 
 const Activity = () => {
   return (
-    <div className="px-4 mt-8 text-gray-400">
+    <div className="px-4 mt-8 text-gray-400 md:pl-10">
       <p className="text-navIcon">Contribution activity</p>
       <div className="mt-4 flex items-center">
         <p className="text-navIcon text-xs font-medium pl-2">
@@ -23,7 +23,7 @@ const Activity = () => {
       <div className="border-l-2 border-gray-400 border-opacity-20 h-4 ml-5"></div>
       <button
         type="button"
-        className="bg-gray-500 bg-opacity-10 hover:bg-opacity-20 text-xs text-blue-400 w-full py-2 font-medium rounded-md 
+        className="bg-transparent hover:bg-opacity-40 hover:bg-gray-800 text-xs text-blue-400 w-full py-2 font-medium rounded-md 
         border border-gray-300 border-opacity-20 mt-4"
       >
         Show more activity
