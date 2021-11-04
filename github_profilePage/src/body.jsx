@@ -5,6 +5,7 @@ import Topbar from "./sections/topbar";
 import OverviewTab from "./sections/overviewTab";
 import OverviewBar from "./sections/overviewBar";
 import ContributionsTab from "./sections/contributionsTab";
+import Activity from "./sections/activity";
 
 const Body = () => {
   return (
@@ -36,6 +37,8 @@ const Body = () => {
       <div className="md:hidden">
         <OverviewTab repo_number="12" />
         <OverviewBar />
+        <ContributionsTab />
+        <Activity />
       </div>
     </div>
   );
