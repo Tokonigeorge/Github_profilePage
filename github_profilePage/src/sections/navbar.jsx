@@ -119,7 +119,7 @@ const HamburgerIcon = () => {
   );
 };
 
-const GithubIcon = () => {
+export const GithubIcon = () => {
   return (
     <svg
       height="32"

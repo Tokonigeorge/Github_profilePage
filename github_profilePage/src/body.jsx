@@ -44,6 +44,9 @@ const Body = () => {
           </div>
         </div>
       </div>
+      <div className="hidden md:block">
+        <Footer />
+      </div>
       <div className="md:hidden">
         <OverviewTab repo_number="12" />
         <OverviewBar />
