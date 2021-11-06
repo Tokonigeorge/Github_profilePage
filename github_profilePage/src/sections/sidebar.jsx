@@ -13,8 +13,8 @@ const Sidebar = ({
   const [hover, setHover] = useState(false);
   //lg pl-20
   return (
-    <div className="w-72 pl-8 lg:w-80 flex-none">
-      <div className="-mt-8 mb-4 relative">
+    <div className="w-72 md:pl-6 lg:pl-8 lg:w-80 flex-none">
+      <div className="-mt-7 mb-4 relative">
         <img
           src="https://avatars.githubusercontent.com/u/65655487?v=4"
           alt=""
@@ -55,8 +55,8 @@ const Sidebar = ({
       </div>
       <button
         type="button"
-        className="bg-gray-500 bg-opacity-10 hover:bg-opacity-20 text-sm text-textColor w-full py-2 font-medium rounded-md 
-        border border-gray-300 border-opacity-20 hover:border-opacity-50 mt-4"
+        className="bg-gray-500 bg-opacity-10 hover:bg-opacity-20 text-sm text-textColor w-full py-1.5 font-medium rounded-md 
+        border border-defaultBorder hover:border-opacity-50 hover:border-gray-300 mt-4"
       >
         Edit profile
       </button>

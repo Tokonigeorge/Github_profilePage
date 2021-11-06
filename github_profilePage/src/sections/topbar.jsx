@@ -2,7 +2,7 @@ import React from "react";
 
 const Topbar = ({ github_name, name, status }) => {
   return (
-    <div className="md:hidden px-4 mt-3">
+    <div className="md:hidden px-4 mt-3 sm2:mt-0.5">
       <div className="flex items-center">
         <img
           src="https://avatars.githubusercontent.com/u/65655487?v=4"

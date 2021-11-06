@@ -7,13 +7,18 @@ const RepoCard = () => {
     <div className="h-auto rounded-md ring-1 ring-defaultBorder p-4">
       <div className="flex items-center justify-between text-gray-400">
         <div className="flex items-center">
-          <RepoIcon />
-          <a href="#" className="text-sm font-medium text-blue-400 ml-2">
+          <span>
+            <RepoIcon />
+          </span>
+          <a
+            href="#"
+            className="text-sm font-medium text-blue-400 ml-2 break-all"
+          >
             certificate_generator
           </a>
         </div>
         <div className="flex items-center">
-          <p className="text-xs rounded-full ring-1 ring-gray-500 ring-opacity-40 px-2 py-0.5 mr-2">
+          <p className="text-xs rounded-full ring-1 ring-gray-500 ring-opacity-40 px-2 py-0.5 mr-2 ml-0.5">
             Public
           </p>
           <DragIcon />

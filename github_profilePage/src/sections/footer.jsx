@@ -3,8 +3,11 @@ import { GithubIcon } from "./navbar";
 
 const Footer = () => {
   return (
-    <div className="mx-4 border-t border-gray-400 border-opacity-20 text-center my-12 font-medium md:flex md:items-center md:justify-between">
-      <div className="text-xs text-blue-400 flex items-center justify-center flex-wrap mt-10 lg:mt-4 lg:px-0">
+    <div
+      className="mx-4 sm2:mx-10 border-t border-gray-400 border-opacity-20 text-center mt-12 mb-14 font-medium lg:flex lg:items-center
+     lg:justify-between lg:mx-0"
+    >
+      <div className="text-xs text-blue-400 flex items-center justify-center flex-wrap mt-10 lg:mt-8 lg:px-0">
         <p className="text-gray-400 lg:ml-0 font-normal">© 2021 GitHub, Inc.</p>
         <a href="#" className="ml-3 lg:ml-5">
           Terms
@@ -22,11 +25,11 @@ const Footer = () => {
           Docs
         </a>
       </div>
-      <div className="hidden lg:block mt-4">
+      <div className="hidden lg:block mt-8">
         <GithubIcon />
       </div>
-      <div className="text-xs text-blue-400 mt-4 flex items-center justify-center flex-wrap lg:px-0">
-        <a href="#" className="lg:ml-5">
+      <div className="text-xs text-blue-400 mt-3 flex items-center justify-center flex-wrap lg:px-0 lg:mt-8">
+        <a href="#" className="lg:ml-0">
           Contact GitHub
         </a>
         <a href="#" className="ml-3 lg:ml-5">

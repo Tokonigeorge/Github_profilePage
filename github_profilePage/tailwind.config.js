@@ -15,6 +15,7 @@ module.exports = {
       },
       screens: {
         sm2: "527px",
+        lg2: "1120px",
       },
       spacing: {
         68: "17rem",

@@ -3,7 +3,7 @@ import "../utils/styles.css";
 
 const ContributionsTab = () => {
   return (
-    <div className="px-4 mt-8 md:pl-10">
+    <div className="px-4 mt-8 md:pl-6 md:pr-6 lg:pr-8">
       <div className="flex justify-between items-center">
         <p className="text-navIcon">247 contributions in 2021</p>
         <div className="text-gray-400 text-sm flex items-center">

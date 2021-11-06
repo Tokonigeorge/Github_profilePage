@@ -2,7 +2,7 @@ import React from "react";
 
 const Activity = () => {
   return (
-    <div className="px-4 mt-8 text-gray-400 md:pl-10">
+    <div className="px-4 mt-8 text-gray-400 md:pl-6 md:pr-6">
       <p className="text-navIcon">Contribution activity</p>
       <div className="mt-4 flex items-center">
         <p className="text-navIcon text-xs font-medium pl-2">

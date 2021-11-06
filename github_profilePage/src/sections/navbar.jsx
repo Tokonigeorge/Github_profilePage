@@ -19,7 +19,7 @@ const Navbar = () => {
           <BellIcon />
         </div>
 
-        <div className="hidden justify-between items-center py-4 px-4 md:flex lg:px-8">
+        <div className="hidden justify-between items-center py-4 px-4 md:flex lg:px-8 md:px-6">
           <div className="items-center flex">
             <GithubIcon />
             {/* calling the search component as a function lets the input the focused on rerender */}

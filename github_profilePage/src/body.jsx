@@ -33,12 +33,12 @@ const Body = () => {
         />
         <div className="flex-auto">
           <OverviewBar />
+          <ContributionsTab />
           <div className="flex items-start">
             <div className="flex-auto">
-              <ContributionsTab />
               <Activity />
             </div>
-            <div className="w-32">
+            <div className="md:hidden lg:block lg:w-32">
               <YearButton />
             </div>
           </div>
