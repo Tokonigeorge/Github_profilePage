@@ -11,6 +11,7 @@ module.exports = {
         searchring: "#F0F6FC",
         bodyBg: "#0D1117",
         textColor: "#C9D1D9",
+        defaultBorder: "#30363d",
       },
       screens: {
         sm2: "527px",
@@ -21,7 +22,7 @@ module.exports = {
         88: "22rem",
       },
       width: {
-        "1/7": "15.5%",
+        "1/7": "16.4%",
       },
     },
   },
