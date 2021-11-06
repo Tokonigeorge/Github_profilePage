@@ -1,70 +1,78 @@
-import React from "react";
+import React, { useState } from "react";
 import Search from "../components/Search";
 import "../utils/iconStyles.css";
+import HamburgerMenu from "./hamburgerMenu";
 
 const Navbar = () => {
   //set the transition to hover color change
-
+  const [open, setOpen] = useState(false);
   const navList = ["Issues", "MarketPlace", "Explore"];
   const nav = true;
   return (
-    <div className="bg-navbg">
-      <div className="flex justify-between items-center py-4 px-4 md:hidden">
-        <button type="button">
-          <HamburgerIcon />
-        </button>
-        <GithubIcon />
-        <BellIcon />
-      </div>
-
-      <div className="hidden justify-between items-center py-4 px-4 md:flex lg:px-8">
-        <div className="items-center flex">
+    <>
+      <div className="bg-navbg">
+        <div className="flex justify-between items-center py-4 px-4 md:hidden">
+          <button type="button" onClick={() => setOpen(!open)}>
+            <HamburgerIcon />
+          </button>
           <GithubIcon />
-          {/* calling the search component as a function lets the input the focused on rerender */}
-          <div className="w-68 mx-4">{Search(nav)}</div>
-          <div>
-            <a
-              href="#"
-              className="text-navIcon text-sm font-medium mr-4 lg:hidden"
-            >
-              Pulls
-            </a>
-            <a
-              href="#"
-              className="text-navIcon text-sm font-medium mr-4 hidden lg:inline-block hover:text-gray-300"
-            >
-              Pull Requests
-            </a>
-            {navList.map((i, indx) => (
+          <BellIcon />
+        </div>
+
+        <div className="hidden justify-between items-center py-4 px-4 md:flex lg:px-8">
+          <div className="items-center flex">
+            <GithubIcon />
+            {/* calling the search component as a function lets the input the focused on rerender */}
+            <div className="w-68 mx-4">{Search(nav)}</div>
+            <div>
               <a
                 href="#"
-                key={indx}
-                className="text-navIcon text-sm font-medium mr-4 hover:text-gray-300"
+                className="text-navIcon text-sm font-medium mr-4 lg:hidden"
               >
-                {i}
+                Pulls
               </a>
-            ))}
+              <a
+                href="#"
+                className="text-navIcon text-sm font-medium mr-4 hidden lg:inline-block hover:text-gray-300"
+              >
+                Pull Requests
+              </a>
+              {navList.map((i, indx) => (
+                <a
+                  href="#"
+                  key={indx}
+                  className="text-navIcon text-sm font-medium mr-4 hover:text-gray-300"
+                >
+                  {i}
+                </a>
+              ))}
+            </div>
+          </div>
+          <div className="flex items-center">
+            <BellIcon />
+            <span className="flex items-center mx-4 cursor-pointer">
+              <PlusIcon />
+              <span className="dropDown-icon ml-1"></span>
+            </span>
+            <span className="flex items-center cursor-pointer">
+              <img
+                src="https://avatars.githubusercontent.com/u/65655487?s=40&amp;v=4"
+                alt=""
+                width="20"
+                height="20"
+                className="bg-navIcon rounded-full"
+              />
+              <span className="dropDown-icon ml-1"></span>
+            </span>
           </div>
         </div>
-        <div className="flex items-center">
-          <BellIcon />
-          <span className="flex items-center mx-4 cursor-pointer">
-            <PlusIcon />
-            <span className="dropDown-icon ml-1"></span>
-          </span>
-          <span className="flex items-center cursor-pointer">
-            <img
-              src="https://avatars.githubusercontent.com/u/65655487?s=40&amp;v=4"
-              alt=""
-              width="20"
-              height="20"
-              className="bg-navIcon rounded-full"
-            />
-            <span className="dropDown-icon ml-1"></span>
-          </span>
-        </div>
       </div>
-    </div>
+      {open && (
+        <div>
+          <HamburgerMenu />
+        </div>
+      )}
+    </>
   );
 };
 
