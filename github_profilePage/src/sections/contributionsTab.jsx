@@ -1,5 +1,5 @@
 import React from "react";
-import "../utils/iconStyles.css";
+import "../utils/styles.css";
 
 const ContributionsTab = () => {
   return (

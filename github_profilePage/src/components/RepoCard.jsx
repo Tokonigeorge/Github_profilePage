@@ -4,7 +4,7 @@ import { StarIcon } from "../sections/topbar";
 
 const RepoCard = () => {
   return (
-    <div className="h-auto rounded-md ring-1 ring-gray-600 ring-opacity-40 p-4">
+    <div className="h-auto rounded-md ring-1 ring-defaultBorder p-4">
       <div className="flex items-center justify-between text-gray-400">
         <div className="flex items-center">
           <RepoIcon />

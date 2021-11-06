@@ -6,7 +6,7 @@ const OverviewBar = () => {
     <div className="ml-4 md:ml-10 pr-6 mt-5">
       <div className="flex justify-between items-center">
         <p className="text-navIcon">Pinned</p>
-        <a href="#" className="text-gray-400 text-sm">
+        <a href="#" className="text-gray-200 text-opacity-60 text-sm">
           Customize your pins
         </a>
       </div>

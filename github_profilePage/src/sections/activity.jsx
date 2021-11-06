@@ -8,7 +8,7 @@ const Activity = () => {
         <p className="text-navIcon text-xs font-medium pl-2">
           November <span className="text-gray-400">2021</span>
         </p>
-        <span className="border-t border-gray-400 border-opacity-20 ml-2 flex-auto"></span>
+        <span className="border-t border-gray-400 border-opacity-20 ml-4 flex-auto"></span>
       </div>
       <div className="border-l-2 border-gray-400 border-opacity-20 h-4 ml-5 mt-2"></div>
       <div className="flex items-center justify-between my-px pl-1.5">
@@ -23,12 +23,12 @@ const Activity = () => {
       <div className="border-l-2 border-gray-400 border-opacity-20 h-4 ml-5"></div>
       <button
         type="button"
-        className="bg-transparent hover:bg-opacity-40 hover:bg-gray-800 text-xs text-blue-400 w-full py-2 font-medium rounded-md 
-        border border-gray-300 border-opacity-20 mt-4"
+        className="bg-transparent text-xs text-blue-400 w-full py-2.5 font-medium rounded-md 
+        border border-gray-300 border-opacity-20 mt-6"
       >
         Show more activity
       </button>
-      <p className="text-xs text-gray-400 mt-4">
+      <p className="text-xs text-gray-400 mt-6">
         Seeing something unexpected? Take a look at the{" "}
         <a href="#" className="text-blue-400">
           Github Profile guide.

@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../utils/styles.css";
 
 const OverviewTab = ({ repo_number }) => {
+  const onScroll = (e) => {
+    console.log(e);
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   return (
     <div className="mt-10 text-sm text-navIcon flex items-center pl-4 border-b border-gray-400 border-opacity-20 pb-3 md:pl-74 lg:pl-88 overflow-x-auto">
       <a href="#" className="pr-6 md:pl-4 flex items-center link active">
