@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Search from "../components/Search";
-import "../utils/iconStyles.css";
+import "../utils/styles.css";
 import HamburgerMenu from "./hamburgerMenu";
 
 const Navbar = () => {

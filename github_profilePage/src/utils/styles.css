@@ -1,0 +1,37 @@
+.dropDown-icon {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  vertical-align: middle;
+  content: "";
+  border-style: solid;
+  border-width: 4px 4px 0;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+}
+
+.link {
+  position: relative;
+  transition: color 0.5s;
+}
+
+.link::after {
+  position: absolute;
+  content: "";
+  height: 3px;
+  left: 0;
+  bottom: -12px;
+  background-color: transparent;
+  width: 100%;
+  transition: 0.25s;
+  margin: 0 auto;
+}
+
+.link:hover::after {
+  background-color: #30363d;
+}
+
+.link.active::after {
+  background-color: #f78166;
+}
