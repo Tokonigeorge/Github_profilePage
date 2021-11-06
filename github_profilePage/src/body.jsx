@@ -11,7 +11,7 @@ import Footer from "./sections/footer";
 
 const Body = () => {
   return (
-    <div className="bg-navbg h-screen overflow-x-hidden sm2:bg-bodyBg">
+    <div className="bg-navbg h-screen overflow-x-hidden sm2:bg-bodyBg overscroll-x-none">
       <Navbar />
       <Topbar
         github_name="Tokonigeorge"
