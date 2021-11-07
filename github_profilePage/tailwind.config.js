@@ -12,6 +12,8 @@ module.exports = {
         bodyBg: "#0D1117",
         textColor: "#C9D1D9",
         defaultBorder: "#30363d",
+        signInBg: "#2da44e",
+        formBg: "#f6f8fa",
       },
       screens: {
         sm2: "527px",
