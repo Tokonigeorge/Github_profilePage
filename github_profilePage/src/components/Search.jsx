@@ -4,7 +4,11 @@ const Search = () => {
   const [value, setValue] = useState("");
   const [focus, setFocus] = useState(false);
   return (
-    <div className="flex justify-between items-center bg-searchbg py-1 ring-1 ring-gray-600 rounded ring-opacity-40 w-full">
+    <div
+      className={`flex justify-between items-center py-1 ring-1 rounded ring-opacity-40 w-full ${
+        focus ? "ring-blue-500 bg-transparent" : "ring-gray-600 bg-searchbg"
+      }`}
+    >
       <input
         type="text"
         placeholder="Search or jump to..."
@@ -22,7 +26,7 @@ const Search = () => {
           width="22"
           height="20"
           aria-hidden="true"
-          className="mr-1"
+          className="mr-px"
         >
           <path
             fill="none"

@@ -11,9 +11,13 @@ module.exports = {
         searchring: "#F0F6FC",
         bodyBg: "#0D1117",
         textColor: "#C9D1D9",
+        defaultBorder: "#30363d",
+        signInBg: "#2da44e",
+        formBg: "#f6f8fa",
       },
       screens: {
         sm2: "527px",
+        lg2: "1120px",
       },
       spacing: {
         68: "17rem",
@@ -21,7 +25,7 @@ module.exports = {
         88: "22rem",
       },
       width: {
-        "1/7": "15.5%",
+        "1/7": "16.4%",
       },
     },
   },

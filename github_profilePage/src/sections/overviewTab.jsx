@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
+import "../utils/styles.css";
 
 const OverviewTab = ({ repo_number }) => {
+  const onScroll = (e) => {
+    console.log(e);
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   return (
-    <div className="mt-10 text-sm text-navIcon flex items-center pl-4 border-b border-gray-400 border-opacity-20 pb-3 md:pl-74 lg:pl-88">
-      <a href="#" className="pr-8 pl-4 flex items-center">
-        <span>
+    <div className="mt-10 text-sm text-navIcon flex items-center pl-4 border-b border-gray-400 border-opacity-20 pb-3 md:pl-74 lg:pl-88 overflow-x-auto">
+      <a href="#" className="pr-6 md:pl-4 flex items-center link active">
+        <span className="hidden sm2:block">
           <OverviewIcon />
-        </span>{" "}
+        </span>
         <span className="ml-2">Overview</span>
       </a>
-      <a href="#" className="pr-8 flex items-center">
-        <span>
+      <a href="#" className="pr-6 flex items-center link">
+        <span className="hidden sm2:block">
           <RepoIcon />
         </span>
         <span className="ml-2">Repositories</span>
@@ -18,14 +26,14 @@ const OverviewTab = ({ repo_number }) => {
           {repo_number}
         </span>
       </a>
-      <a href="#" className="pr-8 flex items-center">
-        <span>
+      <a href="#" className="pr-6 flex items-center link">
+        <span className="hidden sm2:block">
           <ProjectIocn />
         </span>
         <span className="ml-2">Projects</span>
       </a>
-      <a href="#" className="flex items-center">
-        <span>
+      <a href="#" className="flex items-center pr-6 link">
+        <span className="hidden sm2:block">
           <PackageIcon />
         </span>
         <span className="ml-2">Packages</span>

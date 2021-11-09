@@ -1,11 +1,21 @@
 import React from "react";
 
-const Topbar = ({ github_name, name, status }) => {
+const Topbar = ({
+  github_name,
+  name,
+  status,
+  followers,
+  following,
+  starredRepositories,
+  avatarUrl,
+}) => {
   return (
-    <div className="md:hidden px-4">
+    <div className="md:hidden px-4 mt-3 sm2:mt-0.5">
       <div className="flex items-center">
         <img
-          src="https://avatars.githubusercontent.com/u/65655487?v=4"
+          src={
+            avatarUrl || "https://avatars.githubusercontent.com/u/65655487?v=4"
+          }
           alt=""
           width="200"
           height="200"
@@ -25,34 +35,36 @@ const Topbar = ({ github_name, name, status }) => {
       {status ? (
         <p className="text-xs text-navIcon mt-10">{status}</p>
       ) : (
-        <div className="rounded-md w-full ring-1 ring-gray-300 ring-opacity-20 flex items-center py-2 mt-8 px-2 text-gray-400 hover:text-blue-400">
+        <div className="rounded-md w-full ring-1 ring-defaultBorder flex items-center py-2 mt-8 px-2 text-gray-400 hover:text-blue-400">
           <EmojiStatus />
           <p className="text-xs inherit ml-2">Set status</p>
         </div>
       )}
       <button
         type="button"
-        className="bg-gray-500 bg-opacity-10 hover:bg-opacity-20 text-sm text-textColor w-full py-2 font-medium rounded-md 
-        border border-gray-300 border-opacity-20 hover:border-opacity-50 mt-4"
+        className="bg-gray-500 bg-opacity-10 hover:bg-opacity-20 text-sm text-textColor w-full py-1.5 font-medium rounded-md 
+        border border-defaultBorder hover:border-opacity-50 hover:border-gray-300 mt-2"
       >
         Edit profile
       </button>
-      <div className="flex items-center text-gray-200 text-opacity-60 text-sm mt-4">
+      <div className="flex items-center text-gray-200 text-opacity-60 text-sm mt-6">
         <a href="#" className="flex items-center hover:text-blue-400">
           <PersonIcon />
-          <span className="ml-1 text-navIcon font-medium">2</span>
-          <p className="ml-1">followers</p>
+          <span className="ml-1 text-navIcon font-medium">{followers}</span>
+          <p className="ml-1">{followers === 1 ? "follower" : "followers"}</p>
         </a>
-        <p className="ml-1 text-navIcon font-medium">.</p>
+        <span className="ml-1 text-navIcon font-medium w-0.5 h-0.5 bg-navIcon rounded-full"></span>
         <a href="#" className="flex items-center hover:text-blue-400">
-          <span className="ml-1 text-navIcon font-medium">2</span>
+          <span className="ml-1 text-navIcon font-medium">{following}</span>
           <p className="ml-1">following</p>
         </a>
-        <p className="ml-1 mr-1 text-navIcon font-medium">.</p>
-        <span className="hover:text-blue-400">
+        <span className="ml-1 text-navIcon font-medium w-0.5 h-0.5 bg-navIcon rounded-full"></span>
+        <span className="ml-1 hover:text-blue-400">
           <StarIcon />
         </span>
-        <span className="ml-1 text-navIcon font-medium">0</span>
+        <span className="ml-1 text-navIcon font-medium">
+          {starredRepositories}
+        </span>
       </div>
     </div>
   );

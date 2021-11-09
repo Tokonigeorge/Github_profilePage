@@ -2,37 +2,62 @@ import React from "react";
 import { RepoIcon } from "../sections/overviewTab";
 import { StarIcon } from "../sections/topbar";
 
-const RepoCard = () => {
+const RepoCard = ({
+  name,
+  isPrivate,
+  des,
+  forkCount,
+  isFork,
+  stargazerCount,
+  language,
+}) => {
+  const languageColor = {
+    backgroundColor: language?.color,
+  };
   return (
-    <div className="h-auto rounded-md ring-1 ring-gray-600 ring-opacity-40 p-4">
+    <div className="h-auto rounded-md ring-1 ring-defaultBorder p-4 flex flex-col justify-between">
       <div className="flex items-center justify-between text-gray-400">
         <div className="flex items-center">
-          <RepoIcon />
-          <a href="#" className="text-sm font-medium text-blue-400 ml-2">
-            certificate_generator
+          <span>
+            <RepoIcon />
+          </span>
+          <a
+            href="#"
+            className="text-sm font-medium text-blue-400 ml-2 break-all"
+          >
+            {name}
           </a>
         </div>
         <div className="flex items-center">
-          <p className="text-xs rounded-full ring-1 ring-gray-500 ring-opacity-40 px-2 py-0.5 mr-2">
-            Public
+          <p className="text-xs rounded-full ring-1 ring-gray-500 ring-opacity-40 px-2 py-0.5 mr-2 ml-0.5">
+            {isPrivate ? "Private" : "Public"}
           </p>
           <DragIcon />
         </div>
       </div>
-      <p className="text-xs text-gray-400 pt-4">
-        A Workspace Web App powered by React and Node Js.
-      </p>
-      <div className="flex items-center text-gray-400 mt-4">
-        <span className="h-3 w-3 bg-yellow-300 rounded-full"></span>
-        <p className="text-xs ml-1">JavaScript</p>
-        <div className="flex items-center hover:text-blue-400 text-xs ml-6">
-          <StarIcon />
-          <p className="ml-1">2</p>
-        </div>
-        <div className="flex items-center hover:text-blue-400 text-xs ml-6">
-          <ForkIcon />
-          <p className="ml-1">118</p>
-        </div>
+      {des && <p className="text-xs text-gray-400 pt-2">{des}</p>}
+      <div className={`flex items-center text-gray-400 mt-6`}>
+        {language && (
+          <>
+            <span
+              className={`h-3 w-3 rounded-full`}
+              style={languageColor}
+            ></span>
+            <p className="text-xs ml-1">{language.name}</p>
+          </>
+        )}
+        {stargazerCount > 0 && (
+          <div className="flex items-center hover:text-blue-400 text-xs ml-5">
+            <StarIcon />
+            <p className="ml-1">{stargazerCount}</p>
+          </div>
+        )}
+        {forkCount > 0 && (
+          <div className="flex items-center hover:text-blue-400 text-xs ml-5">
+            <ForkIcon />
+            <p className="ml-1">{forkCount}</p>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,18 +1,32 @@
 import React, { useState } from "react";
 import { PersonIcon, StarIcon, EmojiStatus } from "./topbar";
 
-const Sidebar = ({ github_name, name, location, twitter, status }) => {
+const Sidebar = ({
+  github_name,
+  name,
+  location,
+  twitter,
+  status,
+  highlights,
+  organization,
+  followers,
+  following,
+  starredRepositories,
+  avatarUrl,
+}) => {
   const [hover, setHover] = useState(false);
   //lg pl-20
   return (
-    <div className="w-72 pl-8 lg:w-80 flex-none">
-      <div className="-mt-8 mb-4 relative">
+    <div className="w-72 md:pl-6 lg:pl-8 lg:w-80 flex-none">
+      <div className="-mt-7 mb-4 relative">
         <img
-          src="https://avatars.githubusercontent.com/u/65655487?v=4"
+          src={
+            avatarUrl || "https://avatars.githubusercontent.com/u/65655487?v=4"
+          }
           alt=""
           width="340px"
           height="340px"
-          className="rounded-full ring-1 ring-gray-400 ring-opacity-80"
+          className="rounded-full ring-1 ring-gray-700 ring-opacity-80"
         />
         <div
           className={`absolute top-3/4 lg:left-56 left-3/4 bg-navbg rounded-full h-9 text-gray-400 ml-4 ring-1 
@@ -47,27 +61,29 @@ const Sidebar = ({ github_name, name, location, twitter, status }) => {
       </div>
       <button
         type="button"
-        className="bg-gray-500 bg-opacity-10 hover:bg-opacity-20 text-sm text-textColor w-full py-2 font-medium rounded-md 
-        border border-gray-300 border-opacity-20 hover:border-opacity-50 mt-4"
+        className="bg-gray-500 bg-opacity-10 hover:bg-opacity-20 text-sm text-textColor w-full py-1.5 font-medium rounded-md 
+        border border-defaultBorder hover:border-opacity-50 hover:border-gray-300 mt-4"
       >
         Edit profile
       </button>
       <div className="flex items-center text-gray-200 text-opacity-60 text-sm mt-4">
         <a href="#" className="flex items-center hover:text-blue-400">
           <PersonIcon />
-          <span className="ml-1 text-navIcon font-medium">2</span>
-          <p className="ml-1">followers</p>
+          <span className="ml-1 text-navIcon font-medium">{followers}</span>
+          <p className="ml-1">{followers === 1 ? "follower" : "followers"}</p>
         </a>
-        <p className="ml-1 text-navIcon font-medium">.</p>
+        <span className="ml-1 text-navIcon font-medium w-0.5 h-0.5 bg-navIcon rounded-full"></span>
         <a href="#" className="flex items-center hover:text-blue-400">
-          <span className="ml-1 text-navIcon font-medium">2</span>
+          <span className="ml-1 text-navIcon font-medium">{following}</span>
           <p className="ml-1">following</p>
         </a>
-        <p className="ml-1 mr-1 text-navIcon font-medium">.</p>
+        <span className="ml-1 mr-1 text-navIcon font-medium w-0.5 h-0.5 bg-navIcon rounded-full"></span>
         <span className="hover:text-blue-400">
           <StarIcon />
         </span>
-        <span className="ml-1 text-navIcon font-medium">0</span>
+        <span className="ml-1 text-navIcon font-medium">
+          {starredRepositories}
+        </span>
       </div>
       <div className="mt-6">
         {location && (
@@ -85,6 +101,44 @@ const Sidebar = ({ github_name, name, location, twitter, status }) => {
           </div>
         )}
       </div>
+      {highlights && (
+        <div className="mt-4 border-t border-gray-400 border-opacity-20 ">
+          <p className="pt-4 text-gray-200 text-opacity-90 font-medium">
+            Highlights
+          </p>
+          <div className="flex items-center mt-2">
+            <span className="text-gray-400">
+              <StarIcon />
+            </span>
+            <span className="ml-1 ring-1 ring-purple-500 py-0.5 px-2 rounded-full text-purple-500 text-xs font-medium">
+              {highlights}
+            </span>
+          </div>
+        </div>
+      )}
+      {organization.nodes.length > 0 && (
+        <div className="mt-4 border-t border-gray-400 border-opacity-20 ">
+          <p className="pt-4 text-gray-200 text-opacity-90 font-medium">
+            Organizations
+          </p>
+          <div className="flex items-center mt-2">
+            {organization.nodes.map((i) => (
+              <img
+                src={
+                  i.avatarUrl ||
+                  `https://avatars.githubusercontent.com/u/89197363?s=64&amp;v=4`
+                }
+                alt={i.name}
+                key={i}
+                size="32"
+                height="32"
+                width="32"
+                className="ring-1 ring-gray-900 rounded-md"
+              ></img>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
