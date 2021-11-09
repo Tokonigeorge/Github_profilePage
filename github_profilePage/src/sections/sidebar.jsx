@@ -9,6 +9,9 @@ const Sidebar = ({
   status,
   highlights,
   organization,
+  followers,
+  following,
+  starredRepositories,
 }) => {
   const [hover, setHover] = useState(false);
   //lg pl-20
@@ -63,19 +66,21 @@ const Sidebar = ({
       <div className="flex items-center text-gray-200 text-opacity-60 text-sm mt-4">
         <a href="#" className="flex items-center hover:text-blue-400">
           <PersonIcon />
-          <span className="ml-1 text-navIcon font-medium">2</span>
-          <p className="ml-1">followers</p>
+          <span className="ml-1 text-navIcon font-medium">{followers}</span>
+          <p className="ml-1">{followers === 1 ? "follower" : "followers"}</p>
         </a>
-        <p className="ml-1 text-navIcon font-medium">.</p>
+        <span className="ml-1 text-navIcon font-medium w-0.5 h-0.5 bg-navIcon rounded-full"></span>
         <a href="#" className="flex items-center hover:text-blue-400">
-          <span className="ml-1 text-navIcon font-medium">2</span>
+          <span className="ml-1 text-navIcon font-medium">{following}</span>
           <p className="ml-1">following</p>
         </a>
-        <p className="ml-1 mr-1 text-navIcon font-medium">.</p>
+        <span className="ml-1 mr-1 text-navIcon font-medium w-0.5 h-0.5 bg-navIcon rounded-full"></span>
         <span className="hover:text-blue-400">
           <StarIcon />
         </span>
-        <span className="ml-1 text-navIcon font-medium">0</span>
+        <span className="ml-1 text-navIcon font-medium">
+          {starredRepositories}
+        </span>
       </div>
       <div className="mt-6">
         {location && (
@@ -114,14 +119,20 @@ const Sidebar = ({
             Organizations
           </p>
           <div className="flex items-center mt-2">
-            <img
-              src="https://avatars.githubusercontent.com/u/89197363?s=64&amp;v=4"
-              alt="@zurichat"
-              size="32"
-              height="32"
-              width="32"
-              className="ring-1 ring-gray-900 rounded-md"
-            ></img>
+            {organization.nodes.map((i) => (
+              <img
+                src={
+                  i.avatarUrl ||
+                  `https://avatars.githubusercontent.com/u/89197363?s=64&amp;v=4`
+                }
+                alt={i.name}
+                key={i}
+                size="32"
+                height="32"
+                width="32"
+                className="ring-1 ring-gray-900 rounded-md"
+              ></img>
+            ))}
           </div>
         </div>
       )}

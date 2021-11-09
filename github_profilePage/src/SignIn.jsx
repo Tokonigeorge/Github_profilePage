@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
-const SignIn = () => {
+const SignIn = ({ handleChange, loading }) => {
+  //work out validation of input
+  const [value, setValue] = useState("");
   return (
     <div className="flex flex-col items-center mt-8 mx-4 text-gray-800">
       <span>
@@ -17,8 +19,10 @@ const SignIn = () => {
             name="username/email"
             placeholder="Username or email address"
             className="mb-4 w-full px-2 py-1.5 ring-1 ring-defaultBorder ring-opacity-20 rounded-md outline-none focus:ring-blue-500"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
           />
-          <p htmlFor="password" className="mb-2">
+          {/* <p htmlFor="password" className="mb-2">
             Password
           </p>
           <input
@@ -27,13 +31,17 @@ const SignIn = () => {
             placeholder="Password"
             autoComplete="yes"
             className="mb-6 w-full px-2 py-1.5 ring-1 ring-defaultBorder ring-opacity-20 rounded-md outline-none focus:ring-blue-500"
-          />
+          /> */}
         </form>
         <button
-          type="submit"
-          className="w-full py-1.5 bg-signInBg rounded text-navIcon font-medium"
+          type="button"
+          className={`w-full py-1.5 rounded text-navIcon font-medium ${
+            loading ? "bg-green-100" : "bg-signInBg"
+          }`}
+          onClick={(e) => handleChange(e, value)}
+          // onClick={setOwner(value)}
         >
-          Sign in
+          {loading ? "Signing in" : "Sign in"}
         </button>
       </div>
     </div>

@@ -9,13 +9,27 @@ import Activity from "./sections/activity";
 import YearButton from "./components/YearButton";
 import Footer from "./sections/footer";
 
-const Body = () => {
+const Body = ({
+  login,
+  name,
+  location,
+  twitterUsername,
+  organizations,
+  followers,
+  following,
+  status,
+  starredRepositories,
+}) => {
   return (
     <div className="bg-navbg h-screen overflow-x-hidden sm2:bg-bodyBg overscroll-x-none">
       <Navbar />
       <Topbar
-        github_name="Tokonigeorge"
-        name="Tokoni"
+        github_name={login}
+        name={name}
+        status={status.message}
+        followers={followers.totalCount}
+        following={following.totalCount}
+        starredRepositories={starredRepositories.totalCount}
         // status="These are just the before pictures"
       />
       <div className="hidden md:block">
@@ -23,13 +37,16 @@ const Body = () => {
       </div>
       <div className="hidden md:flex md:items-start">
         <Sidebar
-          github_name="Tokonigeorge"
-          name="Tokoni"
-          location="Lagos, Nigeria"
-          twitter="@_tokoni_"
+          github_name={login}
+          name={name}
+          location={location}
+          twitter={twitterUsername}
           highlights="PRO"
-          organization="ZC"
-          // status="I'm bowling in heaven"
+          organization={organizations}
+          followers={followers.totalCount}
+          following={following.totalCount}
+          status={status.message}
+          starredRepositories={starredRepositories.totalCount}
         />
         <div className="flex-auto">
           <OverviewBar />

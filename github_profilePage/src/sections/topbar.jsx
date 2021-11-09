@@ -1,6 +1,13 @@
 import React from "react";
 
-const Topbar = ({ github_name, name, status }) => {
+const Topbar = ({
+  github_name,
+  name,
+  status,
+  followers,
+  following,
+  starredRepositories,
+}) => {
   return (
     <div className="md:hidden px-4 mt-3 sm2:mt-0.5">
       <div className="flex items-center">
@@ -40,19 +47,21 @@ const Topbar = ({ github_name, name, status }) => {
       <div className="flex items-center text-gray-200 text-opacity-60 text-sm mt-6">
         <a href="#" className="flex items-center hover:text-blue-400">
           <PersonIcon />
-          <span className="ml-1 text-navIcon font-medium">2</span>
-          <p className="ml-1">followers</p>
+          <span className="ml-1 text-navIcon font-medium">{followers}</span>
+          <p className="ml-1">{followers === 1 ? "follower" : "followers"}</p>
         </a>
         <span className="ml-1 text-navIcon font-medium w-0.5 h-0.5 bg-navIcon rounded-full"></span>
         <a href="#" className="flex items-center hover:text-blue-400">
-          <span className="ml-1 text-navIcon font-medium">2</span>
+          <span className="ml-1 text-navIcon font-medium">{following}</span>
           <p className="ml-1">following</p>
         </a>
         <span className="ml-1 text-navIcon font-medium w-0.5 h-0.5 bg-navIcon rounded-full"></span>
         <span className="ml-1 hover:text-blue-400">
           <StarIcon />
         </span>
-        <span className="ml-1 text-navIcon font-medium">0</span>
+        <span className="ml-1 text-navIcon font-medium">
+          {starredRepositories}
+        </span>
       </div>
     </div>
   );
