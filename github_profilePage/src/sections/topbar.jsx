@@ -7,12 +7,15 @@ const Topbar = ({
   followers,
   following,
   starredRepositories,
+  avatarUrl,
 }) => {
   return (
     <div className="md:hidden px-4 mt-3 sm2:mt-0.5">
       <div className="flex items-center">
         <img
-          src="https://avatars.githubusercontent.com/u/65655487?v=4"
+          src={
+            avatarUrl || "https://avatars.githubusercontent.com/u/65655487?v=4"
+          }
           alt=""
           width="200"
           height="200"

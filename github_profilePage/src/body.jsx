@@ -12,6 +12,7 @@ import Footer from "./sections/footer";
 const Body = ({
   login,
   name,
+  avatarUrl,
   location,
   twitterUsername,
   organizations,
@@ -26,10 +27,11 @@ const Body = ({
       <Topbar
         github_name={login}
         name={name}
-        status={status.message}
-        followers={followers.totalCount}
-        following={following.totalCount}
-        starredRepositories={starredRepositories.totalCount}
+        status={status?.message}
+        followers={followers?.totalCount}
+        following={following?.totalCount}
+        starredRepositories={starredRepositories?.totalCount}
+        avatarUrl={avatarUrl}
         // status="These are just the before pictures"
       />
       <div className="hidden md:block">
@@ -43,10 +45,11 @@ const Body = ({
           twitter={twitterUsername}
           highlights="PRO"
           organization={organizations}
-          followers={followers.totalCount}
-          following={following.totalCount}
-          status={status.message}
-          starredRepositories={starredRepositories.totalCount}
+          followers={followers?.totalCount}
+          following={following?.totalCount}
+          status={status?.message}
+          starredRepositories={starredRepositories?.totalCount}
+          avatarUrl={avatarUrl}
         />
         <div className="flex-auto">
           <OverviewBar />

@@ -12,6 +12,7 @@ const Sidebar = ({
   followers,
   following,
   starredRepositories,
+  avatarUrl,
 }) => {
   const [hover, setHover] = useState(false);
   //lg pl-20
@@ -19,7 +20,9 @@ const Sidebar = ({
     <div className="w-72 md:pl-6 lg:pl-8 lg:w-80 flex-none">
       <div className="-mt-7 mb-4 relative">
         <img
-          src="https://avatars.githubusercontent.com/u/65655487?v=4"
+          src={
+            avatarUrl || "https://avatars.githubusercontent.com/u/65655487?v=4"
+          }
           alt=""
           width="340px"
           height="340px"

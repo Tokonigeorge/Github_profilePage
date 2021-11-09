@@ -41,6 +41,7 @@ function App() {
         login
         ... on User {
           name
+          avatarUrl
           location
           twitterUsername
           starredRepositories {
@@ -76,7 +77,7 @@ function App() {
       e.preventDefault();
       setOwner(value);
     };
-    if (error) return <p>Error</p>;
+    if (error && owner) console.log(error); //return <p>Error</p>;
     //loading = {owner && loading} => this is because loading is set to true as it still fecthes result when owner state is empty,
     //adding owner && makes it truthy only when both are satisfied.
     return (
