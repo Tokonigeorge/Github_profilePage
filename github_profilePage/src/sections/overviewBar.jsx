@@ -1,7 +1,7 @@
 import React from "react";
 import RepoCard from "../components/RepoCard";
 
-const OverviewBar = () => {
+const OverviewBar = ({ pinnedItems }) => {
   return (
     <div className="ml-4 md:ml-6 md:pr-6 lg:pr-8 mt-5 pr-4">
       <div className="flex justify-between items-center">
@@ -10,13 +10,23 @@ const OverviewBar = () => {
           Customize your pins
         </a>
       </div>
-      <div className="flex-auto grid grid-cols-1 md:grid-cols-2 gap-5 mt-2">
-        <RepoCard />
-        <RepoCard />
-        <RepoCard />
-        <RepoCard />
-        <RepoCard />
-        <RepoCard />
+      <div
+        className={`flex-auto grid grid-cols-1 ${
+          pinnedItems?.nodes.length > 1 ? "md:grid-cols-2" : "md:grid-cols-1"
+        } gap-5 mt-2`}
+      >
+        {pinnedItems?.nodes.map((i, indx) => (
+          <RepoCard
+            key={indx}
+            name={i.name}
+            isPrivate={i.isPrivate}
+            des={i.description}
+            forkCount={i.forkCount}
+            isFork={i.isFork}
+            stargazerCount={i.stargazerCount}
+            language={i.primaryLanguage}
+          />
+        ))}
       </div>
     </div>
   );

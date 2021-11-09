@@ -62,6 +62,25 @@ function App() {
               avatarUrl
             }
           }
+          repositories {
+            totalCount
+          }
+          pinnedItems(first: 6) {
+            nodes {
+              ... on Repository {
+                name
+                isPrivate
+                description
+                primaryLanguage {
+                  name
+                  color
+                }
+                forkCount
+                isFork
+                stargazerCount
+              }
+            }
+          }
         }
       }
     }

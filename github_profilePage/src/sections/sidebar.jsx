@@ -116,7 +116,7 @@ const Sidebar = ({
           </div>
         </div>
       )}
-      {organization && (
+      {organization.nodes.length > 0 && (
         <div className="mt-4 border-t border-gray-400 border-opacity-20 ">
           <p className="pt-4 text-gray-200 text-opacity-90 font-medium">
             Organizations

@@ -6,7 +6,7 @@ const SignIn = ({ handleChange, loading }) => {
   return (
     <div className="flex flex-col items-center mt-8 mx-4 text-gray-800">
       <span>
-        <GithubIcon />
+        <GithubIconBig />
       </span>
       <p className="text-2xl font-extralight mt-6 mb-4">Sign in to Github</p>
       <div className="bg-formBg ring-1 ring-defaultBorder ring-opacity-20 p-4 text-sm rounded w-full sm2:w-80">
@@ -48,7 +48,7 @@ const SignIn = ({ handleChange, loading }) => {
   );
 };
 
-const GithubIcon = () => {
+const GithubIconBig = () => {
   return (
     <svg
       height="48"

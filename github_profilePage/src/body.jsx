@@ -20,6 +20,8 @@ const Body = ({
   following,
   status,
   starredRepositories,
+  repositories,
+  pinnedItems,
 }) => {
   return (
     <div className="bg-navbg h-screen overflow-x-hidden sm2:bg-bodyBg overscroll-x-none">
@@ -35,7 +37,7 @@ const Body = ({
         // status="These are just the before pictures"
       />
       <div className="hidden md:block">
-        <OverviewTab repo_number="12" />
+        <OverviewTab repo_number={repositories?.totalCount} />
       </div>
       <div className="hidden md:flex md:items-start">
         <Sidebar
@@ -52,7 +54,7 @@ const Body = ({
           avatarUrl={avatarUrl}
         />
         <div className="flex-auto">
-          <OverviewBar />
+          <OverviewBar pinnedItems={pinnedItems} />
           <ContributionsTab />
           <div className="flex items-start">
             <div className="flex-auto">
@@ -68,8 +70,8 @@ const Body = ({
         <Footer />
       </div>
       <div className="md:hidden">
-        <OverviewTab repo_number="12" />
-        <OverviewBar />
+        <OverviewTab repo_number={repositories?.totalCount} />
+        <OverviewBar pinnedItems={pinnedItems} />
         <ContributionsTab />
         <Activity />
         <Footer />
