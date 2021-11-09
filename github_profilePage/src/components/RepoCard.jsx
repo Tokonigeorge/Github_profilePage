@@ -15,7 +15,7 @@ const RepoCard = ({
     backgroundColor: language?.color,
   };
   return (
-    <div className="h-auto rounded-md ring-1 ring-defaultBorder p-4">
+    <div className="h-auto rounded-md ring-1 ring-defaultBorder p-4 flex flex-col justify-between">
       <div className="flex items-center justify-between text-gray-400">
         <div className="flex items-center">
           <span>
@@ -47,13 +47,13 @@ const RepoCard = ({
           </>
         )}
         {stargazerCount > 0 && (
-          <div className="flex items-center hover:text-blue-400 text-xs ml-6">
+          <div className="flex items-center hover:text-blue-400 text-xs ml-5">
             <StarIcon />
             <p className="ml-1">{stargazerCount}</p>
           </div>
         )}
         {forkCount > 0 && (
-          <div className="flex items-center hover:text-blue-400 text-xs ml-6">
+          <div className="flex items-center hover:text-blue-400 text-xs ml-5">
             <ForkIcon />
             <p className="ml-1">{forkCount}</p>
           </div>
