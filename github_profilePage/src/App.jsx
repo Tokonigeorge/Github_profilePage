@@ -81,6 +81,9 @@ function App() {
               }
             }
           }
+          contributionsCollection {
+            contributionYears
+          }
         }
       }
     }
@@ -102,7 +105,7 @@ function App() {
     return (
       <>
         {data?.repositoryOwner ? (
-          <Body {...data.repositoryOwner} />
+          <Body {...data.repositoryOwner} owner={owner} />
         ) : (
           <SignIn handleChange={handleChange} loading={owner && loading} />
         )}

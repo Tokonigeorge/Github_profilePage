@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "./sections/navbar";
 import Sidebar from "./sections/sidebar";
 import Topbar from "./sections/topbar";
@@ -22,7 +22,10 @@ const Body = ({
   starredRepositories,
   repositories,
   pinnedItems,
+  contributionYears,
+  owner,
 }) => {
+  const [From, setFrom] = useState(contributionYears?.[0]);
   return (
     <div className="bg-navbg h-screen overflow-x-hidden sm2:bg-bodyBg overscroll-x-none">
       <Navbar />
@@ -34,7 +37,6 @@ const Body = ({
         following={following?.totalCount}
         starredRepositories={starredRepositories?.totalCount}
         avatarUrl={avatarUrl}
-        // status="These are just the before pictures"
       />
       <div className="hidden md:block">
         <OverviewTab repo_number={repositories?.totalCount} />
@@ -61,7 +63,9 @@ const Body = ({
               <Activity />
             </div>
             <div className="md:hidden lg:block lg:w-32">
-              <YearButton />
+              {contributionYears.map((i, indx) => (
+                <YearButton key={indx} year={i} />
+              ))}
             </div>
           </div>
         </div>
@@ -79,5 +83,46 @@ const Body = ({
     </div>
   );
 };
+
+// const ContributionQuery = () => {
+
+//   const contributionsquery = gql`
+//     query ($owner: String!, $From: DateTime!, $To: DateTime!) {
+//       repositoryOwner(login: $owner) {
+//         login
+//         ... on User {
+//           contributionsCollection(
+//             from: $from,
+//             to: $To,
+//           ) {
+//             contributionCalendar {
+//               totalContributions
+//               weeks {
+//                 contributionDays {
+//                   color
+//                   contributionCount
+//                   date
+//                   weekday
+//                 }
+//                 firstDay
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//   `;
+//   const { loading, error, data } = useQuery(contributionsquery, {
+//     variables: { owner, From, to },
+//   });
+
+// //convert from to ISO string and to too
+//   // if (error && topYear) return <p>Error</p>
+//   return (
+//     <>
+
+//     </>
+//   )
+// }
 
 export default Body;

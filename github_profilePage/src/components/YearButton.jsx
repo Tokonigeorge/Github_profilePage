@@ -1,9 +1,9 @@
 import React from "react";
 
-const YearButton = () => {
+const YearButton = ({ contributionYears }) => {
   return (
     <div>
-      <button>2021</button>
+      <button>{contributionYears}</button>
     </div>
   );
 };
