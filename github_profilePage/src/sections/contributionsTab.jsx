@@ -1,5 +1,6 @@
 import React from "react";
 import "../utils/styles.css";
+import CalendarHeatMap from "../components/CalendarHeatMap";
 
 const ContributionsTab = () => {
   return (
@@ -13,7 +14,11 @@ const ContributionsTab = () => {
           <span className="dropDown-icon ml-1 mt-px"></span>
         </div>
       </div>
-      <div className="h-48 rounded-md ring-1 ring-gray-600 ring-opacity-40 p-4 mt-2"></div>
+      <div className="h-auto rounded-md ring-1 ring-gray-600 ring-opacity-40 p-4 mt-2 overflow-hidden">
+        <div>
+          <CalendarHeatMap />
+        </div>
+      </div>
     </div>
   );
 };
