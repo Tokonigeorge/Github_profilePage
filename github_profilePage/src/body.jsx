@@ -22,10 +22,13 @@ const Body = ({
   starredRepositories,
   repositories,
   pinnedItems,
-  contributionYears,
+  contributionsCollection,
   owner,
 }) => {
-  const [From, setFrom] = useState(contributionYears?.[0]);
+  const [from, setFrom] = useState(
+    contributionsCollection?.contributionYears?.[0]
+  );
+  console.log(contributionsCollection?.contributionYears);
   return (
     <div className="bg-navbg h-screen overflow-x-hidden sm2:bg-bodyBg overscroll-x-none">
       <Navbar />
@@ -57,13 +60,13 @@ const Body = ({
         />
         <div className="flex-auto">
           <OverviewBar pinnedItems={pinnedItems} />
-          <ContributionsTab />
           <div className="flex items-start">
             <div className="flex-auto">
+              <ContributionsTab />
               <Activity />
             </div>
-            <div className="md:hidden lg:block lg:w-32">
-              {contributionYears.map((i, indx) => (
+            <div className="md:hidden lg:block lg:w-32 mr-16 mt-4">
+              {contributionsCollection?.contributionYears?.map((i, indx) => (
                 <YearButton key={indx} year={i} />
               ))}
             </div>
