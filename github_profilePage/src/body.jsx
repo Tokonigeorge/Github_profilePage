@@ -28,7 +28,11 @@ const Body = ({
   const [from, setFrom] = useState(
     contributionsCollection?.contributionYears?.[0]
   );
-  console.log(contributionsCollection?.contributionYears);
+  //set the first active item to be the topyear and onclick change the value to i, if it matches set active to true and style
+  const [click, setClick] = useState(from);
+  const handleClick = (i) => {
+    setClick(i);
+  };
   return (
     <div className="bg-navbg h-screen overflow-x-hidden sm2:bg-bodyBg overscroll-x-none">
       <Navbar />
@@ -67,7 +71,12 @@ const Body = ({
             </div>
             <div className="md:hidden lg:block lg:w-32 mr-16 mt-4">
               {contributionsCollection?.contributionYears?.map((i, indx) => (
-                <YearButton key={indx} year={i} />
+                <YearButton
+                  key={indx}
+                  year={i}
+                  active={click === i}
+                  handleClick={handleClick}
+                />
               ))}
             </div>
           </div>
