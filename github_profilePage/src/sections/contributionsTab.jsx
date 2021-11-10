@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "../utils/styles.css";
 import CalendarHeatMap from "../components/CalendarHeatMap";
 
 const ContributionsTab = ({ contributions, year }) => {
+  const _array = [];
+  contributions?.weeks
+    ?.map((i) => i.contributionDays)
+    .map((i) => {
+      Object.values(i).map((i) =>
+        _array.push({ date: i.date, count: i.contributionCount })
+      );
+    });
+
   return (
     <div className="px-4 mt-8 md:pl-6 md:pr-6 lg:pr-8">
       <div className="flex justify-between items-center">
@@ -18,7 +27,7 @@ const ContributionsTab = ({ contributions, year }) => {
       </div>
       <div className="h-auto rounded-md ring-1 ring-gray-600 ring-opacity-40 p-4 mt-2 overflow-hidden">
         <div>
-          <CalendarHeatMap />
+          <CalendarHeatMap value={_array} year={year} />
         </div>
       </div>
     </div>

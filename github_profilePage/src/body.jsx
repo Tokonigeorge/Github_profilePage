@@ -105,7 +105,8 @@ const Body = ({
             <div className="flex-auto">
               <ContributionsTab
                 contributions={
-                  data?.contributionsCollection?.contributionCalendar
+                  data?.repositoryOwner?.contributionsCollection
+                    ?.contributionCalendar
                 }
                 year={from}
               />
