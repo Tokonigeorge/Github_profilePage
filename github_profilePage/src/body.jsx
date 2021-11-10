@@ -70,7 +70,6 @@ const Body = ({
       to: convertToIsoString(`${from}-12-31`),
     },
   });
-
   return (
     <div className="bg-navbg h-screen overflow-x-hidden sm2:bg-bodyBg overscroll-x-none">
       <Navbar />
@@ -104,7 +103,12 @@ const Body = ({
           <OverviewBar pinnedItems={pinnedItems} />
           <div className="flex items-start">
             <div className="flex-auto">
-              <ContributionsTab data={data} />
+              <ContributionsTab
+                contributions={
+                  data?.contributionsCollection?.contributionCalendar
+                }
+                year={from}
+              />
               {loading ? (
                 <p>Loading</p>
               ) : error ? (
