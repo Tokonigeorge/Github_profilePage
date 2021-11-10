@@ -8,6 +8,7 @@ import ContributionsTab from "./sections/contributionsTab";
 import Activity from "./sections/activity";
 import YearButton from "./components/YearButton";
 import Footer from "./sections/footer";
+import { useQuery, gql } from "@apollo/client";
 
 const Body = ({
   login,
@@ -29,10 +30,47 @@ const Body = ({
     contributionsCollection?.contributionYears?.[0]
   );
   //set the first active item to be the topyear and onclick change the value to i, if it matches set active to true and style
-  const [click, setClick] = useState(from);
+  // const [click, setClick] = useState(from);
   const handleClick = (i) => {
-    setClick(i);
+    setFrom(i);
   };
+
+  const convertToIsoString = (arg) => {
+    return new Date(arg).toISOString();
+  };
+
+  const contributionsquery = gql`
+    query ($owner: String!, $from: DateTime!, $to: DateTime!) {
+      repositoryOwner(login: $owner) {
+        login
+        ... on User {
+          contributionsCollection(from: $from, to: $to) {
+            contributionCalendar {
+              totalContributions
+              weeks {
+                contributionDays {
+                  color
+                  contributionCount
+                  date
+                  weekday
+                }
+                firstDay
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const { loading, error, data } = useQuery(contributionsquery, {
+    variables: {
+      owner: owner,
+      from: convertToIsoString(`${from}-01-01`),
+      to: convertToIsoString(`${from}-12-31`),
+    },
+  });
+
   return (
     <div className="bg-navbg h-screen overflow-x-hidden sm2:bg-bodyBg overscroll-x-none">
       <Navbar />
@@ -66,15 +104,21 @@ const Body = ({
           <OverviewBar pinnedItems={pinnedItems} />
           <div className="flex items-start">
             <div className="flex-auto">
-              <ContributionsTab />
-              <Activity />
+              <ContributionsTab data={data} />
+              {loading ? (
+                <p>Loading</p>
+              ) : error ? (
+                <p>Error, heee</p>
+              ) : (
+                <Activity />
+              )}
             </div>
             <div className="md:hidden lg:block lg:w-32 mr-16 mt-4">
               {contributionsCollection?.contributionYears?.map((i, indx) => (
                 <YearButton
                   key={indx}
                   year={i}
-                  active={click === i}
+                  active={from === i}
                   handleClick={handleClick}
                 />
               ))}
@@ -98,32 +142,7 @@ const Body = ({
 
 // const ContributionQuery = () => {
 
-//   const contributionsquery = gql`
-//     query ($owner: String!, $From: DateTime!, $To: DateTime!) {
-//       repositoryOwner(login: $owner) {
-//         login
-//         ... on User {
-//           contributionsCollection(
-//             from: $from,
-//             to: $To,
-//           ) {
-//             contributionCalendar {
-//               totalContributions
-//               weeks {
-//                 contributionDays {
-//                   color
-//                   contributionCount
-//                   date
-//                   weekday
-//                 }
-//                 firstDay
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }
-//   `;
+//   const contributionsquery =
 //   const { loading, error, data } = useQuery(contributionsquery, {
 //     variables: { owner, From, to },
 //   });

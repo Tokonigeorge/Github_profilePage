@@ -2,7 +2,8 @@ import React from "react";
 import "../utils/styles.css";
 import CalendarHeatMap from "../components/CalendarHeatMap";
 
-const ContributionsTab = () => {
+const ContributionsTab = ({ data }) => {
+  console.log(data);
   return (
     <div className="px-4 mt-8 md:pl-6 md:pr-6 lg:pr-8">
       <div className="flex justify-between items-center">
