@@ -12,6 +12,7 @@ const Activities = ({
   isPull,
   isCreated,
   isReview,
+  commitActivity,
 }) => {
   const moreThanOne = (number, sing, plural) => {
     return number > 1 ? `${number} ${plural}` : `${number} ${sing}`;
@@ -59,10 +60,13 @@ const Activities = ({
       <div className="border-l-2 border-gray-400 border-opacity-20 h-auto pb-4 ml-5">
         {open && isCommit && (
           <>
-            <CommitActivity url="#" name="something" number={2} />
-            <CommitActivity url="#" name="something" number={2} />
-            <CommitActivity url="#" name="something" number={2} />
-            <CommitActivity url="#" name="something" number={2} />
+            {commitActivity.map((i) => (
+              <CommitActivity
+                url={i?.repository.url}
+                name={i?.repository.name}
+                number={i?.contributions.totalCount}
+              />
+            ))}
           </>
         )}
         {open && isPull && (

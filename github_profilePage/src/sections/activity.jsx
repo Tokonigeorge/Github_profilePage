@@ -121,6 +121,7 @@ const Activity = ({ year, owner }) => {
           contribution_no={_data?.totalCommitContributions}
           repo_no={_data?.totalRepositoriesWithContributedCommits}
           isCommit={true}
+          commitActivity={_data?.commitContributionsByRepository}
         />
       )}
       {_data?.totalPullRequestContributions > 0 && (
