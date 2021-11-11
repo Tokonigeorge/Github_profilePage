@@ -130,6 +130,7 @@ const Activity = ({ year, owner }) => {
           contribution_no={_data?.totalPullRequestContributions}
           repo_no={_data?.totalRepositoriesWithContributedPullRequests}
           isPull={true}
+          pullActivity={_data?.pullRequestContributionsByRepository}
         />
       )}
       {_data?.totalRepositoryContributions > 0 && (
@@ -137,6 +138,7 @@ const Activity = ({ year, owner }) => {
           Icon={RepoIcon}
           contribution_no={_data?.totalRepositoryContributions}
           isCreated={true}
+          createdActivity={_data.repositoryContributions}
         />
       )}
       {_data?.totalPullRequestReviewContributions > 0 && (
@@ -145,6 +147,16 @@ const Activity = ({ year, owner }) => {
           contribution_no={_data?.totalPullRequestReviewContributions}
           repo_no={_data?.totalRepositoriesWithContributedPullRequestReviews}
           isReview={true}
+          reviewActivity={_data?.pullRequestReviewContributionsByRepository}
+        />
+      )}
+      {_data?.totalIssueContributions > 0 && (
+        <Activities
+          Icon={IssueIcon}
+          contribution_no={_data?.totalIssueContributions}
+          repo_no={_data?.totalRepositoriesWithContributedIssues}
+          isIssue={true}
+          issueActivity={_data?.issueContributionsByRepository}
         />
       )}
       <button
@@ -216,6 +228,25 @@ const ReviewIcon = () => {
       <path
         fillRule="evenodd"
         d="M1.679 7.932c.412-.621 1.242-1.75 2.366-2.717C5.175 4.242 6.527 3.5 8 3.5c1.473 0 2.824.742 3.955 1.715 1.124.967 1.954 2.096 2.366 2.717a.119.119 0 010 .136c-.412.621-1.242 1.75-2.366 2.717C10.825 11.758 9.473 12.5 8 12.5c-1.473 0-2.824-.742-3.955-1.715C2.92 9.818 2.09 8.69 1.679 8.068a.119.119 0 010-.136zM8 2c-1.981 0-3.67.992-4.933 2.078C1.797 5.169.88 6.423.43 7.1a1.619 1.619 0 000 1.798c.45.678 1.367 1.932 2.637 3.024C4.329 13.008 6.019 14 8 14c1.981 0 3.67-.992 4.933-2.078 1.27-1.091 2.187-2.345 2.637-3.023a1.619 1.619 0 000-1.798c-.45-.678-1.367-1.932-2.637-3.023C11.671 2.992 9.981 2 8 2zm0 8a2 2 0 100-4 2 2 0 000 4z"
+      ></path>
+    </svg>
+  );
+};
+
+const IssueIcon = () => {
+  return (
+    <svg
+      aria-hidden="true"
+      height="16"
+      viewBox="0 0 16 16"
+      version="1.1"
+      width="16"
+      data-view-component="true"
+      className="fill-current"
+    >
+      <path
+        fillRule="evenodd"
+        d="M7.998 14.5c2.832 0 5-1.98 5-4.5 0-1.463-.68-2.19-1.879-3.383l-.036-.037c-1.013-1.008-2.3-2.29-2.834-4.434-.322.256-.63.579-.864.953-.432.696-.621 1.58-.046 2.73.473.947.67 2.284-.278 3.232-.61.61-1.545.84-2.403.633a2.788 2.788 0 01-1.436-.874A3.21 3.21 0 003 10c0 2.53 2.164 4.5 4.998 4.5zM9.533.753C9.496.34 9.16.009 8.77.146 7.035.75 4.34 3.187 5.997 6.5c.344.689.285 1.218.003 1.5-.419.419-1.54.487-2.04-.832-.173-.454-.659-.762-1.035-.454C2.036 7.44 1.5 8.702 1.5 10c0 3.512 2.998 6 6.498 6s6.5-2.5 6.5-6c0-2.137-1.128-3.26-2.312-4.438-1.19-1.184-2.436-2.425-2.653-4.81z"
       ></path>
     </svg>
   );

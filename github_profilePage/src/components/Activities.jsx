@@ -3,6 +3,7 @@ import CommitActivity from "./CommitActivity";
 import PullActivity from "./PullActivity";
 import CreatedRepoActivity from "./CreatedRepoActivity";
 import ReviewActivity from "./ReviewActivity";
+import IssueActivity from "./IssueActivity";
 
 const Activities = ({
   Icon,
@@ -12,10 +13,12 @@ const Activities = ({
   isPull,
   isCreated,
   isReview,
+  isIssue,
   commitActivity,
   pullActivity,
   createdActivity,
   reviewActivity,
+  issueActivity,
 }) => {
   const moreThanOne = (number, sing, plural) => {
     return number > 1 ? `${number} ${plural}` : `${number} ${sing}`;
@@ -39,6 +42,12 @@ const Activities = ({
             <p className="ml-2">
               Opened{" "}
               {moreThanOne(contribution_no, "pull request", "pull requests")} in{" "}
+              {moreThanOne(repo_no, "repository", "repositories")}
+            </p>
+          )}
+          {isIssue && (
+            <p className="ml-2">
+              Opened {moreThanOne(contribution_no, "Issue", "Issues")} in{" "}
               {moreThanOne(repo_no, "repository", "repositories")}
             </p>
           )}
@@ -76,6 +85,17 @@ const Activities = ({
           <>
             {pullActivity?.map((i) => (
               <PullActivity
+                url={i?.repository.url}
+                name={i?.repository.name}
+                contribution_no={i?.contributions.totalCount}
+              />
+            ))}
+          </>
+        )}
+        {open && isIssue && (
+          <>
+            {issueActivity?.map((i) => (
+              <IssueActivity
                 url={i?.repository.url}
                 name={i?.repository.name}
                 contribution_no={i?.contributions.totalCount}
