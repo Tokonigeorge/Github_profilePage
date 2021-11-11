@@ -13,6 +13,9 @@ const Activities = ({
   isCreated,
   isReview,
   commitActivity,
+  pullActivity,
+  createdActivity,
+  reviewActivity,
 }) => {
   const moreThanOne = (number, sing, plural) => {
     return number > 1 ? `${number} ${plural}` : `${number} ${sing}`;
@@ -60,7 +63,7 @@ const Activities = ({
       <div className="border-l-2 border-gray-400 border-opacity-20 h-auto pb-4 ml-5">
         {open && isCommit && (
           <>
-            {commitActivity.map((i) => (
+            {commitActivity?.map((i) => (
               <CommitActivity
                 url={i?.repository.url}
                 name={i?.repository.name}
@@ -107,6 +110,13 @@ const Activities = ({
         )}
         {open && isReview && (
           <>
+            {reviewActivity.map((i) => (
+              <ReviewActivity
+                url={i?.repository.url}
+                name={i?.repository.name}
+                pullrequest_no={i?.contributions.totalCount}
+              />
+            ))}
             <ReviewActivity url="#" name="something" pullrequest_no={2} />
             <ReviewActivity url="#" name="something" pullrequest_no={2} />
             <ReviewActivity url="#" name="something" pullrequest_no={2} />
