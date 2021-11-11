@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "./sections/navbar";
 import Sidebar from "./sections/sidebar";
 import Topbar from "./sections/topbar";
@@ -8,6 +8,7 @@ import ContributionsTab from "./sections/contributionsTab";
 import Activity from "./sections/activity";
 import YearButton from "./components/YearButton";
 import Footer from "./sections/footer";
+import { useQuery, gql } from "@apollo/client";
 
 const Body = ({
   login,
@@ -22,7 +23,61 @@ const Body = ({
   starredRepositories,
   repositories,
   pinnedItems,
+  contributionsCollection,
+  owner,
 }) => {
+  const [from, setFrom] = useState(
+    contributionsCollection?.contributionYears?.[0]
+  );
+  let month;
+  const getMonth = () => {
+    month = new Date().getMonth() + 1;
+    return month;
+  };
+  let months = [`${getMonth()}`];
+  const [count, setCount] = useState(0);
+
+  //set the first active item to be the topyear and onclick change the value to i, if it matches set active to true and style
+  // const [click, setClick] = useState(from);
+  const handleClick = (i) => {
+    setFrom(i);
+  };
+
+  const handleCount = () => {
+    setCount((prevState) => prevState + 1);
+    months.push(month + count);
+  };
+
+  const contributionsquery = gql`
+    query ($owner: String!, $from: DateTime!, $to: DateTime!) {
+      repositoryOwner(login: $owner) {
+        ... on User {
+          contributionsCollection(from: $from, to: $to) {
+            contributionCalendar {
+              totalContributions
+              weeks {
+                contributionDays {
+                  color
+                  contributionCount
+                  date
+                  weekday
+                }
+                firstDay
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const { loading, error, data } = useQuery(contributionsquery, {
+    variables: {
+      owner: owner,
+      from: convertToIsoString(`${from}-01-01`),
+      to: convertToIsoString(`${from}-12-31`),
+    },
+  });
   return (
     <div className="bg-navbg h-screen overflow-x-hidden sm2:bg-bodyBg overscroll-x-none">
       <Navbar />
@@ -34,7 +89,6 @@ const Body = ({
         following={following?.totalCount}
         starredRepositories={starredRepositories?.totalCount}
         avatarUrl={avatarUrl}
-        // status="These are just the before pictures"
       />
       <div className="hidden md:block">
         <OverviewTab repo_number={repositories?.totalCount} />
@@ -55,13 +109,35 @@ const Body = ({
         />
         <div className="flex-auto">
           <OverviewBar pinnedItems={pinnedItems} />
-          <ContributionsTab />
           <div className="flex items-start">
             <div className="flex-auto">
-              <Activity />
+              <ContributionsTab
+                contributions={
+                  data?.repositoryOwner?.contributionsCollection
+                    ?.contributionCalendar
+                }
+                year={from}
+                error={error}
+              />
+              {months.map((i) => (
+                <Activity
+                  year={from}
+                  owner={owner}
+                  month={i}
+                  handleCount={handleCount}
+                />
+              ))}{" "}
+              {/* <Activity year={from} owner={owner} /> */}
             </div>
-            <div className="md:hidden lg:block lg:w-32">
-              <YearButton />
+            <div className="md:hidden lg:block lg:w-32 mr-16 mt-4">
+              {contributionsCollection?.contributionYears?.map((i, indx) => (
+                <YearButton
+                  key={indx}
+                  year={i}
+                  active={from === i}
+                  handleClick={handleClick}
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -79,5 +155,25 @@ const Body = ({
     </div>
   );
 };
+
+export const convertToIsoString = (arg) => {
+  return new Date(arg).toISOString();
+};
+
+// const ContributionQuery = () => {
+
+//   const contributionsquery =
+//   const { loading, error, data } = useQuery(contributionsquery, {
+//     variables: { owner, From, to },
+//   });
+
+// //convert from to ISO string and to too
+//   // if (error && topYear) return <p>Error</p>
+//   return (
+//     <>
+
+//     </>
+//   )
+// }
 
 export default Body;
