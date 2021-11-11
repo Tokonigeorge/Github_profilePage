@@ -74,10 +74,13 @@ const Activities = ({
         )}
         {open && isPull && (
           <>
-            <PullActivity url="#" name="something" contribution_no={2} />
-            <PullActivity url="#" name="something" contribution_no={2} />
-            <PullActivity url="#" name="something" contribution_no={2} />
-            <PullActivity url="#" name="something" contribution_no={2} />
+            {pullActivity?.map((i) => (
+              <PullActivity
+                url={i?.repository.url}
+                name={i?.repository.name}
+                contribution_no={i?.contributions.totalCount}
+              />
+            ))}
           </>
         )}
         {open && isCreated && (
