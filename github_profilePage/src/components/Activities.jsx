@@ -82,45 +82,26 @@ const Activities = ({
         )}
         {open && isCreated && (
           <>
-            <CreatedRepoActivity
-              url="#"
-              name="something"
-              language_name={"javascript"}
-              createdAt={"3 nov"}
-            />
-            <CreatedRepoActivity
-              url="#"
-              name="something"
-              language_name={"javascript"}
-              createdAt={"3 nov"}
-            />
-            <CreatedRepoActivity
-              url="#"
-              name="something"
-              language_name={"javascript"}
-              createdAt={"3 nov"}
-            />
-            <CreatedRepoActivity
-              url="#"
-              name="something"
-              language_name={"javascript"}
-              createdAt={"3 nov"}
-            />
+            {createdActivity?.nodes?.map((i) => (
+              <CreatedRepoActivity
+                url={i?.repository.url}
+                name={i?.repository.name}
+                language_name={i?.repository.primaryLanguage.name}
+                createdAt={i?.repository.createdAt}
+                color={i?.repository.primaryLanguage.color}
+              />
+            ))}
           </>
         )}
         {open && isReview && (
           <>
-            {reviewActivity.map((i) => (
+            {reviewActivity?.map((i) => (
               <ReviewActivity
                 url={i?.repository.url}
                 name={i?.repository.name}
                 pullrequest_no={i?.contributions.totalCount}
               />
             ))}
-            <ReviewActivity url="#" name="something" pullrequest_no={2} />
-            <ReviewActivity url="#" name="something" pullrequest_no={2} />
-            <ReviewActivity url="#" name="something" pullrequest_no={2} />
-            <ReviewActivity url="#" name="something" pullrequest_no={2} />
           </>
         )}
       </div>
