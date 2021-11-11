@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { RepoIcon } from "./overviewTab";
 
 const Activity = () => {
   return (
@@ -22,6 +23,12 @@ const Activity = () => {
         repo_no={5}
         isPull={true}
       />
+      <Activities
+        Icon={PullIcon}
+        contribution_no={2}
+        repo_no={5}
+        isCreated={true}
+      />
       <button
         type="button"
         className="bg-transparent text-xs text-blue-400 w-full py-2.5 font-medium rounded-md 
@@ -39,7 +46,14 @@ const Activity = () => {
   );
 };
 
-const Activities = ({ Icon, contribution_no, repo_no, isCommit, isPull }) => {
+const Activities = ({
+  Icon,
+  contribution_no,
+  repo_no,
+  isCommit,
+  isPull,
+  isCreated,
+}) => {
   const [open, setOpen] = useState(true);
   return (
     <>
@@ -74,6 +88,34 @@ const Activities = ({ Icon, contribution_no, repo_no, isCommit, isPull }) => {
             <PullActivity url="#" name="something" contribution_no={2} />
           </>
         )}
+        {open && isCreated && (
+          <>
+            <CreatedRepoActivity
+              url="#"
+              name="something"
+              language_name={"javascript"}
+              createdAt={"3 nov"}
+            />
+            <CreatedRepoActivity
+              url="#"
+              name="something"
+              language_name={"javascript"}
+              createdAt={"3 nov"}
+            />
+            <CreatedRepoActivity
+              url="#"
+              name="something"
+              language_name={"javascript"}
+              createdAt={"3 nov"}
+            />
+            <CreatedRepoActivity
+              url="#"
+              name="something"
+              language_name={"javascript"}
+              createdAt={"3 nov"}
+            />
+          </>
+        )}
       </div>
     </>
   );
@@ -81,37 +123,59 @@ const Activities = ({ Icon, contribution_no, repo_no, isCommit, isPull }) => {
 
 const CommitActivity = ({ url, name, number }) => {
   return (
-    <>
-      <div className="flex items-center justify-between text-xs pt-1 mt-px pl-5">
-        <span className="flex items-center">
-          <a href={url} className="text-blue-400 hover:underline mr-2 text-sm">
-            {name}
-          </a>
-          <p>{number} commits</p>
-        </span>
-        <span className="w-16 h-2 bg-green-600 rounded"></span>
-      </div>
-    </>
+    <div className="flex items-center justify-between text-xs pt-1 mt-px pl-5">
+      <span className="flex items-center">
+        <a href={url} className="text-blue-400 hover:underline mr-2 text-sm">
+          {name}
+        </a>
+        <p>{number} commits</p>
+      </span>
+      <span className="w-16 h-2 bg-green-600 rounded"></span>
+    </div>
   );
 };
 
 const PullActivity = ({ url, name, contribution_no }) => {
   return (
-    <>
-      <div className="flex items-center justify-between text-xs pt-1 mt-px pl-5">
-        <span className="flex items-center">
-          <a href={url} className="text-blue-400 hover:underline mr-2 text-sm">
-            {name}
-          </a>
+    <div className="flex items-center justify-between text-xs pt-1 mt-px pl-5">
+      <span className="flex items-center">
+        <a href={url} className="text-blue-400 hover:underline mr-2 text-sm">
+          {name}
+        </a>
+      </span>
+      <span>
+        <span className="bg-purple-700 px-1.5 rounded-full mr-1">
+          {contribution_no}
         </span>
+        merged
+      </span>
+    </div>
+  );
+};
+
+const CreatedRepoActivity = ({
+  name,
+  url,
+  language_name,
+  language_color,
+  createdAt,
+}) => {
+  return (
+    <div className="flex items-center justify-between text-xs pt-1 mt-px pl-5">
+      <span className="flex items-center">
         <span>
-          <span className="bg-purple-700 px-1.5 rounded-full mr-1">
-            {contribution_no}
-          </span>
-          merged
+          <RepoIcon />
         </span>
-      </div>
-    </>
+        <a href={url} className="text-blue-400 hover:underline ml-2 text-sm">
+          {name}
+        </a>
+      </span>
+      <span className="flex items-center">
+        <span className="w-2 h-2 rounded-full bg-purple-300"></span>
+        <p>{language_name}</p>
+      </span>
+      <span>{createdAt}</span>
+    </div>
   );
 };
 
