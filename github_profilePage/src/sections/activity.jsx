@@ -85,8 +85,8 @@ const Activity = ({ year, owner }) => {
   const { loading, error, data } = useQuery(activitiesquery, {
     variables: {
       owner: owner,
-      from: convertToIsoString(`${year}-${getMonth()}-01`),
-      to: convertToIsoString(`${year}-${getMonth()}-31`),
+      from: convertToIsoString(`${year}-${getMonth() + 1}-01`),
+      to: convertToIsoString(`${year}-${getMonth() + 1}-31`),
     },
   });
 
@@ -115,29 +115,37 @@ const Activity = ({ year, owner }) => {
         </p>
         <span className="border-t border-gray-400 border-opacity-20 ml-4 flex-auto"></span>
       </div>
-      <Activities
-        Icon={CommitIcon}
-        contribution_no={_data?.totalCommitContributions}
-        repo_no={_data?.totalRepositoriesWithContributedCommits}
-        isCommit={true}
-      />
-      <Activities
-        Icon={PullIcon}
-        contribution_no={_data?.totalPullRequestContributions}
-        repo_no={_data?.totalRepositoriesWithContributedPullRequests}
-        isPull={true}
-      />
-      <Activities
-        Icon={RepoIcon}
-        contribution_no={_data?.totalRepositoryContributions}
-        isCreated={true}
-      />
-      <Activities
-        Icon={ReviewIcon}
-        contribution_no={_data?.totalPullRequestReviewContributions}
-        repo_no={_data?.totalRepositoriesWithContributedPullRequestReviews}
-        isReview={true}
-      />
+      {_data?.totalCommitContributions > 0 && (
+        <Activities
+          Icon={CommitIcon}
+          contribution_no={_data?.totalCommitContributions}
+          repo_no={_data?.totalRepositoriesWithContributedCommits}
+          isCommit={true}
+        />
+      )}
+      {_data?.totalPullRequestContributions > 0 && (
+        <Activities
+          Icon={PullIcon}
+          contribution_no={_data?.totalPullRequestContributions}
+          repo_no={_data?.totalRepositoriesWithContributedPullRequests}
+          isPull={true}
+        />
+      )}
+      {_data?.totalRepositoryContributions > 0 && (
+        <Activities
+          Icon={RepoIcon}
+          contribution_no={_data?.totalRepositoryContributions}
+          isCreated={true}
+        />
+      )}
+      {_data?.totalPullRequestReviewContributions > 0 && (
+        <Activities
+          Icon={ReviewIcon}
+          contribution_no={_data?.totalPullRequestReviewContributions}
+          repo_no={_data?.totalRepositoriesWithContributedPullRequestReviews}
+          isReview={true}
+        />
+      )}
       <button
         type="button"
         className="bg-transparent text-xs text-blue-400 w-full py-2.5 font-medium rounded-md 
