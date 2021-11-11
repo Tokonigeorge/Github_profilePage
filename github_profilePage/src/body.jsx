@@ -29,10 +29,23 @@ const Body = ({
   const [from, setFrom] = useState(
     contributionsCollection?.contributionYears?.[0]
   );
+  let month;
+  const getMonth = () => {
+    month = new Date().getMonth() + 1;
+    return month;
+  };
+  let months = [`${getMonth()}`];
+  const [count, setCount] = useState(0);
+
   //set the first active item to be the topyear and onclick change the value to i, if it matches set active to true and style
   // const [click, setClick] = useState(from);
   const handleClick = (i) => {
     setFrom(i);
+  };
+
+  const handleCount = () => {
+    setCount((prevState) => prevState + 1);
+    months.push(month + count);
   };
 
   const contributionsquery = gql`
@@ -106,8 +119,15 @@ const Body = ({
                 year={from}
                 error={error}
               />
-
-              <Activity year={from} owner={owner} />
+              {months.map((i) => (
+                <Activity
+                  year={from}
+                  owner={owner}
+                  month={i}
+                  handleCount={handleCount}
+                />
+              ))}{" "}
+              {/* <Activity year={from} owner={owner} /> */}
             </div>
             <div className="md:hidden lg:block lg:w-32 mr-16 mt-4">
               {contributionsCollection?.contributionYears?.map((i, indx) => (

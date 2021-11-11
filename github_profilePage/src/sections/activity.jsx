@@ -4,10 +4,10 @@ import Activities from "../components/Activities";
 import { useQuery, gql } from "@apollo/client";
 import { convertToIsoString } from "../body";
 
-const Activity = ({ year, owner }) => {
-  const getMonth = () => {
-    return new Date().getMonth();
-  };
+const Activity = ({ year, owner, month, handleCount }) => {
+  // const getMonth = () => {
+  //   return new Date().getMonth();
+  // };
   const activitiesquery = gql`
     query ($owner: String!, $from: DateTime!, $to: DateTime!) {
       repositoryOwner(login: $owner) {
@@ -85,8 +85,8 @@ const Activity = ({ year, owner }) => {
   const { loading, error, data } = useQuery(activitiesquery, {
     variables: {
       owner: owner,
-      from: convertToIsoString(`${year}-${getMonth() + 1}-01`),
-      to: convertToIsoString(`${year}-${getMonth() + 1}-31`),
+      from: convertToIsoString(`${year}-${month}-01`),
+      to: convertToIsoString(`${year}-${month}-31`),
     },
   });
 
@@ -163,6 +163,7 @@ const Activity = ({ year, owner }) => {
         type="button"
         className="bg-transparent text-xs text-blue-400 w-full py-2.5 font-medium rounded-md 
         border border-gray-300 border-opacity-20 mt-6"
+        onClick={() => handleCount()}
       >
         Show more activity
       </button>
