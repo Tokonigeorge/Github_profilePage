@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../utils/styles.css";
 import CalendarHeatMap from "../components/CalendarHeatMap";
 
-const ContributionsTab = ({ contributions, year }) => {
+const ContributionsTab = ({ contributions, year, error }) => {
   const _values = [];
   //map contribution days and get an array of the values from the object, mapping over and pushing into the array
   contributions?.weeks
@@ -16,9 +16,15 @@ const ContributionsTab = ({ contributions, year }) => {
   return (
     <div className="px-4 mt-8 md:pl-6 md:pr-6 lg:pr-8">
       <div className="flex justify-between items-center">
-        <p className="text-navIcon">
-          {contributions?.totalContributions} contributions in {year}
-        </p>
+        {error ? (
+          <p className="text-navIcon">
+            Oooooooops, Error fetching contributions but It's not my fault
+          </p>
+        ) : (
+          <p className="text-navIcon">
+            {contributions?.totalContributions} contributions in {year}
+          </p>
+        )}
         <div className="text-gray-400 text-sm flex items-center">
           <span>
             <p>Contributions Settings</p>

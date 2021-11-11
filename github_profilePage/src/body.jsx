@@ -35,14 +35,9 @@ const Body = ({
     setFrom(i);
   };
 
-  const convertToIsoString = (arg) => {
-    return new Date(arg).toISOString();
-  };
-
   const contributionsquery = gql`
     query ($owner: String!, $from: DateTime!, $to: DateTime!) {
       repositoryOwner(login: $owner) {
-        login
         ... on User {
           contributionsCollection(from: $from, to: $to) {
             contributionCalendar {
@@ -109,14 +104,10 @@ const Body = ({
                     ?.contributionCalendar
                 }
                 year={from}
+                error={error}
               />
-              {loading ? (
-                <p>Loading</p>
-              ) : error ? (
-                <p>Error, heee</p>
-              ) : (
-                <Activity />
-              )}
+
+              <Activity year={from} owner={owner} />
             </div>
             <div className="md:hidden lg:block lg:w-32 mr-16 mt-4">
               {contributionsCollection?.contributionYears?.map((i, indx) => (
@@ -143,6 +134,10 @@ const Body = ({
       </div>
     </div>
   );
+};
+
+export const convertToIsoString = (arg) => {
+  return new Date(arg).toISOString();
 };
 
 // const ContributionQuery = () => {

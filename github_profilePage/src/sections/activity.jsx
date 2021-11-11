@@ -1,39 +1,141 @@
 import React from "react";
 import { RepoIcon } from "./overviewTab";
 import Activities from "../components/Activities";
+import { useQuery, gql } from "@apollo/client";
+import { convertToIsoString } from "../body";
 
-const Activity = () => {
-  return (
+const Activity = ({ year, owner }) => {
+  const getMonth = () => {
+    return new Date().getMonth();
+  };
+  const activitiesquery = gql`
+    query ($owner: String!, $from: DateTime!, $to: DateTime!) {
+      repositoryOwner(login: $owner) {
+        ... on User {
+          contributionsCollection(from: $from, to: $to) {
+            totalCommitContributions
+            totalRepositoriesWithContributedCommits
+            totalRepositoryContributions
+            totalPullRequestContributions
+            totalRepositoriesWithContributedPullRequests
+            totalPullRequestReviewContributions
+            totalRepositoriesWithContributedPullRequestReviews
+            totalIssueContributions
+            totalRepositoriesWithContributedIssues
+            commitContributionsByRepository(maxRepositories: 5) {
+              repository {
+                name
+                url
+              }
+              contributions {
+                totalCount
+              }
+            }
+            pullRequestContributionsByRepository(maxRepositories: 5) {
+              repository {
+                name
+                url
+                pullRequests {
+                  totalCount
+                }
+              }
+              contributions {
+                totalCount
+              }
+            }
+            pullRequestReviewContributionsByRepository(maxRepositories: 5) {
+              repository {
+                name
+                url
+                pullRequests {
+                  totalCount
+                }
+              }
+              contributions {
+                totalCount
+              }
+            }
+            issueContributionsByRepository(maxRepositories: 5) {
+              repository {
+                name
+                url
+              }
+              contributions {
+                totalCount
+              }
+            }
+            repositoryContributions(last: 5) {
+              nodes {
+                repository {
+                  name
+                  url
+                  createdAt
+                  primaryLanguage {
+                    name
+                    color
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+  const { loading, error, data } = useQuery(activitiesquery, {
+    variables: {
+      owner: owner,
+      from: convertToIsoString(`${year}-${getMonth()}-01`),
+      to: convertToIsoString(`${year}-${getMonth()}-31`),
+    },
+  });
+
+  const _data = data?.repositoryOwner?.contributionsCollection;
+
+  // const {
+  //   totalCommitContributions,
+  //   totalRepositoriesWithContributedCommits,
+  //   totalRepositoryContributions,
+  //   totalPullRequestContributions,
+  //   totalRepositoriesWithContributedPullRequests,
+  //   totalPullRequestReviewContributions,
+  //   totalRepositoriesWithContributedPullRequestReviews,
+  //   totalIssueContributions,
+  //   totalRepositoriesWithContributedIssues,
+  // } = ;
+
+  return loading ? (
+    <p>loading</p>
+  ) : (
     <div className="px-4 mt-8 text-gray-400 md:pl-6 md:pr-6">
       <p className="text-navIcon">Contribution activity</p>
       <div className="mt-4 flex items-center mb-2">
         <p className="text-navIcon text-xs font-medium pl-2">
-          November <span className="text-gray-400">2021</span>
+          November <span className="text-gray-400">{year}</span>
         </p>
         <span className="border-t border-gray-400 border-opacity-20 ml-4 flex-auto"></span>
       </div>
       <Activities
         Icon={CommitIcon}
-        contribution_no={2}
-        repo_no={5}
+        contribution_no={_data?.totalCommitContributions}
+        repo_no={_data?.totalRepositoriesWithContributedCommits}
         isCommit={true}
       />
       <Activities
         Icon={PullIcon}
-        contribution_no={2}
-        repo_no={5}
+        contribution_no={_data?.totalPullRequestContributions}
+        repo_no={_data?.totalRepositoriesWithContributedPullRequests}
         isPull={true}
       />
       <Activities
         Icon={RepoIcon}
-        contribution_no={2}
-        repo_no={5}
+        contribution_no={_data?.totalRepositoryContributions}
         isCreated={true}
       />
       <Activities
         Icon={ReviewIcon}
-        contribution_no={2}
-        repo_no={5}
+        contribution_no={_data?.totalPullRequestReviewContributions}
+        repo_no={_data?.totalRepositoriesWithContributedPullRequestReviews}
         isReview={true}
       />
       <button

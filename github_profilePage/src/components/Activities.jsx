@@ -13,6 +13,9 @@ const Activities = ({
   isCreated,
   isReview,
 }) => {
+  const moreThanOne = (number, sing, plural) => {
+    return number > 1 ? `${number} ${plural}` : `${number} ${sing}`;
+  };
   const [open, setOpen] = useState(true);
   return (
     <>
@@ -22,9 +25,32 @@ const Activities = ({
           <span className="rounded-full p-1.5 bg-gray-400 bg-opacity-20">
             {/* <LockIcon /> */} <Icon />
           </span>
-          <p className="ml-2">
-            {contribution_no} contributions in {repo_no} repositories
-          </p>
+          {isCommit && (
+            <p className="ml-2">
+              Created {moreThanOne(contribution_no, "commit", "commits")} in{" "}
+              {moreThanOne(repo_no, "repository", "repositories")}
+            </p>
+          )}
+          {isPull && (
+            <p className="ml-2">
+              Opened{" "}
+              {moreThanOne(contribution_no, "pull request", "pull requests")} in{" "}
+              {moreThanOne(repo_no, "repository", "repositories")}
+            </p>
+          )}
+          {isCreated && (
+            <p className="ml-2">
+              Created{" "}
+              {moreThanOne(contribution_no, "repository", "repositories")}
+            </p>
+          )}
+          {isReview && (
+            <p className="ml-2">
+              Opened{" "}
+              {moreThanOne(contribution_no, "pull request", "pull requests")} in{" "}
+              {moreThanOne(repo_no, "repository", "repositories")}
+            </p>
+          )}
         </div>
         <span onClick={() => setOpen(!open)}>
           <ToggleIcon />
