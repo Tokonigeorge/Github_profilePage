@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Activity = () => {
   return (
@@ -29,6 +29,7 @@ const Activity = () => {
 };
 
 const Activities = ({ Icon, contribution_no, repo_no }) => {
+  const [open, setOpen] = useState(true);
   return (
     <>
       <div className="border-l-2 border-gray-400 border-opacity-20 h-4 ml-5 mt-2"></div>
@@ -41,15 +42,19 @@ const Activities = ({ Icon, contribution_no, repo_no }) => {
             {contribution_no} contributions in {repo_no} repositories
           </p>
         </div>
-        <span>
+        <span onClick={() => setOpen(!open)}>
           <ToggleIcon />
         </span>
       </div>
-      <div className="border-l-2 border-gray-400 border-opacity-20 h-auto min-h-4 ml-5">
-        <CommitActivity url="#" name="something" number={2} />
-        <CommitActivity url="#" name="something" number={2} />
-        <CommitActivity url="#" name="something" number={2} />
-        <CommitActivity url="#" name="something" number={2} />
+      <div className="border-l-2 border-gray-400 border-opacity-20 h-auto pb-4 ml-5">
+        {open && (
+          <>
+            <CommitActivity url="#" name="something" number={2} />
+            <CommitActivity url="#" name="something" number={2} />
+            <CommitActivity url="#" name="something" number={2} />
+            <CommitActivity url="#" name="something" number={2} />
+          </>
+        )}
       </div>
     </>
   );
@@ -58,14 +63,14 @@ const Activities = ({ Icon, contribution_no, repo_no }) => {
 const CommitActivity = ({ url, name, number }) => {
   return (
     <>
-      <div className="flex items-center justify-between text-xs mt-2">
-        <div className="flex items-center">
-          <a href={url} className="text-blue-400 hover:text-underline mr-2">
+      <div className="flex items-center justify-between text-xs mt-2 pl-5">
+        <span className="flex items-center">
+          <a href={url} className="text-blue-400 hover:underline mr-2 text-sm">
             {name}
           </a>
           <p>{number} commits</p>
-        </div>
-        <span className="w-16 h-3 bg-green-400 rounded"></span>
+        </span>
+        <span className="w-16 h-2 bg-green-600 rounded"></span>
       </div>
     </>
   );
