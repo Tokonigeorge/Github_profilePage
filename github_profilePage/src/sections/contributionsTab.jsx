@@ -3,12 +3,13 @@ import "../utils/styles.css";
 import CalendarHeatMap from "../components/CalendarHeatMap";
 
 const ContributionsTab = ({ contributions, year }) => {
-  const _array = [];
+  const _values = [];
+  //map contribution days and get an array of the values from the object, mapping over and pushing into the array
   contributions?.weeks
     ?.map((i) => i.contributionDays)
     .map((i) => {
       Object.values(i).map((i) =>
-        _array.push({ date: i.date, count: i.contributionCount })
+        _values.push({ date: i.date, count: i.contributionCount })
       );
     });
 
@@ -27,7 +28,7 @@ const ContributionsTab = ({ contributions, year }) => {
       </div>
       <div className="h-auto rounded-md ring-1 ring-gray-600 ring-opacity-40 p-4 mt-2 overflow-hidden">
         <div>
-          <CalendarHeatMap value={_array} year={year} />
+          <CalendarHeatMap value={_values} year={year} />
         </div>
       </div>
     </div>
