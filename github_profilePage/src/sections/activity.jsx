@@ -5,6 +5,7 @@ import { useQuery, gql } from "@apollo/client";
 import { convertToIsoString } from "../body";
 
 const Activity = ({ year, owner, month, handleCount }) => {
+  console.log(month);
   // const getMonth = () => {
   //   return new Date().getMonth();
   // };
@@ -85,8 +86,8 @@ const Activity = ({ year, owner, month, handleCount }) => {
   const { loading, error, data } = useQuery(activitiesquery, {
     variables: {
       owner: owner,
-      from: convertToIsoString(`${year}-${month}-01`),
-      to: convertToIsoString(`${year}-${month}-31`),
+      from: convertToIsoString(`${year}-${month ? month : "11"}-01`),
+      to: convertToIsoString(`${year}-${month ? month : "11"}-30`),
     },
   });
 

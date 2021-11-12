@@ -34,8 +34,10 @@ const Body = ({
     month = new Date().getMonth() + 1;
     return month;
   };
-  let months = [`${getMonth()}`];
-  const [count, setCount] = useState(0);
+  getMonth();
+
+  const [count, setCount] = useState(1);
+  const [_months, setMonth] = useState([`${month}`]);
 
   //set the first active item to be the topyear and onclick change the value to i, if it matches set active to true and style
   // const [click, setClick] = useState(from);
@@ -45,9 +47,8 @@ const Body = ({
 
   const handleCount = () => {
     setCount((prevState) => prevState + 1);
-    months.push(month + count);
+    setMonth([..._months, `${month - count}`]);
   };
-
   const contributionsquery = gql`
     query ($owner: String!, $from: DateTime!, $to: DateTime!) {
       repositoryOwner(login: $owner) {
@@ -119,7 +120,7 @@ const Body = ({
                 year={from}
                 error={error}
               />
-              {months.map((i) => (
+              {_months?.map((i) => (
                 <Activity
                   year={from}
                   owner={owner}
@@ -127,6 +128,12 @@ const Body = ({
                   handleCount={handleCount}
                 />
               ))}{" "}
+              {/* <Activity
+                year={from}
+                owner={owner}
+                // month={i}
+                handleCount={handleCount}
+              /> */}
               {/* <Activity year={from} owner={owner} /> */}
             </div>
             <div className="md:hidden lg:block lg:w-32 mr-16 mt-4">
