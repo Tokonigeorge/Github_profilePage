@@ -1,5 +1,6 @@
 import React from "react";
 import RepoCard from "../components/RepoCard";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 const OverviewBar = ({ pinnedItems }) => {
   return (
@@ -10,24 +11,34 @@ const OverviewBar = ({ pinnedItems }) => {
           Customize your pins
         </a>
       </div>
-      <div
-        className={`flex-auto grid grid-cols-1 ${
-          pinnedItems?.nodes.length > 1 ? "md:grid-cols-2" : "md:grid-cols-1"
-        } gap-5 mt-2`}
-      >
-        {pinnedItems?.nodes.map((i, indx) => (
-          <RepoCard
-            key={indx}
-            name={i.name}
-            isPrivate={i.isPrivate}
-            des={i.description}
-            forkCount={i.forkCount}
-            isFork={i.isFork}
-            stargazerCount={i.stargazerCount}
-            language={i.primaryLanguage}
-          />
-        ))}
-      </div>
+      <DragDropContext>
+        <Droppable droppableId="pinnedItems">
+          {(provided) => (
+            <div
+              className={`flex-auto grid grid-cols-1 ${
+                pinnedItems?.nodes.length > 1
+                  ? "md:grid-cols-2"
+                  : "md:grid-cols-1"
+              } gap-5 mt-2`}
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              {pinnedItems?.nodes.map((i, indx) => (
+                <RepoCard
+                  key={indx}
+                  name={i.name}
+                  isPrivate={i.isPrivate}
+                  des={i.description}
+                  forkCount={i.forkCount}
+                  isFork={i.isFork}
+                  stargazerCount={i.stargazerCount}
+                  language={i.primaryLanguage}
+                />
+              ))}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
     </div>
   );
 };
