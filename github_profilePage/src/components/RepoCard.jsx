@@ -10,12 +10,19 @@ const RepoCard = ({
   isFork,
   stargazerCount,
   language,
+  _ref,
+  provided,
 }) => {
   const languageColor = {
     backgroundColor: language?.color,
   };
   return (
-    <div className="h-auto rounded-md ring-1 ring-defaultBorder p-4 flex flex-col justify-between">
+    <div
+      className="h-auto rounded-md ring-1 ring-defaultBorder p-4 flex flex-col justify-between"
+      ref={_ref}
+      {...provided.draggableProps}
+      {...provided.dragHandleProps}
+    >
       <div className="flex items-center justify-between text-gray-400">
         <div className="flex items-center">
           <span>
