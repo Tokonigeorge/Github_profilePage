@@ -4,11 +4,7 @@ import Activities from "../components/Activities";
 import { useQuery, gql } from "@apollo/client";
 import { convertToIsoString } from "../body";
 
-const Activity = ({ year, owner, month, handleCount }) => {
-  console.log(month);
-  // const getMonth = () => {
-  //   return new Date().getMonth();
-  // };
+const Activity = ({ year, owner, month, click }) => {
   const activitiesquery = gql`
     query ($owner: String!, $from: DateTime!, $to: DateTime!) {
       repositoryOwner(login: $owner) {
@@ -90,9 +86,7 @@ const Activity = ({ year, owner, month, handleCount }) => {
       to: convertToIsoString(`${year}-${month ? month : "11"}-30`),
     },
   });
-
   const _data = data?.repositoryOwner?.contributionsCollection;
-
   // const {
   //   totalCommitContributions,
   //   totalRepositoriesWithContributedCommits,
@@ -105,11 +99,10 @@ const Activity = ({ year, owner, month, handleCount }) => {
   //   totalRepositoriesWithContributedIssues,
   // } = ;
 
-  return loading ? (
+  return loading && !click ? (
     <p>loading</p>
   ) : (
-    <div className="px-4 mt-8 text-gray-400 md:pl-6 md:pr-6">
-      <p className="text-navIcon">Contribution activity</p>
+    <>
       <div className="mt-4 flex items-center mb-2">
         <p className="text-navIcon text-xs font-medium pl-2">
           November <span className="text-gray-400">{year}</span>
@@ -160,21 +153,7 @@ const Activity = ({ year, owner, month, handleCount }) => {
           issueActivity={_data?.issueContributionsByRepository}
         />
       )}
-      <button
-        type="button"
-        className="bg-transparent text-xs text-blue-400 w-full py-2.5 font-medium rounded-md 
-        border border-gray-300 border-opacity-20 mt-6"
-        onClick={() => handleCount()}
-      >
-        Show more activity
-      </button>
-      <p className="text-xs text-gray-400 mt-6">
-        Seeing something unexpected? Take a look at the{" "}
-        <a href="#" className="text-blue-400">
-          Github Profile guide.
-        </a>
-      </p>
-    </div>
+    </>
   );
 };
 
