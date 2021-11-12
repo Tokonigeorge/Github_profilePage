@@ -11,7 +11,6 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { DndProvider } from "react-dnd";
 
 function App() {
   const [owner, setOwner] = useState("");
@@ -115,11 +114,9 @@ function App() {
   };
   return (
     <ApolloProvider client={client}>
-      <DndProvider>
-        <div className="App">
-          <RepoOwner />
-        </div>
-      </DndProvider>
+      <div className="App">
+        <RepoOwner />
+      </div>
     </ApolloProvider>
   );
 }
