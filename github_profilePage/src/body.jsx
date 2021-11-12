@@ -34,8 +34,11 @@ const Body = ({
     month = new Date().getMonth() + 1;
     return month;
   };
-  let months = [`${getMonth()}`];
-  const [count, setCount] = useState(0);
+  getMonth();
+
+  const [count, setCount] = useState(1);
+  const [_months, setMonth] = useState([`${month}`]);
+  const [click, setClick] = useState(false);
 
   //set the first active item to be the topyear and onclick change the value to i, if it matches set active to true and style
   // const [click, setClick] = useState(from);
@@ -44,8 +47,9 @@ const Body = ({
   };
 
   const handleCount = () => {
+    setClick(true);
     setCount((prevState) => prevState + 1);
-    months.push(month + count);
+    setMonth([..._months, `${month - count}`]);
   };
 
   const contributionsquery = gql`
@@ -119,14 +123,39 @@ const Body = ({
                 year={from}
                 error={error}
               />
-              {months.map((i) => (
-                <Activity
-                  year={from}
-                  owner={owner}
-                  month={i}
-                  handleCount={handleCount}
-                />
-              ))}{" "}
+              <div className="px-4 mt-8 text-gray-400 md:pl-6 md:pr-6">
+                <p className="text-navIcon">Contribution activity</p>
+                {_months?.map((i) => (
+                  <Activity
+                    year={from}
+                    owner={owner}
+                    month={i}
+                    handleCount={handleCount}
+                    click={click}
+                  />
+                ))}{" "}
+                <button
+                  type="button"
+                  className="bg-transparent text-xs text-blue-400 w-full py-2.5 font-medium rounded-md 
+        border border-gray-300 border-opacity-20 mt-6"
+                  onClick={() => handleCount()}
+                >
+                  Show more activity
+                </button>
+                <p className="text-xs text-gray-400 mt-6">
+                  Seeing something unexpected? Take a look at the{" "}
+                  <a href="#" className="text-blue-400">
+                    Github Profile guide.
+                  </a>
+                </p>
+              </div>
+
+              {/* <Activity
+                year={from}
+                owner={owner}
+                // month={i}
+                handleCount={handleCount}
+              /> */}
               {/* <Activity year={from} owner={owner} /> */}
             </div>
             <div className="md:hidden lg:block lg:w-32 mr-16 mt-4">
