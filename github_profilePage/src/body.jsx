@@ -137,7 +137,7 @@ const Body = ({
                 <button
                   type="button"
                   className="bg-transparent text-xs text-blue-400 w-full py-2.5 font-medium rounded-md 
-        border border-gray-300 border-opacity-20 mt-6"
+        border border-gray-300 border-opacity-20 mt-6 hover:bg-gray-100 hover:bg-opacity-20"
                   onClick={() => handleCount()}
                 >
                   Show more activity
