@@ -1,0 +1,208 @@
+import React, { useState } from "react";
+import Navbar from "./sections/navbar";
+import Sidebar from "./sections/sidebar";
+import Topbar from "./sections/topbar";
+import OverviewTab from "./sections/overviewTab";
+import OverviewBar from "./sections/overviewBar";
+import ContributionsTab from "./sections/contributionsTab";
+import Activity from "./sections/activity";
+import YearButton from "./components/YearButton";
+import Footer from "./sections/footer";
+import { useQuery, gql } from "@apollo/client";
+
+const Body = ({
+  login,
+  name,
+  avatarUrl,
+  location,
+  twitterUsername,
+  organizations,
+  followers,
+  following,
+  status,
+  starredRepositories,
+  repositories,
+  pinnedItems,
+  contributionsCollection,
+  owner,
+}) => {
+  const [from, setFrom] = useState(
+    contributionsCollection?.contributionYears?.[0]
+  );
+  let month;
+  const getMonth = () => {
+    month = new Date().getMonth() + 1;
+    return month;
+  };
+  getMonth();
+
+  const [count, setCount] = useState(1);
+  const [_months, setMonth] = useState([`${month}`]);
+  const [click, setClick] = useState(false);
+
+  //set the first active item to be the topyear and onclick change the value to i, if it matches set active to true and style
+  // const [click, setClick] = useState(from);
+  const handleClick = (i) => {
+    setFrom(i);
+  };
+
+  const handleCount = () => {
+    setClick(true);
+    setCount((prevState) => prevState + 1);
+    setMonth([..._months, `${month - count}`]);
+  };
+
+  const contributionsquery = gql`
+    query ($owner: String!, $from: DateTime!, $to: DateTime!) {
+      repositoryOwner(login: $owner) {
+        ... on User {
+          contributionsCollection(from: $from, to: $to) {
+            contributionCalendar {
+              totalContributions
+              weeks {
+                contributionDays {
+                  color
+                  contributionCount
+                  date
+                  weekday
+                }
+                firstDay
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const { loading, error, data } = useQuery(contributionsquery, {
+    variables: {
+      owner: owner,
+      from: convertToIsoString(`${from}-01-01`),
+      to: convertToIsoString(`${from}-12-31`),
+    },
+  });
+  return (
+    <div className="bg-navbg h-screen overflow-x-hidden sm2:bg-bodyBg overscroll-x-none">
+      <Navbar />
+      <Topbar
+        github_name={login}
+        name={name}
+        status={status?.message}
+        followers={followers?.totalCount}
+        following={following?.totalCount}
+        starredRepositories={starredRepositories?.totalCount}
+        avatarUrl={avatarUrl}
+      />
+      <div className="hidden md:block">
+        <OverviewTab repo_number={repositories?.totalCount} />
+      </div>
+      <div className="hidden md:flex md:items-start">
+        <Sidebar
+          github_name={login}
+          name={name}
+          location={location}
+          twitter={twitterUsername}
+          highlights="PRO"
+          organization={organizations}
+          followers={followers?.totalCount}
+          following={following?.totalCount}
+          status={status?.message}
+          starredRepositories={starredRepositories?.totalCount}
+          avatarUrl={avatarUrl}
+        />
+        <div className="flex-auto">
+          <OverviewBar pinnedItems={pinnedItems} />
+          <div className="flex items-start">
+            <div className="flex-auto">
+              <ContributionsTab
+                contributions={
+                  data?.repositoryOwner?.contributionsCollection
+                    ?.contributionCalendar
+                }
+                year={from}
+                error={error}
+              />
+              <div className="px-4 mt-8 text-gray-400 md:pl-6 md:pr-6">
+                <p className="text-navIcon">Contribution activity</p>
+                {_months?.map((i) => (
+                  <Activity
+                    year={from}
+                    owner={owner}
+                    month={i}
+                    handleCount={handleCount}
+                    click={click}
+                  />
+                ))}{" "}
+                <button
+                  type="button"
+                  className="bg-transparent text-xs text-blue-400 w-full py-2.5 font-medium rounded-md 
+        border border-gray-300 border-opacity-20 mt-6"
+                  onClick={() => handleCount()}
+                >
+                  Show more activity
+                </button>
+                <p className="text-xs text-gray-400 mt-6">
+                  Seeing something unexpected? Take a look at the{" "}
+                  <a href="#" className="text-blue-400">
+                    Github Profile guide.
+                  </a>
+                </p>
+              </div>
+
+              {/* <Activity
+                year={from}
+                owner={owner}
+                // month={i}
+                handleCount={handleCount}
+              /> */}
+              {/* <Activity year={from} owner={owner} /> */}
+            </div>
+            <div className="md:hidden lg:block lg:w-32 mr-16 mt-4">
+              {contributionsCollection?.contributionYears?.map((i, indx) => (
+                <YearButton
+                  key={indx}
+                  year={i}
+                  active={from === i}
+                  handleClick={handleClick}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="hidden md:block">
+        <Footer />
+      </div>
+      <div className="md:hidden">
+        <OverviewTab repo_number={repositories?.totalCount} />
+        <OverviewBar pinnedItems={pinnedItems} />
+        <ContributionsTab />
+        <Activity />
+        <Footer />
+      </div>
+    </div>
+  );
+};
+
+export const convertToIsoString = (arg) => {
+  return new Date(arg).toISOString();
+};
+
+// const ContributionQuery = () => {
+
+//   const contributionsquery =
+//   const { loading, error, data } = useQuery(contributionsquery, {
+//     variables: { owner, From, to },
+//   });
+
+// //convert from to ISO string and to too
+//   // if (error && topYear) return <p>Error</p>
+//   return (
+//     <>
+
+//     </>
+//   )
+// }
+
+export default Body;
