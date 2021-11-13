@@ -83,7 +83,7 @@ const Body = ({
     },
   });
   return (
-    <div className="bg-navbg h-screen overflow-x-hidden sm2:bg-bodyBg overscroll-x-none">
+    <div className="bg-navbg overflow-x-hidden sm2:bg-bodyBg overscroll-x-none">
       <Navbar />
       <Topbar
         github_name={login}
@@ -137,7 +137,7 @@ const Body = ({
                 <button
                   type="button"
                   className="bg-transparent text-xs text-blue-400 w-full py-2.5 font-medium rounded-md 
-        border border-gray-300 border-opacity-20 mt-6 hover:bg-gray-100 hover:bg-opacity-20"
+        border border-gray-300 border-opacity-20 mt-6 hover:bg-gray-500 hover:bg-opacity-10"
                   onClick={() => handleCount()}
                 >
                   Show more activity
