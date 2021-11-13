@@ -87,18 +87,7 @@ const Activity = ({ year, owner, month, click }) => {
     },
   });
   const _data = data?.repositoryOwner?.contributionsCollection;
-  // const {
-  //   totalCommitContributions,
-  //   totalRepositoriesWithContributedCommits,
-  //   totalRepositoryContributions,
-  //   totalPullRequestContributions,
-  //   totalRepositoriesWithContributedPullRequests,
-  //   totalPullRequestReviewContributions,
-  //   totalRepositoriesWithContributedPullRequestReviews,
-  //   totalIssueContributions,
-  //   totalRepositoriesWithContributedIssues,
-  // } = ;
-
+ 
   return loading && !click ? (
     <p>loading</p>
   ) : (

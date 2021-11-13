@@ -4,11 +4,21 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const OverviewBar = ({ pinnedItems }) => {
   const [position, setPosition] = useState(pinnedItems?.nodes);
+
   const handleDrag = (result) => {
-    if (!result.destination) return;
+    const { destination, source, draggableId } = result;
+    //if the drag is beyond the destination return and if the destination is equal to the source, there is nothing to be done, otherwise:
+    if (!destination) return;
+
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    )
+      return;
+    //create an array out of the previous
     const items = Array.from(position);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
+    const [reorderedItem] = items.splice(source.index, 1);
+    items.splice(destination.index, 0, reorderedItem);
 
     setPosition(items);
   };
@@ -16,7 +26,10 @@ const OverviewBar = ({ pinnedItems }) => {
     <div className="ml-4 md:ml-6 md:pr-6 lg:pr-8 mt-5 pr-4">
       <div className="flex justify-between items-center">
         <p className="text-navIcon">Pinned</p>
-        <a href="#" className="text-gray-200 text-opacity-60 text-sm">
+        <a
+          href="#"
+          className="text-gray-200 hover:text-blue-400 text-opacity-60 text-sm"
+        >
           Customize your pins
         </a>
       </div>
