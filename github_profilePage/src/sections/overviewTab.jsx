@@ -1,17 +1,48 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../utils/styles.css";
 
 const OverviewTab = ({ repo_number }) => {
-  const onScroll = (e) => {
-    console.log(document.documentElement.scrollTop || document.body.scrollTop);
-    console.log("weeel");
+  const overviewRef = useRef();
+  const [fixed, setFixed] = useState(false);
+  const [offset, setOffset] = useState();
+  // const { offsetTop } = overviewRef?.current;
+  // const rect = document.getElementById("overview")?.offsetTop;
+  const handleLoad = () => {
+    const { offsetTop } = overviewRef?.current;
+    setOffset(offsetTop);
   };
+  const onScroll = (e) => {
+    // console.log(document.documentElement.scrollTop || document.body.scrollTop);
+    // if (!offsetTop) return;
+    // const { top } = overviewRef?.current?.getBoundingClientRect();
+    if (
+      document.documentElement.scrollTop >= offset ||
+      document.body.scrollTop >= offset
+    ) {
+      setFixed(true);
+      console.log(offset);
+    } else {
+      setFixed(false);
+      console.log(offset, fixed);
+    }
+  };
+  useEffect(() => {
+    document.addEventListener("load", handleLoad, true);
+    return () => document.removeEventListener("load", handleLoad);
+  }, []);
   useEffect(() => {
     document.addEventListener("scroll", onScroll, true);
     return () => document.removeEventListener("scroll", onScroll);
   }, []);
   return (
-    <div className="mt-10 text-sm text-navIcon flex items-center pl-4 border-b border-gray-400 border-opacity-20 pb-3 md:pl-74 lg:pl-88 overflow-x-auto">
+    <div
+      className={`text-sm bg-bodyBg text-navIcon flex items-center pl-4 border-b border-gray-400 border-opacity-20 pb-3 
+    md:pl-74 lg:pl-88 overflow-x-auto ${
+      fixed ? "fixed top-0 pt-10 bg-bodyBg w-screen" : "pt-10 "
+    }`}
+      ref={overviewRef}
+      id="overview"
+    >
       <a href="#" className="pr-6 md:pl-4 flex items-center link active">
         <span className="hidden sm2:block">
           <OverviewIcon />
