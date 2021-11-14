@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ReactTooltip from "react-tooltip";
 import Search from "../components/Search";
 import "../utils/styles.css";
 import HamburgerMenu from "./hamburgerMenu";
@@ -49,7 +50,13 @@ const Navbar = () => {
             </div>
           </div>
           <div className="flex items-center">
-            <BellIcon />
+            <span
+              data-tip="You have no unread notifications"
+              data-type="light"
+              data-text-color="white"
+            >
+              <BellIcon />
+            </span>
             <span className="flex items-center mx-4 cursor-pointer">
               <PlusIcon />
               <span className="dropDown-icon ml-1"></span>
@@ -72,6 +79,7 @@ const Navbar = () => {
           <HamburgerMenu />
         </div>
       )}
+      <ReactTooltip />
     </>
   );
 };
