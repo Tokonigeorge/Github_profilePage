@@ -17,7 +17,11 @@ const Navbar = () => {
             <HamburgerIcon />
           </button>
           <GithubIcon />
-          <BellIcon />
+           <span
+              data-tip="You have no unread notifications"
+              data-type="light"
+              data-text-color="white"
+            ><BellIcon /></span>
         </div>
 
         <div className="hidden justify-between items-center py-4 px-4 md:flex lg:px-8 md:px-6">

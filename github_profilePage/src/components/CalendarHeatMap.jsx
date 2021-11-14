@@ -1,5 +1,6 @@
 import React from "react";
 import CalendarHeatmap from "react-calendar-heatmap";
+import ReactTooltip from "react-tooltip";
 import "react-calendar-heatmap/dist/styles.css";
 import "../utils/styles.css";
 
@@ -10,6 +11,15 @@ const CalendarHeatMap = ({ value, year }) => {
         endDate={new Date(`${year}-12-31`)}
         startDate={new Date(`${year}-01-01`)}
         values={value}
+        tooltipDataAttrs={(value) => {
+          return {
+            "data-tip": `${
+              value?.count > 1
+                ? `${value?.count} contributions`
+                : `${value?.count} contribution`
+            } on ${value?.date?.toISOString().slice(0, 10)}`,
+          };
+        }}
         showWeekdayLabels={true}
         showOutOfRangeDays={true}
         gutterSize={5}
@@ -20,6 +30,7 @@ const CalendarHeatMap = ({ value, year }) => {
           return `color-scale-${value.count}`;
         }}
       />
+      <ReactTooltip />
     </>
   );
 };
