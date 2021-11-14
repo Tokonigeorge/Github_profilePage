@@ -27,7 +27,7 @@ const ContributionsTab = ({ contributions, year, error }) => {
         )}
         <div className="text-gray-400 text-sm flex items-center">
           <span>
-            <p>Contributions Settings</p>
+            <p className="font-light">Contributions Settings</p>
           </span>
           <span className="dropDown-icon ml-1 mt-px"></span>
         </div>

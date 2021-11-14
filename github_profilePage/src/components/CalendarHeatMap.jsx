@@ -17,7 +17,7 @@ const CalendarHeatMap = ({ value, year }) => {
               value?.count > 1
                 ? `${value?.count} contributions`
                 : `${value?.count} contribution`
-            } on ${value?.date?.toISOString().slice(0, 10)}`,
+            } on ${value?.date}`,
           };
         }}
         showWeekdayLabels={true}

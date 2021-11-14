@@ -28,7 +28,7 @@ const OverviewBar = ({ pinnedItems }) => {
         <p className="text-navIcon">Pinned</p>
         <a
           href="#"
-          className="text-gray-200 hover:text-blue-400 text-opacity-60 text-sm"
+          className="text-gray-200 hover:text-blue-400 text-opacity-60 text-sm font-light"
         >
           Customize your pins
         </a>

@@ -17,15 +17,17 @@ const Navbar = () => {
             <HamburgerIcon />
           </button>
           <GithubIcon />
-           <span
-              data-tip="You have no unread notifications"
-              data-type="light"
-              data-text-color="white"
-            ><BellIcon /></span>
+          <span
+            data-tip="You have no unread notifications"
+            data-type="light"
+            data-text-color="white"
+          >
+            <BellIcon />
+          </span>
         </div>
 
         <div className="hidden justify-between items-center py-4 px-4 md:flex lg:px-8 md:px-6">
-          <div className="items-center flex">
+          <div className="items-center flex text-navIcon hover:text-gray-300">
             <GithubIcon />
             {/* calling the search component as a function lets the input the focused on rerender */}
             <div className="w-68 mx-4">{Search(nav)}</div>
@@ -56,8 +58,7 @@ const Navbar = () => {
           <div className="flex items-center">
             <span
               data-tip="You have no unread notifications"
-              data-type="light"
-              data-text-color="white"
+              className="text-xs"
             >
               <BellIcon />
             </span>
