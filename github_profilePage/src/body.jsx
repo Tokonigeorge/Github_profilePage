@@ -39,6 +39,7 @@ const Body = ({
   const [count, setCount] = useState(1);
   const [_months, setMonth] = useState([`${month}`]);
   const [click, setClick] = useState(false);
+  const [profileShow, setProfileShow] = useState(false);
 
   //set the first active item to be the topyear and onclick change the value to i, if it matches set active to true and style
   // const [click, setClick] = useState(from);
@@ -51,6 +52,11 @@ const Body = ({
     setCount((prevState) => prevState + 1);
     setMonth([..._months, `${month - count}`]);
   };
+
+  // const handleNavProfileVis = (bool) => {
+  //   console.log("is in body");
+  //   setProfileShow(bool);
+  // };
 
   const contributionsquery = gql`
     query ($owner: String!, $from: DateTime!, $to: DateTime!) {
@@ -95,7 +101,12 @@ const Body = ({
         avatarUrl={avatarUrl}
       />
       <div className="hidden md:block">
-        <OverviewTab repo_number={repositories?.totalCount} />
+        <OverviewTab
+          repo_number={repositories?.totalCount}
+          profileShow={profileShow}
+          avatarUrl={avatarUrl}
+          github_name={login}
+        />
       </div>
       <div className="hidden md:flex md:items-start">
         <Sidebar
@@ -110,6 +121,7 @@ const Body = ({
           status={status?.message}
           starredRepositories={starredRepositories?.totalCount}
           avatarUrl={avatarUrl}
+          handleNavProfileVis={setProfileShow}
         />
         <div className="flex-auto">
           <OverviewBar pinnedItems={pinnedItems} />

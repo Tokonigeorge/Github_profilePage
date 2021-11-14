@@ -1,29 +1,26 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../utils/styles.css";
 
-const OverviewTab = ({ repo_number }) => {
+const OverviewTab = ({ repo_number, profileShow, avatarUrl, github_name }) => {
   const overviewRef = useRef();
   const [fixed, setFixed] = useState(false);
   const [offset, setOffset] = useState();
-  // const { offsetTop } = overviewRef?.current;
-  // const rect = document.getElementById("overview")?.offsetTop;
+
   const handleLoad = () => {
-    const { offsetTop } = overviewRef?.current;
-    setOffset(offsetTop);
+    const { offsetTop } = overviewRef?.current || {};
+    setOffset(offsetTop ? offsetTop : 64);
   };
   const onScroll = (e) => {
-    // console.log(document.documentElement.scrollTop || document.body.scrollTop);
-    // if (!offsetTop) return;
-    // const { top } = overviewRef?.current?.getBoundingClientRect();
+    if (!offset) return handleLoad();
     if (
       document.documentElement.scrollTop >= offset ||
       document.body.scrollTop >= offset
     ) {
-      setFixed(true);
       console.log(offset);
+      setFixed(true);
     } else {
+      console.log(offset);
       setFixed(false);
-      console.log(offset, fixed);
     }
   };
   useEffect(() => {
@@ -34,42 +31,64 @@ const OverviewTab = ({ repo_number }) => {
     document.addEventListener("scroll", onScroll, true);
     return () => document.removeEventListener("scroll", onScroll);
   }, []);
+  // md:pl-74 lg:pl-88
   return (
     <div
       className={`text-sm bg-bodyBg text-navIcon flex items-center pl-4 border-b border-gray-400 border-opacity-20 pb-3 
-    md:pl-74 lg:pl-88 overflow-x-auto ${
-      fixed ? "fixed top-0 pt-10 bg-bodyBg w-screen" : "pt-10 "
-    }`}
+     overflow-x-auto ${
+       fixed ? "fixed top-0 pt-8 bg-bodyBg w-screen" : "pt-10 "
+     }`}
       ref={overviewRef}
-      id="overview"
     >
-      <a href="#" className="pr-6 md:pl-4 flex items-center link active">
-        <span className="hidden sm2:block">
-          <OverviewIcon />
-        </span>
-        <span className="ml-2">Overview</span>
-      </a>
-      <a href="#" className="pr-6 flex items-center link">
-        <span className="hidden sm2:block">
-          <RepoIcon />
-        </span>
-        <span className="ml-2">Repositories</span>
-        <span className="w-6 h-5 bg-gray-500 bg-opacity-50 rounded-full ml-2 px-1.5 py-px text-xs">
-          {repo_number}
-        </span>
-      </a>
-      <a href="#" className="pr-6 flex items-center link">
-        <span className="hidden sm2:block">
-          <ProjectIocn />
-        </span>
-        <span className="ml-2">Projects</span>
-      </a>
-      <a href="#" className="flex items-center pr-6 link">
-        <span className="hidden sm2:block">
-          <PackageIcon />
-        </span>
-        <span className="ml-2">Packages</span>
-      </a>
+      <div
+        className={`${
+          profileShow ? "visible" : "invisible"
+        } flex items-center pl-4`}
+      >
+        <img
+          src={
+            avatarUrl || "https://avatars.githubusercontent.com/u/65655487?v=4"
+          }
+          alt=""
+          width="32px"
+          height="32px"
+          className="rounded-full ring-1 ring-gray-700 ring-opacity-80 mr-2"
+        />
+        {github_name && (
+          <p className="text-sm text-gray-200 text-opacity-80 font-medium">
+            {github_name}
+          </p>
+        )}
+      </div>
+      <div className="flex items-center md:pl-68 lg:pl-52">
+        <a href="#" className="pr-6 md:pl-4 flex items-center link active">
+          <span className="hidden sm2:block">
+            <OverviewIcon />
+          </span>
+          <span className="ml-2">Overview</span>
+        </a>
+        <a href="#" className="pr-6 flex items-center link">
+          <span className="hidden sm2:block">
+            <RepoIcon />
+          </span>
+          <span className="ml-2">Repositories</span>
+          <span className="w-6 h-5 bg-gray-500 bg-opacity-50 rounded-full ml-2 px-1.5 py-px text-xs">
+            {repo_number}
+          </span>
+        </a>
+        <a href="#" className="pr-6 flex items-center link">
+          <span className="hidden sm2:block">
+            <ProjectIocn />
+          </span>
+          <span className="ml-2">Projects</span>
+        </a>
+        <a href="#" className="flex items-center pr-6 link">
+          <span className="hidden sm2:block">
+            <PackageIcon />
+          </span>
+          <span className="ml-2">Packages</span>
+        </a>
+      </div>
     </div>
   );
 };

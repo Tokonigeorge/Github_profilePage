@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { PersonIcon, StarIcon, EmojiStatus } from "./topbar";
 
 const Sidebar = ({
@@ -13,8 +13,38 @@ const Sidebar = ({
   following,
   starredRepositories,
   avatarUrl,
+  handleNavProfileVis,
 }) => {
+  const githubNameRef = useRef();
   const [hover, setHover] = useState(false);
+  const [offset, setOffset] = useState();
+
+  const handleLoad = () => {
+    const { offsetTop } = githubNameRef?.current || {};
+    setOffset(offsetTop ? offsetTop - 20 : 64);
+  };
+  const onScroll = (e) => {
+    if (!offset) return handleLoad();
+    if (
+      document.documentElement.scrollTop > offset ||
+      document.body.scrollTop > offset
+    ) {
+      console.log(offset);
+      handleNavProfileVis(true);
+    } else {
+      console.log(offset);
+      handleNavProfileVis(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("load", handleLoad, true);
+    return () => document.removeEventListener("load", handleLoad);
+  }, []);
+  useEffect(() => {
+    document.addEventListener("scroll", onScroll, true);
+    return () => document.removeEventListener("scroll", onScroll);
+  }, []);
   //lg pl-20
   return (
     <div className="w-72 md:pl-6 lg:pl-8 lg:w-80 flex-none">
@@ -47,7 +77,7 @@ const Sidebar = ({
           </span>
         </div>
       </div>
-      <div>
+      <div ref={githubNameRef}>
         {name && (
           <p className="text-2xl text-gray-200 text-opacity-80 font-medium">
             {name}
