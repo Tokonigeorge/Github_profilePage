@@ -99,7 +99,6 @@ function App() {
     const handleChange = (value) => {
       setOwner(value);
     };
-    if (error && owner) console.log(error); //return <p>Error</p>;
     //loading = {owner && loading} => this is because loading is set to true as it still fecthes result when owner state is empty,
     //adding owner && makes it truthy only when both are satisfied.
     return (
@@ -107,7 +106,11 @@ function App() {
         {data?.repositoryOwner ? (
           <Body {...data.repositoryOwner} owner={owner} />
         ) : (
-          <SignIn handleChange={handleChange} loading={owner && loading} />
+          <SignIn
+            handleChange={handleChange}
+            loading={owner && loading}
+            error={error && owner}
+          />
         )}
       </>
     );

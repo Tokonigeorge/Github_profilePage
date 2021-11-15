@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const SignIn = ({ handleChange, loading }) => {
+const SignIn = ({ handleChange, loading, error }) => {
   //work out validation of input
   const [value, setValue] = useState("");
   const [empty, setEmpty] = useState(false);
@@ -19,6 +19,11 @@ const SignIn = ({ handleChange, loading }) => {
         <GithubIconBig />
       </span>
       <p className="text-2xl font-extralight mt-6 mb-4">Sign in to Github</p>
+      {error && (
+        <p className="text-red-800 bg-red-100 bg-opacity-70 w-full sm2:w-80 mt-2 mb-4 text-sm rounded text-center py-2 ring-1 ring-red-300">
+          Sign In Error. Please provide a valid username
+        </p>
+      )}
       <div className="bg-formBg ring-1 ring-defaultBorder ring-opacity-20 p-4 text-sm rounded w-full sm2:w-80">
         {/* using the handleSubmit on the form capture the click of the submit button and the enter on the input */}
         <form onSubmit={handleSubmit}>
