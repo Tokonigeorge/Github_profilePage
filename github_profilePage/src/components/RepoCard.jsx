@@ -12,6 +12,7 @@ const RepoCard = ({
   language,
   _ref,
   provided,
+  url,
 }) => {
   const languageColor = {
     backgroundColor: language?.color,
@@ -29,8 +30,8 @@ const RepoCard = ({
             <RepoIcon />
           </span>
           <a
-            href="#"
-            className="text-sm font-medium text-blue-400 ml-2 break-all"
+            href={url}
+            className="text-sm font-medium text-blue-400 ml-2 break-all hover:underline"
           >
             {name}
           </a>

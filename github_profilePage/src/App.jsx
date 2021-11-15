@@ -69,6 +69,7 @@ function App() {
             nodes {
               ... on Repository {
                 name
+                url
                 isPrivate
                 description
                 primaryLanguage {

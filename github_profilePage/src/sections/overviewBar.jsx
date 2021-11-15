@@ -65,6 +65,7 @@ const OverviewBar = ({ pinnedItems }) => {
                             language={i.primaryLanguage}
                             provided={provided}
                             _ref={provided.innerRef}
+                            url={i.url}
                           />
                         );
                       }}
