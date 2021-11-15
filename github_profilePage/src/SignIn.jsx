@@ -29,11 +29,19 @@ const SignIn = ({ handleChange, loading }) => {
             type="text"
             name="username"
             placeholder="Enter username"
-            className="mb-4 w-full px-2 py-1.5 ring-1 ring-defaultBorder ring-opacity-20 rounded-md outline-none focus:ring-blue-500"
+            className={`mb-4 w-full px-2 py-1.5 ring-1 rounded-md outline-none focus:ring-blue-500 ${
+              empty
+                ? "ring-red-400 ring-opacity-90"
+                : "ring-defaultBorder ring-opacity-20"
+            }`}
             value={value}
-            onChange={(e) => setValue(e.target.value)}
+            onChange={(e) => {
+              setValue(e.target.value), setEmpty(false);
+            }}
           />
-          {empty && <p className="text-sm py-1.5">Input is empty abeg :/</p>}
+          {empty && (
+            <p className="text-sm pb-1.5 text-center">Input is empty abeg :/</p>
+          )}
           {/* <p htmlFor="password" className="mb-2">
             Password
           </p>
