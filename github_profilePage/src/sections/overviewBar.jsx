@@ -23,7 +23,7 @@ const OverviewBar = ({ pinnedItems }) => {
     setPosition(items);
   };
   return (
-    <div className="ml-4 md:ml-6 md:pr-6 lg:pr-8 mt-5 pr-4">
+    <div className="ml-4 md:ml-6 md:pr-6 lg:pr-8 mt-5 pr-4 lg2:pr-16">
       <div className="flex justify-between items-center">
         <p className="text-navIcon">Pinned</p>
         <a

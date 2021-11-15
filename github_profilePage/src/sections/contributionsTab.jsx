@@ -14,7 +14,7 @@ const ContributionsTab = ({ contributions, year, error }) => {
     });
 
   return (
-    <div className="px-4 mt-8 md:pl-6 md:pr-6 lg:pr-8">
+    <div className="px-4 mt-10 md:pl-6 md:pr-6 lg:pr-8 lg2:pr-16">
       <div className="flex justify-between items-center">
         {error ? (
           <p className="text-navIcon">
@@ -32,7 +32,7 @@ const ContributionsTab = ({ contributions, year, error }) => {
           <span className="dropDown-icon ml-1 mt-px"></span>
         </div>
       </div>
-      <div className="h-auto rounded-md ring-1 ring-gray-600 ring-opacity-40 p-4 mt-2 overflow-hidden">
+      <div className="h-auto rounded-md ring-1 ring-gray-600 ring-opacity-50 p-4 pr-10 mt-2 overflow-hidden">
         <div>
           <CalendarHeatMap value={_values} year={year} />
         </div>

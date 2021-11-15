@@ -19,7 +19,7 @@ const RepoCard = ({
   };
   return (
     <div
-      className="h-auto rounded-md ring-1 ring-defaultBorder p-4 flex flex-col justify-between"
+      className="h-auto rounded-md ring-1 ring-gray-600 ring-opacity-50 p-4 flex flex-col justify-between"
       ref={_ref}
       {...provided.draggableProps}
       {...provided.dragHandleProps}
@@ -44,7 +44,7 @@ const RepoCard = ({
         </div>
       </div>
       {des && <p className="text-xs text-gray-400 pt-2">{des}</p>}
-      <div className={`flex items-center text-gray-400 mt-6`}>
+      <div className={`flex items-center text-gray-400 mt-5`}>
         {language && (
           <>
             <span

@@ -34,9 +34,9 @@ const OverviewTab = ({ repo_number, profileShow, avatarUrl, github_name }) => {
   // md:pl-74 lg:pl-88
   return (
     <div
-      className={`text-sm bg-bodyBg text-navIcon flex items-center pl-4 border-b border-gray-400 border-opacity-20 pb-3 
+      className={`text-sm bg-bodyBg text-navIcon flex items-center pl-4 border-b border-gray-400 border-opacity-20 pb-2.5
      overflow-x-auto ${
-       fixed ? "fixed top-0 pt-8 bg-bodyBg w-screen" : "pt-10  "
+       fixed ? "fixed top-0 pt-5 bg-bodyBg w-screen" : "pt-7  "
      }`}
       ref={overviewRef}
     >
@@ -60,15 +60,21 @@ const OverviewTab = ({ repo_number, profileShow, avatarUrl, github_name }) => {
           </p>
         )}
       </div>
-      <div className="flex items-center md:pl-48 md:-ml-16 lg:pl-52 lg:-ml-6">
-        <a href="#" className="pr-6 md:pl-4 flex items-center link active">
+      <div className="flex items-center md:pl-48 md:-ml-16 lg:pl-52 lg:-ml-6 lg2:pl-60">
+        <a
+          href="#"
+          className="pr-3 md:pr-4 md:pl-4 flex items-center link active"
+        >
           <span className="hidden sm2:block">
             <OverviewIcon />
           </span>
           <span className="ml-2">Overview</span>
         </a>
-        <a href="#" className="pr-6 flex items-center link">
-          <span className="hidden sm2:block">
+        <a
+          href="#"
+          className="pr-3 pl-3 md:pr-4 md:pl-4 flex items-center link"
+        >
+          <span className="hidden sm2:block text-gray-600 text-opacity-80">
             <RepoIcon />
           </span>
           <span className="ml-2">Repositories</span>
@@ -76,14 +82,20 @@ const OverviewTab = ({ repo_number, profileShow, avatarUrl, github_name }) => {
             {repo_number}
           </span>
         </a>
-        <a href="#" className="pr-6 flex items-center link">
-          <span className="hidden sm2:block">
+        <a
+          href="#"
+          className="pr-3 pl-3 md:pr-4 md:pl-4 flex items-center link"
+        >
+          <span className="hidden sm2:block text-gray-600 text-opacity-80">
             <ProjectIocn />
           </span>
           <span className="ml-2">Projects</span>
         </a>
-        <a href="#" className="flex items-center pr-6 link">
-          <span className="hidden sm2:block">
+        <a
+          href="#"
+          className="flex items-center pr-3 pl-3 md:pr-4 md:pl-4 link"
+        >
+          <span className="hidden sm2:block text-gray-600 text-opacity-80">
             <PackageIcon />
           </span>
           <span className="ml-2">Packages</span>
