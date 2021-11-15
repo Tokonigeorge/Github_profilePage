@@ -62,10 +62,24 @@ function App() {
               avatarUrl
             }
           }
-          repositories {
+          repositories(first: 6) {
             totalCount
+            nodes {
+              name
+              url
+              isPrivate
+              description
+              primaryLanguage {
+                name
+                color
+              }
+              forkCount
+              isFork
+              stargazerCount
+            }
           }
           pinnedItems(first: 6) {
+            totalCount
             nodes {
               ... on Repository {
                 name
