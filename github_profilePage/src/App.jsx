@@ -96,8 +96,7 @@ function App() {
       variables: { owner },
     });
     //handleChange function is passed as a prop to Body to be called so the owner state can be updated in this component
-    const handleChange = (e, value) => {
-      e.preventDefault();
+    const handleChange = (value) => {
       setOwner(value);
     };
     if (error && owner) console.log(error); //return <p>Error</p>;

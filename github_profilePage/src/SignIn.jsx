@@ -3,6 +3,16 @@ import React, { useState } from "react";
 const SignIn = ({ handleChange, loading }) => {
   //work out validation of input
   const [value, setValue] = useState("");
+  const [empty, setEmpty] = useState(false);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (value.length > 0) handleChange(value), setEmpty(false);
+    else {
+      setEmpty(true);
+    }
+    setValue(value);
+  };
+
   return (
     <div className="flex flex-col items-center mt-8 mx-4 text-gray-800">
       <span>
@@ -10,18 +20,20 @@ const SignIn = ({ handleChange, loading }) => {
       </span>
       <p className="text-2xl font-extralight mt-6 mb-4">Sign in to Github</p>
       <div className="bg-formBg ring-1 ring-defaultBorder ring-opacity-20 p-4 text-sm rounded w-full sm2:w-80">
-        <form>
-          <p htmlFor="username/email" className="mb-2">
-            Username or email address
+        {/* using the handleSubmit on the form capture the click of the submit button and the enter on the input */}
+        <form onSubmit={handleSubmit}>
+          <p htmlFor="username" className="mb-2">
+            Username
           </p>
           <input
             type="text"
-            name="username/email"
-            placeholder="Username or email address"
+            name="username"
+            placeholder="Enter username"
             className="mb-4 w-full px-2 py-1.5 ring-1 ring-defaultBorder ring-opacity-20 rounded-md outline-none focus:ring-blue-500"
             value={value}
             onChange={(e) => setValue(e.target.value)}
           />
+          {empty && <p className="text-sm py-1.5">Input is empty abeg :/</p>}
           {/* <p htmlFor="password" className="mb-2">
             Password
           </p>
@@ -32,17 +44,17 @@ const SignIn = ({ handleChange, loading }) => {
             autoComplete="yes"
             className="mb-6 w-full px-2 py-1.5 ring-1 ring-defaultBorder ring-opacity-20 rounded-md outline-none focus:ring-blue-500"
           /> */}
+          <button
+            type="submit"
+            className={`w-full py-1.5 rounded text-navIcon font-medium ${
+              loading ? "bg-green-100" : "bg-signInBg hover:bg-opacity-90"
+            }`}
+            // onClick={(e) => handleClick(e, value)}
+            // onClick={setOwner(value)}
+          >
+            {loading ? "Signing in" : "Sign in"}
+          </button>
         </form>
-        <button
-          type="button"
-          className={`w-full py-1.5 rounded text-navIcon font-medium ${
-            loading ? "bg-green-100" : "bg-signInBg"
-          }`}
-          onClick={(e) => handleChange(e, value)}
-          // onClick={setOwner(value)}
-        >
-          {loading ? "Signing in" : "Sign in"}
-        </button>
       </div>
     </div>
   );
