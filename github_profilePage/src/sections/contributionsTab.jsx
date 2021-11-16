@@ -32,11 +32,11 @@ const ContributionsTab = ({ contributions, year, error }) => {
           <span className="dropDown-icon ml-1 mt-px"></span>
         </div>
       </div>
-      <div className="h-auto rounded-md ring-1 ring-gray-600 ring-opacity-50 p-4 pr-10 mt-2 overflow-hidden">
+      <div className="h-auto rounded-t-md ring-1 ring-gray-600 ring-opacity-50 p-4 pr-10 mt-2 overflow-hidden">
         <div>
           <CalendarHeatMap value={_values} year={year} />
         </div>
-        <div className="flex items-center justify-between text-xs text-gray-400 -mt-2.5 ml-2">
+        <div className="flex items-center justify-between text-xs text-gray-400 -mt-3 ml-3">
           <span>Learn how we count contribution</span>
           <div className="flex items-center">
             <p>less</p>

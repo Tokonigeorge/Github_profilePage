@@ -56,7 +56,7 @@ const Sidebar = ({
           alt=""
           width="340px"
           height="340px"
-          className="rounded-full ring-2 ring-gray-700 ring-opacity-80"
+          className="rounded-full ring-2 ring-gray-700 ring-opacity-60"
         />
         <div
           className={`cursor-pointer absolute top-3/4 lg:left-56 left-3/4 bg-navbg rounded-full h-9 text-gray-400 ml-4 ring-1 

@@ -141,7 +141,7 @@ const Body = ({
             />
           </div>
           <div className="flex items-start">
-            <div className="px-4 mt-8 text-gray-400 md:pl-6 md:pr-6 flex-auto">
+            <div className="px-4 mt-6 text-gray-400 md:pl-6 md:pr-6 flex-auto">
               <p className="text-navIcon">Contribution activity</p>
               {_months?.map((i) => (
                 <Activity
@@ -176,7 +176,7 @@ const Body = ({
               /> */}
             {/* <Activity year={from} owner={owner} /> */}
 
-            <div className={`md:hidden lg:block lg:w-32 mr-16 mt-4`}>
+            <div className={`md:hidden lg:block lg:w-32 mr-12 mt-4`}>
               {contributionsCollection?.contributionYears?.map((i, indx) => (
                 <YearButton
                   key={indx}

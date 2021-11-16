@@ -111,3 +111,19 @@
 .color-scale-4 {
   background-color: #39d353;
 }
+
+.commit {
+  background-color: #216e39;
+}
+
+.year-button {
+  background-color: #1f6feb;
+}
+
+.pull-bubble {
+  background-color: #8957e5;
+}
+
+.issue-bubble {
+  background-color: #238636;
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import { RepoIcon } from "../sections/overviewTab";
+import { getDay, getMonth } from "../date";
 
 const CreatedRepoActivity = ({
   name,
@@ -28,7 +29,7 @@ const CreatedRepoActivity = ({
         ></span>
         <p>{language_name}</p>
       </span>
-      <span>{createdAt}</span>
+      <span>{getMonth(createdAt) + " " + getDay(createdAt)}</span>
     </div>
   );
 };
