@@ -3,6 +3,7 @@ import CalendarHeatmap from "react-calendar-heatmap";
 import ReactTooltip from "react-tooltip";
 import "react-calendar-heatmap/dist/styles.css";
 import "../utils/styles.css";
+import { getMonth, getDay } from "../date";
 
 const CalendarHeatMap = ({ value, year }) => {
   const colorScale = (count) => {
@@ -27,7 +28,7 @@ const CalendarHeatMap = ({ value, year }) => {
               value?.count > 1
                 ? `${value?.count} contributions`
                 : `${value?.count} contribution`
-            } on ${value?.date}`,
+            } on ${getDay(value?.date)} ${getMonth(value?.date, "short")}`,
           };
         }}
         showWeekdayLabels={true}
