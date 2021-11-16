@@ -60,7 +60,7 @@ const OverviewTab = ({ repo_number, profileShow, avatarUrl, github_name }) => {
           </p>
         )}
       </div>
-      <div className="flex items-center md:pl-48 md:-ml-16 lg:pl-52 lg:-ml-6 lg2:pl-60">
+      <div className="flex items-center md:pl-52  md:-ml-14 lg:pl-52 lg:-ml-6 lg2:pl-60">
         <a
           href="#"
           className="pr-3 md:pr-4 md:pl-4 flex items-center link active"

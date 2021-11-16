@@ -5,6 +5,16 @@ import "react-calendar-heatmap/dist/styles.css";
 import "../utils/styles.css";
 
 const CalendarHeatMap = ({ value, year }) => {
+  const colorScale = (count) => {
+    if (count === 0) {
+      return 0;
+    } else if (count > 10) return 4;
+    else if (count >= 7 && count < 10) return 3;
+    else if (count >= 4 && count < 7) return 2;
+    else {
+      return 1;
+    }
+  };
   return (
     <>
       <CalendarHeatmap
@@ -27,7 +37,7 @@ const CalendarHeatMap = ({ value, year }) => {
           if (!value) {
             return "color-empty";
           }
-          return `color-scale-${value.count}`;
+          return `color-scale-${colorScale(value.count)}`;
         }}
       />
       <ReactTooltip />

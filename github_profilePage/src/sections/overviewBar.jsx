@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import RepoCard from "../components/RepoCard";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-const OverviewBar = ({ pinnedItems }) => {
+const OverviewBar = ({ pinnedItems, isrepo }) => {
   const [position, setPosition] = useState(pinnedItems?.nodes);
   const [disable, setDisable] = useState(true);
 
@@ -30,13 +30,19 @@ const OverviewBar = ({ pinnedItems }) => {
   return (
     <div className="ml-4 md:ml-6 md:pr-6 lg:pr-8 mt-5 pr-4 lg2:pr-16">
       <div className="flex justify-between items-center">
-        <p className="text-navIcon">Pinned</p>
-        <a
-          href="#"
-          className="text-gray-200 hover:text-blue-400 text-opacity-60 text-sm font-light"
-        >
-          Customize your pins
-        </a>
+        {isrepo ? (
+          <p className="text-navIcon">Popular repositories</p>
+        ) : (
+          <p className="text-navIcon">Pinned</p>
+        )}
+        {!isrepo && (
+          <a
+            href="#"
+            className="text-gray-200 hover:text-blue-400 text-opacity-60 text-sm font-light"
+          >
+            Customize your pins
+          </a>
+        )}
       </div>
       <DragDropContext onDragEnd={handleDrag}>
         <Droppable droppableId="pinnedItems">

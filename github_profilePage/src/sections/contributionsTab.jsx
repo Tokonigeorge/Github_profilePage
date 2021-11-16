@@ -36,6 +36,18 @@ const ContributionsTab = ({ contributions, year, error }) => {
         <div>
           <CalendarHeatMap value={_values} year={year} />
         </div>
+        <div className="flex items-center justify-between text-xs text-gray-400 -mt-2.5 ml-2">
+          <span>Learn how we count contribution</span>
+          <div className="flex items-center">
+            <p>less</p>
+            <span className="h-2.5 w-2.5 color-scale-0 mx-1 -mb-1"></span>
+            <span className="h-2.5 w-2.5 color-scale-1 mr-1 -mb-1"></span>
+            <span className="h-2.5 w-2.5 color-scale-2 mr-1 -mb-1"></span>
+            <span className="h-2.5 w-2.5 color-scale-3 mr-1 -mb-1"></span>
+            <span className="h-2.5 w-2.5 color-scale-5 -mr-2.5 -mb-1"></span>
+            <p>more</p>
+          </div>
+        </div>
       </div>
     </div>
   );

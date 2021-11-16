@@ -124,7 +124,12 @@ const Body = ({
           handleNavProfileVis={setProfileShow}
         />
         <div className="flex-auto">
-          <OverviewBar pinnedItems={pinnedItems} />
+          {pinnedItems.totalCount > 0 ? (
+            <OverviewBar pinnedItems={pinnedItems} />
+          ) : (
+            <OverviewBar pinnedItems={repositories} isrepo={true} />
+          )}
+
           <div className="flex-auto">
             <ContributionsTab
               contributions={

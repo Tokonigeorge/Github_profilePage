@@ -21,7 +21,7 @@ const Sidebar = ({
 
   const handleLoad = () => {
     const { offsetTop } = githubNameRef?.current || {};
-    setOffset(offsetTop ? offsetTop - 20 : 64);
+    setOffset(offsetTop ? offsetTop - 20 : 340);
   };
   const onScroll = (e) => {
     if (!offset) return handleLoad();
