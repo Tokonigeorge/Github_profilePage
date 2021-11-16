@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ReactTooltip from "react-tooltip";
 import Search from "../components/Search";
 import "../utils/styles.css";
 import HamburgerMenu from "./hamburgerMenu";
@@ -11,16 +12,22 @@ const Navbar = () => {
   return (
     <>
       <div className="bg-navbg">
-        <div className="flex justify-between items-center py-4 px-4 md:hidden text-navIcon hover:text-gray-300">
+        <div className="flex justify-between items-center py-3.5 px-4 md:hidden text-navIcon hover:text-gray-300">
           <button type="button" onClick={() => setOpen(!open)}>
             <HamburgerIcon />
           </button>
           <GithubIcon />
-          <BellIcon />
+          <span
+            data-tip="You have no unread notifications"
+            data-type="light"
+            data-text-color="white"
+          >
+            <BellIcon />
+          </span>
         </div>
 
-        <div className="hidden justify-between items-center py-4 px-4 md:flex lg:px-8 md:px-6">
-          <div className="items-center flex">
+        <div className="hidden justify-between items-center py-3.5 px-4 md:flex lg:px-8 md:px-6">
+          <div className="items-center flex text-navIcon hover:text-gray-300">
             <GithubIcon />
             {/* calling the search component as a function lets the input the focused on rerender */}
             <div className="w-68 mx-4">{Search(nav)}</div>
@@ -35,7 +42,7 @@ const Navbar = () => {
                 href="#"
                 className="text-navIcon text-sm font-medium mr-4 hidden lg:inline-block hover:text-gray-300"
               >
-                Pull Requests
+                Pull requests
               </a>
               {navList.map((i, indx) => (
                 <a
@@ -49,7 +56,12 @@ const Navbar = () => {
             </div>
           </div>
           <div className="flex items-center">
-            <BellIcon />
+            <span
+              data-tip="You have no unread notifications"
+              className="text-xs"
+            >
+              <BellIcon />
+            </span>
             <span className="flex items-center mx-4 cursor-pointer">
               <PlusIcon />
               <span className="dropDown-icon ml-1"></span>
@@ -72,6 +84,7 @@ const Navbar = () => {
           <HamburgerMenu />
         </div>
       )}
+      <ReactTooltip />
     </>
   );
 };

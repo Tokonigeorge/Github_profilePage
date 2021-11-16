@@ -1,4 +1,5 @@
 import React from "react";
+import "../utils/styles.css";
 
 const PullActivity = ({ url, name, contribution_no }) => {
   return (
@@ -9,10 +10,10 @@ const PullActivity = ({ url, name, contribution_no }) => {
         </a>
       </span>
       <span>
-        <span className="bg-purple-700 px-1.5 rounded-full mr-1">
+        <span className="pull-bubble px-1.5 rounded-full mr-1">
           {contribution_no}
         </span>
-        merged
+        {contribution_no > 1 ? `pull requests` : `pull request`}
       </span>
     </div>
   );

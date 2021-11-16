@@ -1,4 +1,5 @@
 import React from "react";
+import "../utils/styles.css";
 
 const IssueActivity = ({ url, name, contribution_no }) => {
   return (
@@ -9,10 +10,9 @@ const IssueActivity = ({ url, name, contribution_no }) => {
         </a>
       </span>
       <span>
-        <span className="bg-purple-700 px-1.5 rounded-full mr-1">
-          {contribution_no}
+        <span className="issue-bubble px-1.5 rounded-full mr-1">
+          {contribution_no} opened
         </span>
-        merged
       </span>
     </div>
   );

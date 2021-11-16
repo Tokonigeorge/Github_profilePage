@@ -3,6 +3,7 @@ import { RepoIcon } from "./overviewTab";
 import Activities from "../components/Activities";
 import { useQuery, gql } from "@apollo/client";
 import { convertToIsoString } from "../body";
+import { getMonth } from "../date";
 
 const Activity = ({ year, owner, month, click }) => {
   const activitiesquery = gql`
@@ -87,17 +88,28 @@ const Activity = ({ year, owner, month, click }) => {
     },
   });
   const _data = data?.repositoryOwner?.contributionsCollection;
- 
+
   return loading && !click ? (
     <p>loading</p>
   ) : (
     <>
       <div className="mt-4 flex items-center mb-2">
         <p className="text-navIcon text-xs font-medium pl-2">
-          November <span className="text-gray-400">{year}</span>
+          {getMonth(`${year}-${month ? month : "11"}-01`, "long")}{" "}
+          <span className="text-gray-400">{year}</span>
         </p>
         <span className="border-t border-gray-400 border-opacity-20 ml-4 flex-auto"></span>
       </div>
+      {_data?.totalCommitContributions > 0 &&
+        _data?.totalPullRequestContributions > 0 &&
+        _data?.totalRepositoryContributions > 0 &&
+        _data?.totalPullRequestReviewContributions > 0 &&
+        _data?.totalIssueContributions > 0 && (
+          <p className="text-navIcon text-xs text-center">
+            No activities for{" "}
+            {getMonth(`${year}-${month ? month : "11"}-01`, "long")}
+          </p>
+        )}
       {_data?.totalCommitContributions > 0 && (
         <Activities
           Icon={CommitIcon}
