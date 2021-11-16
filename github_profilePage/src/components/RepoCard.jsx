@@ -13,6 +13,7 @@ const RepoCard = ({
   _ref,
   provided,
   url,
+  handleDisable,
 }) => {
   const languageColor = {
     backgroundColor: language?.color,
@@ -40,7 +41,12 @@ const RepoCard = ({
           <p className="text-xs rounded-full ring-1 ring-gray-500 ring-opacity-40 px-2 py-0.5 mr-2 ml-0.5">
             {isPrivate ? "Private" : "Public"}
           </p>
-          <DragIcon />
+          <span
+            onMouseEnter={() => handleDisable(false)}
+            onMouseLeave={() => handleDisable(true)}
+          >
+            <DragIcon />
+          </span>
         </div>
       </div>
       {des && <p className="text-xs text-gray-400 pt-2">{des}</p>}

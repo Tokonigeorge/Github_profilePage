@@ -4,6 +4,11 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const OverviewBar = ({ pinnedItems }) => {
   const [position, setPosition] = useState(pinnedItems?.nodes);
+  const [disable, setDisable] = useState(true);
+
+  const handleDisable = (bool) => {
+    setDisable(bool);
+  };
 
   const handleDrag = (result) => {
     const { destination, source, draggableId } = result;
@@ -52,6 +57,7 @@ const OverviewBar = ({ pinnedItems }) => {
                       key={`${indx}`}
                       draggableId={`${indx}`}
                       index={indx}
+                      isDragDisabled={disable}
                     >
                       {(provided) => {
                         return (
@@ -66,6 +72,7 @@ const OverviewBar = ({ pinnedItems }) => {
                             provided={provided}
                             _ref={provided.innerRef}
                             url={i.url}
+                            handleDisable={handleDisable}
                           />
                         );
                       }}

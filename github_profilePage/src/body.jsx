@@ -171,7 +171,7 @@ const Body = ({
               /> */}
             {/* <Activity year={from} owner={owner} /> */}
 
-            <div className={`md:hidden lg:block lg:w-32 mr-16 mt-4 sticky`}>
+            <div className={`md:hidden lg:block lg:w-32 mr-16 mt-4`}>
               {contributionsCollection?.contributionYears?.map((i, indx) => (
                 <YearButton
                   key={indx}
