@@ -63,8 +63,8 @@ const Sidebar = ({
         ring-gray-400 ring-opacity-30 ${
           hover ? (status ? "w-44 shadow" : "w-24 shadow") : "w-9"
         }`}
-          onMouseEnter={() => setHover(true)}
-          onMouseLeave={() => setHover(false)}
+          onMouseOver={() => setHover(true)}
+          onMouseOut={() => setHover(false)}
         >
           <span
             className={`absolute top-1/4 flex items-center left-1/4 mt-px  ${
