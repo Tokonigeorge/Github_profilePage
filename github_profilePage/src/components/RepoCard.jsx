@@ -42,8 +42,8 @@ const RepoCard = ({
             {isPrivate ? "Private" : "Public"}
           </p>
           <span
-            onMouseEnter={() => handleDisable(false)}
-            onMouseLeave={() => handleDisable(true)}
+            onMouseOver={() => handleDisable(false)}
+            onMouseOut={() => handleDisable(true)}
           >
             <DragIcon />
           </span>
