@@ -2,6 +2,8 @@ import React from "react";
 import Activity from "./activity";
 import { useQuery, gql } from "@apollo/client";
 import { convertToIsoString } from "../body";
+import { css } from "@emotion/react";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const ActivityWrapper = ({ year, owner, month, click, index }) => {
   const activitiesquery = gql`
@@ -132,7 +134,7 @@ const ActivityWrapper = ({ year, owner, month, click, index }) => {
   });
   const _data = data?.repositoryOwner?.contributionsCollection;
   return loading && !click ? (
-    <p>Loading</p>
+    <ClipLoader loading={loading} size={150} />
   ) : (
     <>
       {index === 0 && <p className="text-navIcon">Contribution activity</p>}
