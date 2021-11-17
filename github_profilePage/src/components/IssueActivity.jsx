@@ -27,8 +27,9 @@ const IssueActivity = ({
       </span>
       <span>
         <span className="issue-bubble px-1.5 rounded-full mr-1">
-          {contribution_no} opened
+          {contribution_no}
         </span>
+        opened
       </span>
       {hover && (
         <div className="absolute -top-24 left-10">

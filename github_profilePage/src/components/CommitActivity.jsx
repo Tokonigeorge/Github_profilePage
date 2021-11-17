@@ -27,7 +27,7 @@ const CommitActivity = ({
         >
           {name}
         </a>
-        <p>{number} commits</p>
+        <p className="hidden md:block">{number} commits</p>
       </span>
       <span className=" h-2 rounded commit" style={commitStyle}></span>
       {hover && (

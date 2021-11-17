@@ -150,6 +150,7 @@ const Body = ({
                   month={i}
                   click={click}
                   index={indx}
+                  key={indx}
                 />
               ))}{" "}
               <button
@@ -193,10 +194,49 @@ const Body = ({
         <Footer />
       </div>
       <div className="md:hidden">
-        <OverviewTab repo_number={repositories?.totalCount} />
-        <OverviewBar pinnedItems={pinnedItems} />
-        <ContributionsTab />
-        <Activity />
+        <OverviewTab
+          repo_number={repositories?.totalCount}
+          avatarUrl={avatarUrl}
+          github_name={login}
+        />
+        {pinnedItems.totalCount > 0 ? (
+          <OverviewBar pinnedItems={pinnedItems} />
+        ) : (
+          <OverviewBar pinnedItems={repositories} isrepo={true} />
+        )}
+        <ContributionsTab
+          contributions={
+            data?.repositoryOwner?.contributionsCollection?.contributionCalendar
+          }
+          year={from}
+          error={error}
+        />
+        <div className="px-4 mt-6 text-gray-400 md:pl-6 md:pr-6 flex-auto">
+          {_months?.map((i, indx) => (
+            <ActivityWrapper
+              year={from}
+              owner={owner}
+              month={i}
+              click={click}
+              index={indx}
+              key={indx}
+            />
+          ))}{" "}
+          <button
+            type="button"
+            className="bg-transparent text-xs text-blue-400 w-full py-2.5 font-medium rounded-md 
+        border border-gray-300 border-opacity-20 mt-6 hover:bg-gray-500 hover:bg-opacity-10"
+            onClick={() => handleCount()}
+          >
+            Show more activity
+          </button>
+          <p className="text-xs text-gray-400 mt-6">
+            Seeing something unexpected? Take a look at the{" "}
+            <a href="#" className="text-blue-400">
+              Github Profile guide.
+            </a>
+          </p>
+        </div>
         <Footer />
       </div>
     </div>

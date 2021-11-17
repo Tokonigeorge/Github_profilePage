@@ -134,11 +134,19 @@ const ActivityWrapper = ({ year, owner, month, click, index }) => {
   });
   const _data = data?.repositoryOwner?.contributionsCollection;
   return loading && !click ? (
-    <ClipLoader loading={loading} size={150} />
+    <div className="flex justify-center">
+      <ClipLoader color={"#8B949E"} loading={loading} size={150} />
+    </div>
   ) : (
     <>
       {index === 0 && <p className="text-navIcon">Contribution activity</p>}
-      <Activity year={year} month={month} _data={_data} loading={loading} />
+      <Activity
+        year={year}
+        month={month}
+        _data={_data}
+        loading={loading}
+        error={error}
+      />
     </>
   );
 };

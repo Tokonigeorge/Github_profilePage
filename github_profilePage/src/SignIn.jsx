@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const SignIn = ({ handleChange, loading, error }) => {
   //work out validation of input
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState("Tokonigeorge");
   const [empty, setEmpty] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,7 +41,7 @@ const SignIn = ({ handleChange, loading, error }) => {
             }`}
             value={value}
             onChange={(e) => {
-              setValue(e.target.value), setEmpty(false);
+              setValue(e.target.value);
             }}
           />
           {empty && (

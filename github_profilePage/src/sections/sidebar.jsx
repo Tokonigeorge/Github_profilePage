@@ -17,35 +17,36 @@ const Sidebar = ({
 }) => {
   const githubNameRef = useRef();
   const [hover, setHover] = useState(false);
-  const [offset, setOffset] = useState();
+  // const [offset, setOffset] = useState();
 
-  const handleLoad = () => {
-    const { offsetTop } = githubNameRef?.current || {};
-    setOffset(offsetTop ? offsetTop - 20 : 340);
-  };
-  const onScroll = (e) => {
-    if (!offset) return handleLoad();
-    if (
-      document.documentElement.scrollTop > offset ||
-      document.body.scrollTop > offset
-    ) {
-      console.log(offset);
-      handleNavProfileVis(true);
-    } else {
-      console.log(offset);
-      handleNavProfileVis(false);
-    }
-  };
+  // const handleLoad = () => {
+  //   const { offsetTop } = githubNameRef?.current || {};
+  //   setOffset(offsetTop ? offsetTop : null);
+  // };
+  // const onScroll = (e) => {
+  //   if (!offset) return handleLoad();
+  //   if (
+  //     document.documentElement.scrollTop > offset ||
+  //     document.body.scrollTop > offset
+  //   ) {
+  //     handleNavProfileVis(true);
+  //   } else {
+  //     handleNavProfileVis(false);
+  //   }
+  // };
 
-  useEffect(() => {
-    document.addEventListener("load", handleLoad, true);
-    return () => document.removeEventListener("load", handleLoad);
-  }, []);
-  useEffect(() => {
-    document.addEventListener("scroll", onScroll, true);
-    return () => document.removeEventListener("scroll", onScroll);
-  }, []);
+  // useEffect(() => {
+  //   document.addEventListener("load", handleLoad, true);
+  //   return () => document.removeEventListener("load", handleLoad);
+  // }, []);
+  // useEffect(() => {
+  //   document.addEventListener("scroll", onScroll, true);
+  //   return () => document.removeEventListener("scroll", onScroll);
+  // }, []);
   //lg pl-20
+  const statusWidth = {
+    width: hover && status && status.length * 15 + "px",
+  };
   return (
     <div className="w-72 md:pl-6 lg:pl-8 lg:w-80 lg2:w-88 lg2:pl-16 flex-none">
       <div className="-mt-8 mb-4 relative">
@@ -60,9 +61,8 @@ const Sidebar = ({
         />
         <div
           className={`cursor-pointer absolute top-3/4 lg:left-56 left-3/4 bg-navbg rounded-full h-9 text-gray-400 ml-4 ring-1 
-        ring-gray-400 ring-opacity-30 ${
-          hover ? (status ? "w-44 shadow" : "w-24 shadow") : "w-9"
-        }`}
+        ring-gray-400 ring-opacity-30 ${hover ? "w-24 shadow" : "w-9"}`}
+          style={statusWidth}
           onMouseOver={() => setHover(true)}
           onMouseOut={() => setHover(false)}
         >
@@ -85,7 +85,9 @@ const Sidebar = ({
           </span>
         </div>
       </div>
-      <div ref={githubNameRef}>
+      <div
+      // ref={githubNameRef}
+      >
         {name && (
           <p className="text-2xl text-gray-200 text-opacity-80 font-semibold">
             {name}

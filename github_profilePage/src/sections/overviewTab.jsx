@@ -2,48 +2,48 @@ import React, { useEffect, useRef, useState } from "react";
 import "../utils/styles.css";
 
 const OverviewTab = ({ repo_number, profileShow, avatarUrl, github_name }) => {
-  const overviewRef = useRef();
-  const [fixed, setFixed] = useState(false);
-  const [offset, setOffset] = useState();
+  // const overviewRef = useRef();
+  // const [fixed, setFixed] = useState(false);
+  // const [offset, setOffset] = useState(60);
 
-  const handleLoad = () => {
-    const { offsetTop } = overviewRef?.current || {};
-    setOffset(offsetTop ? offsetTop : 64);
-  };
-  const onScroll = (e) => {
-    if (!offset) return handleLoad();
-    if (
-      document.documentElement.scrollTop >= offset ||
-      document.body.scrollTop >= offset
-    ) {
-      console.log(offset);
-      setFixed(true);
-    } else {
-      console.log(offset);
-      setFixed(false);
-    }
-  };
-  useEffect(() => {
-    document.addEventListener("load", handleLoad, true);
-    return () => document.removeEventListener("load", handleLoad);
-  }, []);
-  useEffect(() => {
-    document.addEventListener("scroll", onScroll, true);
-    return () => document.removeEventListener("scroll", onScroll);
-  }, []);
-  // md:pl-74 lg:pl-88
+  // const handleLoad = () => {
+  //   const { offsetTop } = overviewRef?.current || {};
+  //   setOffset(offsetTop ? offsetTop : null);
+  // };
+  // const onScroll = (e) => {
+  //   // if (!offset) return handleLoad();
+  //   if (
+  //     document.documentElement.scrollTop >= offset ||
+  //     document.body.scrollTop >= offset
+  //   ) {
+  //     setFixed(true);
+  //   } else {
+  //     setFixed(false);
+  //   }
+  // };
+  // useEffect(() => {
+  //   document.addEventListener("load", handleLoad, true);
+  //   return () => document.removeEventListener("load", handleLoad);
+  // }, []);
+  // useEffect(() => {
+  //   document.addEventListener("scroll", onScroll, true);
+  //   return () => document.removeEventListener("scroll", onScroll);
+  // }, []);
+  // ${
+  //      fixed ? "fixed top-0 pt-5 bg-bodyBg w-screen" : "pt-7"
+  //    }
   return (
     <div
-      className={`text-sm bg-bodyBg text-navIcon flex items-center pl-4 border-b border-gray-400 border-opacity-20 pb-2.5
-     overflow-x-auto ${
-       fixed ? "fixed top-0 pt-5 bg-bodyBg w-screen" : "pt-7  "
-     }`}
-      ref={overviewRef}
+      className={`text-sm md:bg-bodyBg text-navIcon flex items-center pl-4 border-b border-gray-400 border-opacity-20 pb-2.5
+     overflow-x-auto pt-10 md:pt-7 overflow-y-hidden
+     
+     `}
+      // ref={overviewRef}
     >
       <div
         className={`${
-          profileShow ? "visible" : "invisible"
-        } flex items-center pl-4`}
+          profileShow ? "visible z-30" : "invisible"
+        } md:flex md:items-center hidden md:w-72 md:pl-6 lg:pl-8 lg:w-80 lg2:w-88 lg2:pl-16 `}
       >
         <img
           src={
@@ -60,10 +60,10 @@ const OverviewTab = ({ repo_number, profileShow, avatarUrl, github_name }) => {
           </p>
         )}
       </div>
-      <div className="flex items-center md:pl-52  md:-ml-2 lg:pl-52 lg:ml-6 lg2:pl-60">
+      <div className="flex items-center md:ml-2">
         <a
           href="#"
-          className="pr-3 md:pr-4 md:pl-4 flex items-center link active"
+          className="pr-3 pl-4 md:pr-4 md:pl-4 flex items-center link active"
         >
           <span className="hidden sm2:block">
             <OverviewIcon />

@@ -27,7 +27,7 @@ const Activities = ({
   return (
     <>
       <div className="border-l-2 border-gray-400 border-opacity-20 h-4 ml-5"></div>
-      <div className="flex items-center justify-between mt-px pl-1.5">
+      <div className="flex items-center justify-between sm2:mt-px pl-1.5">
         <div className="flex items-center">
           <span className="rounded-full p-1.5 bg-gray-400 bg-opacity-20">
             {/* <LockIcon /> */} <Icon />
@@ -72,7 +72,7 @@ const Activities = ({
       <div className="border-l-2 border-gray-400 border-opacity-20 h-auto pb-4 ml-5">
         {open && isCommit && (
           <>
-            {commitActivity?.map((i) => (
+            {commitActivity?.map((i, indx) => (
               <CommitActivity
                 url={i?.repository.url}
                 name={i?.repository.name}
@@ -82,13 +82,14 @@ const Activities = ({
                 stargazerCount={i?.repository.stargazerCount}
                 language={i?.repository.primaryLanguage}
                 number={i?.contributions.totalCount}
+                key={indx}
               />
             ))}
           </>
         )}
         {open && isPull && (
           <>
-            {pullActivity?.map((i) => (
+            {pullActivity?.map((i, indx) => (
               <PullActivity
                 url={i?.repository.url}
                 name={i?.repository.name}
@@ -98,13 +99,14 @@ const Activities = ({
                 stargazerCount={i?.repository.stargazerCount}
                 language={i?.repository.primaryLanguage}
                 contribution_no={i?.contributions.totalCount}
+                key={indx}
               />
             ))}
           </>
         )}
         {open && isIssue && (
           <>
-            {issueActivity?.map((i) => (
+            {issueActivity?.map((i, indx) => (
               <IssueActivity
                 url={i?.repository.url}
                 name={i?.repository.name}
@@ -114,13 +116,14 @@ const Activities = ({
                 stargazerCount={i?.repository.stargazerCount}
                 language={i?.repository.primaryLanguage}
                 contribution_no={i?.contributions.totalCount}
+                key={indx}
               />
             ))}
           </>
         )}
         {open && isCreated && (
           <>
-            {createdActivity?.nodes?.map((i) => (
+            {createdActivity?.nodes?.map((i, indx) => (
               <CreatedRepoActivity
                 url={i?.repository.url}
                 name={i?.repository.name}
@@ -130,13 +133,14 @@ const Activities = ({
                 stargazerCount={i?.repository.stargazerCount}
                 language={i?.repository.primaryLanguage}
                 createdAt={i?.repository.createdAt}
+                key={indx}
               />
             ))}
           </>
         )}
         {open && isReview && (
           <>
-            {reviewActivity?.map((i) => (
+            {reviewActivity?.map((i, indx) => (
               <ReviewActivity
                 url={i?.repository.url}
                 name={i?.repository.name}
@@ -146,6 +150,7 @@ const Activities = ({
                 stargazerCount={i?.repository.stargazerCount}
                 language={i?.repository.primaryLanguage}
                 pullrequest_no={i?.contributions.totalCount}
+                key={indx}
               />
             ))}
           </>

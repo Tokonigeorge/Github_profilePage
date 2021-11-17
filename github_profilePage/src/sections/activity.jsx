@@ -4,7 +4,7 @@ import Activities from "../components/Activities";
 
 import { getMonth } from "../date";
 
-const Activity = ({ year, month, _data, loading }) => {
+const Activity = ({ year, month, _data, loading, error }) => {
   return (
     !loading && (
       <>
@@ -25,6 +25,12 @@ const Activity = ({ year, month, _data, loading }) => {
               {getMonth(`${year}-${month ? month : "11"}-01`, "long")}
             </p>
           )}
+        {error && (
+          <p className="text-navIcon text-xs text-center">
+            Error fetching activities for {""}{" "}
+            {getMonth(`${year}-${month ? month : "11"}-01`, "long")}
+          </p>
+        )}
         {_data?.totalCommitContributions > 0 && (
           <Activities
             Icon={CommitIcon}

@@ -17,11 +17,7 @@ const Navbar = ({ avatarUrl }) => {
             <HamburgerIcon />
           </button>
           <GithubIcon />
-          <span
-            data-tip="You have no unread notifications"
-            data-type="light"
-            data-text-color="white"
-          >
+          <span data-tip="You have no unread notifications">
             <BellIcon />
           </span>
         </div>

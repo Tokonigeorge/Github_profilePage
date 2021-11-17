@@ -13,7 +13,7 @@ function HamburgerMenu() {
     "Settings",
   ];
   return (
-    <div className="px-4">
+    <div className="px-4 bg-navbg">
       {Search()}
       <div className="pt-4">
         {menuItems.map((i, indx) => (
@@ -52,7 +52,7 @@ const MenuItems = ({ text, imageSrc, Icon }) => {
             <Icon />
           </span>
         )}
-        <p> {text}</p>
+        <p className="hover:text-gray-300"> {text}</p>
       </div>
     </a>
   );

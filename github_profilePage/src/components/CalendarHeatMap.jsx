@@ -5,7 +5,7 @@ import "react-calendar-heatmap/dist/styles.css";
 import "../utils/styles.css";
 import { getMonth, getDay } from "../date";
 
-const CalendarHeatMap = ({ value, year }) => {
+const CalendarHeatMap = ({ value, year, from, to }) => {
   const colorScale = (count) => {
     if (count === 0) {
       return 0;
@@ -19,8 +19,8 @@ const CalendarHeatMap = ({ value, year }) => {
   return (
     <>
       <CalendarHeatmap
-        endDate={new Date(`${year}-12-31`)}
-        startDate={new Date(`${year}-01-01`)}
+        endDate={new Date(`${year}-${to}-31`)}
+        startDate={new Date(`${year}-${from}-01`)}
         values={value}
         tooltipDataAttrs={(value) => {
           return {
