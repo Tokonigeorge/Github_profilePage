@@ -4,7 +4,7 @@ import Search from "../components/Search";
 import "../utils/styles.css";
 import HamburgerMenu from "./hamburgerMenu";
 
-const Navbar = ({avatarUrl}) => {
+const Navbar = ({ avatarUrl }) => {
   //set the transition to hover color change
   const [open, setOpen] = useState(false);
   const navList = ["Issues", "MarketPlace", "Explore"];
@@ -68,7 +68,10 @@ const Navbar = ({avatarUrl}) => {
             </span>
             <span className="flex items-center cursor-pointer">
               <img
-                src={avatarUrl || "https://avatars.githubusercontent.com/u/65655487?s=40&amp;v=4"}
+                src={
+                  avatarUrl ||
+                  "https://avatars.githubusercontent.com/u/65655487?s=40&amp;v=4"
+                }
                 alt=""
                 width="20"
                 height="20"

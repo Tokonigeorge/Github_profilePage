@@ -6,7 +6,10 @@ import OverviewTab from "./sections/overviewTab";
 import OverviewBar from "./sections/overviewBar";
 import ContributionsTab from "./sections/contributionsTab";
 import Activity from "./sections/activity";
+<<<<<<< HEAD
 import ActivityWrapper from "./sections/activityWrapper";
+=======
+>>>>>>> 0788c9a4742faa4f3ee050affaf6295a72ca8a91
 import YearButton from "./components/YearButton";
 import Footer from "./sections/footer";
 import { useQuery, gql } from "@apollo/client";
