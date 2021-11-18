@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { PersonIcon, StarIcon, EmojiStatus } from "./topbar";
 
 const Sidebar = ({
@@ -13,12 +13,43 @@ const Sidebar = ({
   following,
   starredRepositories,
   avatarUrl,
+  handleNavProfileVis,
 }) => {
+  const githubNameRef = useRef();
   const [hover, setHover] = useState(false);
+  // const [offset, setOffset] = useState();
+
+  // const handleLoad = () => {
+  //   const { offsetTop } = githubNameRef?.current || {};
+  //   setOffset(offsetTop ? offsetTop : null);
+  // };
+  // const onScroll = (e) => {
+  //   if (!offset) return handleLoad();
+  //   if (
+  //     document.documentElement.scrollTop > offset ||
+  //     document.body.scrollTop > offset
+  //   ) {
+  //     handleNavProfileVis(true);
+  //   } else {
+  //     handleNavProfileVis(false);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   document.addEventListener("load", handleLoad, true);
+  //   return () => document.removeEventListener("load", handleLoad);
+  // }, []);
+  // useEffect(() => {
+  //   document.addEventListener("scroll", onScroll, true);
+  //   return () => document.removeEventListener("scroll", onScroll);
+  // }, []);
   //lg pl-20
+  const statusWidth = {
+    width: hover && status && status.length * 15 + "px",
+  };
   return (
-    <div className="w-72 md:pl-6 lg:pl-8 lg:w-80 flex-none">
-      <div className="-mt-7 mb-4 relative">
+    <div className="w-72 md:pl-6 lg:pl-8 lg:w-80 lg2:w-88 lg2:pl-16 flex-none">
+      <div className="-mt-8 mb-4 relative">
         <img
           src={
             avatarUrl || "https://avatars.githubusercontent.com/u/65655487?v=4"
@@ -26,30 +57,39 @@ const Sidebar = ({
           alt=""
           width="340px"
           height="340px"
-          className="rounded-full ring-1 ring-gray-700 ring-opacity-80"
+          className="rounded-full ring-2 ring-gray-700 ring-opacity-60"
         />
         <div
-          className={`absolute top-3/4 lg:left-56 left-3/4 bg-navbg rounded-full h-9 text-gray-400 ml-4 ring-1 
-        ring-gray-400 ring-opacity-30 ${
-          hover ? (status ? "w-44 shadow" : "w-24 shadow") : "w-9"
-        }`}
-          onMouseEnter={() => setHover(true)}
-          onMouseLeave={() => setHover(false)}
+          className={`cursor-pointer absolute top-3/4 lg:left-56 left-3/4 bg-navbg rounded-full h-9 text-gray-400 ml-4 ring-1 
+        ring-gray-400 ring-opacity-30 ${hover ? "w-24 shadow" : "w-9"}`}
+          style={statusWidth}
+          onMouseOver={() => setHover(true)}
+          onMouseOut={() => setHover(false)}
         >
           <span
-            className={`absolute top-1/4 flex items-center left-1/4 mt-px hover:text-blue-400 ${
-              hover ? (status ? "-ml-8" : "-ml-4") : "ml-px"
+            className={`absolute top-1/4 flex items-center left-1/4 mt-px  ${
+              hover
+                ? status
+                  ? "-ml-8 text-blue-400"
+                  : "-ml-4 text-blue-400"
+                : "ml-px"
             }`}
           >
             <EmojiStatus />
-            {hover && !status && <p className="text-xs ml-3">Set status</p>}
-            {status && hover && <p className="text-xs ml-3">{status}</p>}
+            {hover && !status && (
+              <p className="text-xs ml-2 text-gray-400">Set status</p>
+            )}
+            {status && hover && (
+              <p className="text-xs ml-2 text-gray-400">{status}</p>
+            )}
           </span>
         </div>
       </div>
-      <div>
+      <div
+      // ref={githubNameRef}
+      >
         {name && (
-          <p className="text-2xl text-gray-200 text-opacity-80 font-medium">
+          <p className="text-2xl text-gray-200 text-opacity-80 font-semibold">
             {name}
           </p>
         )}
@@ -61,8 +101,8 @@ const Sidebar = ({
       </div>
       <button
         type="button"
-        className="bg-gray-500 bg-opacity-10 hover:bg-opacity-20 text-sm text-textColor w-full py-1.5 font-medium rounded-md 
-        border border-defaultBorder hover:border-opacity-50 hover:border-gray-300 mt-4"
+        className="bg-gray-500 bg-opacity-20 hover:bg-opacity-40 text-sm text-textColor w-full py-1.5 font-medium rounded-md 
+        border border-defaultBorder hover:border-opacity-50 hover:border-gray-300 mt-4 transition-all"
       >
         Edit profile
       </button>
@@ -78,7 +118,7 @@ const Sidebar = ({
           <p className="ml-1">following</p>
         </a>
         <span className="ml-1 mr-1 text-navIcon font-medium w-0.5 h-0.5 bg-navIcon rounded-full"></span>
-        <span className="hover:text-blue-400">
+        <span className="hover:text-blue-400 cursor-pointer">
           <StarIcon />
         </span>
         <span className="ml-1 text-navIcon font-medium">
@@ -101,7 +141,7 @@ const Sidebar = ({
           </div>
         )}
       </div>
-      {highlights && (
+      {/* {highlights && (
         <div className="mt-4 border-t border-gray-400 border-opacity-20 ">
           <p className="pt-4 text-gray-200 text-opacity-90 font-medium">
             Highlights
@@ -115,7 +155,7 @@ const Sidebar = ({
             </span>
           </div>
         </div>
-      )}
+      )} */}
       {organization.nodes.length > 0 && (
         <div className="mt-4 border-t border-gray-400 border-opacity-20 ">
           <p className="pt-4 text-gray-200 text-opacity-90 font-medium">

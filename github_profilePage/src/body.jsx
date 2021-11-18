@@ -6,6 +6,7 @@ import OverviewTab from "./sections/overviewTab";
 import OverviewBar from "./sections/overviewBar";
 import ContributionsTab from "./sections/contributionsTab";
 import Activity from "./sections/activity";
+import ActivityWrapper from "./sections/activityWrapper";
 import YearButton from "./components/YearButton";
 import Footer from "./sections/footer";
 import { useQuery, gql } from "@apollo/client";
@@ -39,6 +40,7 @@ const Body = ({
   const [count, setCount] = useState(1);
   const [_months, setMonth] = useState([`${month}`]);
   const [click, setClick] = useState(false);
+  const [profileShow, setProfileShow] = useState(false);
 
   //set the first active item to be the topyear and onclick change the value to i, if it matches set active to true and style
   // const [click, setClick] = useState(from);
@@ -51,6 +53,11 @@ const Body = ({
     setCount((prevState) => prevState + 1);
     setMonth([..._months, `${month - count}`]);
   };
+
+  // const handleNavProfileVis = (bool) => {
+  //   console.log("is in body");
+  //   setProfileShow(bool);
+  // };
 
   const contributionsquery = gql`
     query ($owner: String!, $from: DateTime!, $to: DateTime!) {
@@ -82,9 +89,10 @@ const Body = ({
       to: convertToIsoString(`${from}-12-31`),
     },
   });
+  //overflow-x-hidden overscroll-x-none
   return (
-    <div className="bg-navbg h-screen overflow-x-hidden sm2:bg-bodyBg overscroll-x-none">
-      <Navbar />
+    <div className="bg-navbg  sm2:bg-bodyBg h-auto relative">
+      <Navbar avatarUrl={avatarUrl} />
       <Topbar
         github_name={login}
         name={name}
@@ -94,8 +102,13 @@ const Body = ({
         starredRepositories={starredRepositories?.totalCount}
         avatarUrl={avatarUrl}
       />
-      <div className="hidden md:block">
-        <OverviewTab repo_number={repositories?.totalCount} />
+      <div className="hidden md:block sticky top-0">
+        <OverviewTab
+          repo_number={repositories?.totalCount}
+          profileShow={profileShow}
+          avatarUrl={avatarUrl}
+          github_name={login}
+        />
       </div>
       <div className="hidden md:flex md:items-start">
         <Sidebar
@@ -103,62 +116,69 @@ const Body = ({
           name={name}
           location={location}
           twitter={twitterUsername}
-          highlights="PRO"
+          // highlights="PRO"
           organization={organizations}
           followers={followers?.totalCount}
           following={following?.totalCount}
           status={status?.message}
           starredRepositories={starredRepositories?.totalCount}
           avatarUrl={avatarUrl}
+          handleNavProfileVis={setProfileShow}
         />
         <div className="flex-auto">
-          <OverviewBar pinnedItems={pinnedItems} />
-          <div className="flex items-start">
-            <div className="flex-auto">
-              <ContributionsTab
-                contributions={
-                  data?.repositoryOwner?.contributionsCollection
-                    ?.contributionCalendar
-                }
-                year={from}
-                error={error}
-              />
-              <div className="px-4 mt-8 text-gray-400 md:pl-6 md:pr-6">
-                <p className="text-navIcon">Contribution activity</p>
-                {_months?.map((i) => (
-                  <Activity
-                    year={from}
-                    owner={owner}
-                    month={i}
-                    handleCount={handleCount}
-                    click={click}
-                  />
-                ))}{" "}
-                <button
-                  type="button"
-                  className="bg-transparent text-xs text-blue-400 w-full py-2.5 font-medium rounded-md 
-        border border-gray-300 border-opacity-20 mt-6"
-                  onClick={() => handleCount()}
-                >
-                  Show more activity
-                </button>
-                <p className="text-xs text-gray-400 mt-6">
-                  Seeing something unexpected? Take a look at the{" "}
-                  <a href="#" className="text-blue-400">
-                    Github Profile guide.
-                  </a>
-                </p>
-              </div>
+          {pinnedItems.totalCount > 0 ? (
+            <OverviewBar pinnedItems={pinnedItems} />
+          ) : (
+            <OverviewBar pinnedItems={repositories} isrepo={true} />
+          )}
 
-              {/* <Activity
+          <div className="flex-auto">
+            <ContributionsTab
+              contributions={
+                data?.repositoryOwner?.contributionsCollection
+                  ?.contributionCalendar
+              }
+              year={from}
+              error={error}
+            />
+          </div>
+          <div className="flex items-start">
+            <div className="px-4 mt-6 text-gray-400 md:pl-6 md:pr-6 flex-auto">
+              {_months?.map((i, indx) => (
+                <ActivityWrapper
+                  year={from}
+                  owner={owner}
+                  month={i}
+                  click={click}
+                  index={indx}
+                  key={indx}
+                />
+              ))}{" "}
+              <button
+                type="button"
+                className="bg-transparent text-xs text-blue-400 w-full py-2.5 font-medium rounded-md 
+        border border-gray-300 border-opacity-20 mt-6 hover:bg-gray-500 hover:bg-opacity-10"
+                onClick={() => handleCount()}
+              >
+                Show more activity
+              </button>
+              <p className="text-xs text-gray-400 mt-6">
+                Seeing something unexpected? Take a look at the{" "}
+                <a href="#" className="text-blue-400">
+                  Github Profile guide.
+                </a>
+              </p>
+            </div>
+
+            {/* <Activity
                 year={from}
                 owner={owner}
                 // month={i}
                 handleCount={handleCount}
               /> */}
-              {/* <Activity year={from} owner={owner} /> */}
-            </div>
-            <div className="md:hidden lg:block lg:w-32 mr-16 mt-4">
+            {/* <Activity year={from} owner={owner} /> */}
+
+            <div className={`md:hidden lg:block lg:w-32 mr-12 mt-4`}>
               {contributionsCollection?.contributionYears?.map((i, indx) => (
                 <YearButton
                   key={indx}
@@ -175,10 +195,51 @@ const Body = ({
         <Footer />
       </div>
       <div className="md:hidden">
-        <OverviewTab repo_number={repositories?.totalCount} />
-        <OverviewBar pinnedItems={pinnedItems} />
-        <ContributionsTab />
-        <Activity />
+        <div className=" sticky top-0">
+          <OverviewTab
+            repo_number={repositories?.totalCount}
+            avatarUrl={avatarUrl}
+            github_name={login}
+          />
+        </div>
+        {pinnedItems.totalCount > 0 ? (
+          <OverviewBar pinnedItems={pinnedItems} />
+        ) : (
+          <OverviewBar pinnedItems={repositories} isrepo={true} />
+        )}
+        <ContributionsTab
+          contributions={
+            data?.repositoryOwner?.contributionsCollection?.contributionCalendar
+          }
+          year={from}
+          error={error}
+        />
+        <div className="px-4 mt-6 text-gray-400 md:pl-6 md:pr-6 flex-auto">
+          {_months?.map((i, indx) => (
+            <ActivityWrapper
+              year={from}
+              owner={owner}
+              month={i}
+              click={click}
+              index={indx}
+              key={indx}
+            />
+          ))}{" "}
+          <button
+            type="button"
+            className="bg-transparent text-xs text-blue-400 w-full py-2.5 font-medium rounded-md 
+        border border-gray-300 border-opacity-20 mt-6 hover:bg-gray-500 hover:bg-opacity-10"
+            onClick={() => handleCount()}
+          >
+            Show more activity
+          </button>
+          <p className="text-xs text-gray-400 mt-6">
+            Seeing something unexpected? Take a look at the{" "}
+            <a href="#" className="text-blue-400">
+              Github Profile guide.
+            </a>
+          </p>
+        </div>
         <Footer />
       </div>
     </div>
@@ -188,21 +249,5 @@ const Body = ({
 export const convertToIsoString = (arg) => {
   return new Date(arg).toISOString();
 };
-
-// const ContributionQuery = () => {
-
-//   const contributionsquery =
-//   const { loading, error, data } = useQuery(contributionsquery, {
-//     variables: { owner, From, to },
-//   });
-
-// //convert from to ISO string and to too
-//   // if (error && topYear) return <p>Error</p>
-//   return (
-//     <>
-
-//     </>
-//   )
-// }
 
 export default Body;

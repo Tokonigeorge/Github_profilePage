@@ -12,13 +12,15 @@ const RepoCard = ({
   language,
   _ref,
   provided,
+  url,
+  handleDisable,
 }) => {
   const languageColor = {
     backgroundColor: language?.color,
   };
   return (
     <div
-      className="h-auto rounded-md ring-1 ring-defaultBorder p-4 flex flex-col justify-between"
+      className="h-auto rounded-md ring-1 ring-gray-600 ring-opacity-50 p-4 flex flex-col justify-between"
       ref={_ref}
       {...provided.draggableProps}
       {...provided.dragHandleProps}
@@ -29,8 +31,8 @@ const RepoCard = ({
             <RepoIcon />
           </span>
           <a
-            href="#"
-            className="text-sm font-medium text-blue-400 ml-2 break-all"
+            href={url}
+            className="text-sm font-medium text-blue-400 ml-2 break-all hover:underline"
           >
             {name}
           </a>
@@ -39,11 +41,16 @@ const RepoCard = ({
           <p className="text-xs rounded-full ring-1 ring-gray-500 ring-opacity-40 px-2 py-0.5 mr-2 ml-0.5">
             {isPrivate ? "Private" : "Public"}
           </p>
-          <DragIcon />
+          <span
+            onMouseOver={() => handleDisable(false)}
+            onMouseOut={() => handleDisable(true)}
+          >
+            <DragIcon />
+          </span>
         </div>
       </div>
       {des && <p className="text-xs text-gray-400 pt-2">{des}</p>}
-      <div className={`flex items-center text-gray-400 mt-6`}>
+      <div className={`flex items-center text-gray-400 mt-5`}>
         {language && (
           <>
             <span

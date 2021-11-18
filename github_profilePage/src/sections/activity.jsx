@@ -1,159 +1,82 @@
 import React from "react";
 import { RepoIcon } from "./overviewTab";
 import Activities from "../components/Activities";
-import { useQuery, gql } from "@apollo/client";
-import { convertToIsoString } from "../body";
 
-const Activity = ({ year, owner, month, click }) => {
-  const activitiesquery = gql`
-    query ($owner: String!, $from: DateTime!, $to: DateTime!) {
-      repositoryOwner(login: $owner) {
-        ... on User {
-          contributionsCollection(from: $from, to: $to) {
-            totalCommitContributions
-            totalRepositoriesWithContributedCommits
-            totalRepositoryContributions
-            totalPullRequestContributions
-            totalRepositoriesWithContributedPullRequests
-            totalPullRequestReviewContributions
-            totalRepositoriesWithContributedPullRequestReviews
-            totalIssueContributions
-            totalRepositoriesWithContributedIssues
-            commitContributionsByRepository(maxRepositories: 5) {
-              repository {
-                name
-                url
-              }
-              contributions {
-                totalCount
-              }
-            }
-            pullRequestContributionsByRepository(maxRepositories: 5) {
-              repository {
-                name
-                url
-                pullRequests {
-                  totalCount
-                }
-              }
-              contributions {
-                totalCount
-              }
-            }
-            pullRequestReviewContributionsByRepository(maxRepositories: 5) {
-              repository {
-                name
-                url
-                pullRequests {
-                  totalCount
-                }
-              }
-              contributions {
-                totalCount
-              }
-            }
-            issueContributionsByRepository(maxRepositories: 5) {
-              repository {
-                name
-                url
-              }
-              contributions {
-                totalCount
-              }
-            }
-            repositoryContributions(last: 5) {
-              nodes {
-                repository {
-                  name
-                  url
-                  createdAt
-                  primaryLanguage {
-                    name
-                    color
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `;
-  const { loading, error, data } = useQuery(activitiesquery, {
-    variables: {
-      owner: owner,
-      from: convertToIsoString(`${year}-${month ? month : "11"}-01`),
-      to: convertToIsoString(`${year}-${month ? month : "11"}-30`),
-    },
-  });
-  const _data = data?.repositoryOwner?.contributionsCollection;
-  // const {
-  //   totalCommitContributions,
-  //   totalRepositoriesWithContributedCommits,
-  //   totalRepositoryContributions,
-  //   totalPullRequestContributions,
-  //   totalRepositoriesWithContributedPullRequests,
-  //   totalPullRequestReviewContributions,
-  //   totalRepositoriesWithContributedPullRequestReviews,
-  //   totalIssueContributions,
-  //   totalRepositoriesWithContributedIssues,
-  // } = ;
+import { getMonth } from "../date";
 
-  return loading && !click ? (
-    <p>loading</p>
-  ) : (
-    <>
-      <div className="mt-4 flex items-center mb-2">
-        <p className="text-navIcon text-xs font-medium pl-2">
-          November <span className="text-gray-400">{year}</span>
-        </p>
-        <span className="border-t border-gray-400 border-opacity-20 ml-4 flex-auto"></span>
-      </div>
-      {_data?.totalCommitContributions > 0 && (
-        <Activities
-          Icon={CommitIcon}
-          contribution_no={_data?.totalCommitContributions}
-          repo_no={_data?.totalRepositoriesWithContributedCommits}
-          isCommit={true}
-          commitActivity={_data?.commitContributionsByRepository}
-        />
-      )}
-      {_data?.totalPullRequestContributions > 0 && (
-        <Activities
-          Icon={PullIcon}
-          contribution_no={_data?.totalPullRequestContributions}
-          repo_no={_data?.totalRepositoriesWithContributedPullRequests}
-          isPull={true}
-          pullActivity={_data?.pullRequestContributionsByRepository}
-        />
-      )}
-      {_data?.totalRepositoryContributions > 0 && (
-        <Activities
-          Icon={RepoIcon}
-          contribution_no={_data?.totalRepositoryContributions}
-          isCreated={true}
-          createdActivity={_data.repositoryContributions}
-        />
-      )}
-      {_data?.totalPullRequestReviewContributions > 0 && (
-        <Activities
-          Icon={ReviewIcon}
-          contribution_no={_data?.totalPullRequestReviewContributions}
-          repo_no={_data?.totalRepositoriesWithContributedPullRequestReviews}
-          isReview={true}
-          reviewActivity={_data?.pullRequestReviewContributionsByRepository}
-        />
-      )}
-      {_data?.totalIssueContributions > 0 && (
-        <Activities
-          Icon={IssueIcon}
-          contribution_no={_data?.totalIssueContributions}
-          repo_no={_data?.totalRepositoriesWithContributedIssues}
-          isIssue={true}
-          issueActivity={_data?.issueContributionsByRepository}
-        />
-      )}
-    </>
+const Activity = ({ year, month, _data, loading, error }) => {
+  return (
+    !loading && (
+      <>
+        <div className="mt-4 flex items-center mb-2">
+          <p className="text-navIcon text-xs font-medium pl-2">
+            {getMonth(`${year}-${month ? month : "11"}-01`, "long")}{" "}
+            <span className="text-gray-400">{year}</span>
+          </p>
+          <span className="border-t border-gray-400 border-opacity-20 ml-4 flex-auto"></span>
+        </div>
+        {!_data?.totalCommitContributions > 0 &&
+          !_data?.totalPullRequestContributions > 0 &&
+          !_data?.totalRepositoryContributions > 0 &&
+          !_data?.totalPullRequestReviewContributions > 0 &&
+          !_data?.totalIssueContributions > 0 && (
+            <p className="text-navIcon text-xs text-center">
+              No activities for{" "}
+              {getMonth(`${year}-${month ? month : "11"}-01`, "long")}
+            </p>
+          )}
+        {error && (
+          <p className="text-navIcon text-xs text-center">
+            Error fetching activities for {""}{" "}
+            {getMonth(`${year}-${month ? month : "11"}-01`, "long")}
+          </p>
+        )}
+        {_data?.totalCommitContributions > 0 && (
+          <Activities
+            Icon={CommitIcon}
+            contribution_no={_data?.totalCommitContributions}
+            repo_no={_data?.totalRepositoriesWithContributedCommits}
+            isCommit={true}
+            commitActivity={_data?.commitContributionsByRepository}
+          />
+        )}
+        {_data?.totalPullRequestContributions > 0 && (
+          <Activities
+            Icon={PullIcon}
+            contribution_no={_data?.totalPullRequestContributions}
+            repo_no={_data?.totalRepositoriesWithContributedPullRequests}
+            isPull={true}
+            pullActivity={_data?.pullRequestContributionsByRepository}
+          />
+        )}
+        {_data?.totalRepositoryContributions > 0 && (
+          <Activities
+            Icon={RepoIcon}
+            contribution_no={_data?.totalRepositoryContributions}
+            isCreated={true}
+            createdActivity={_data.repositoryContributions}
+          />
+        )}
+        {_data?.totalPullRequestReviewContributions > 0 && (
+          <Activities
+            Icon={ReviewIcon}
+            contribution_no={_data?.totalPullRequestReviewContributions}
+            repo_no={_data?.totalRepositoriesWithContributedPullRequestReviews}
+            isReview={true}
+            reviewActivity={_data?.pullRequestReviewContributionsByRepository}
+          />
+        )}
+        {_data?.totalIssueContributions > 0 && (
+          <Activities
+            Icon={IssueIcon}
+            contribution_no={_data?.totalIssueContributions}
+            repo_no={_data?.totalRepositoriesWithContributedIssues}
+            isIssue={true}
+            issueActivity={_data?.issueContributionsByRepository}
+          />
+        )}
+      </>
+    )
   );
 };
 

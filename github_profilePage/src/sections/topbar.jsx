@@ -42,7 +42,7 @@ const Topbar = ({
       )}
       <button
         type="button"
-        className="bg-gray-500 bg-opacity-10 hover:bg-opacity-20 text-sm text-textColor w-full py-1.5 font-medium rounded-md 
+        className="bg-gray-500 bg-opacity-20 hover:bg-opacity-20 text-sm text-textColor w-full py-1.5 font-medium rounded-md 
         border border-defaultBorder hover:border-opacity-50 hover:border-gray-300 mt-2"
       >
         Edit profile

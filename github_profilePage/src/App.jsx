@@ -62,13 +62,28 @@ function App() {
               avatarUrl
             }
           }
-          repositories {
+          repositories(first: 6) {
             totalCount
+            nodes {
+              name
+              url
+              isPrivate
+              description
+              primaryLanguage {
+                name
+                color
+              }
+              forkCount
+              isFork
+              stargazerCount
+            }
           }
           pinnedItems(first: 6) {
+            totalCount
             nodes {
               ... on Repository {
                 name
+                url
                 isPrivate
                 description
                 primaryLanguage {
@@ -95,11 +110,9 @@ function App() {
       variables: { owner },
     });
     //handleChange function is passed as a prop to Body to be called so the owner state can be updated in this component
-    const handleChange = (e, value) => {
-      e.preventDefault();
+    const handleChange = (value) => {
       setOwner(value);
     };
-    if (error && owner) console.log(error); //return <p>Error</p>;
     //loading = {owner && loading} => this is because loading is set to true as it still fecthes result when owner state is empty,
     //adding owner && makes it truthy only when both are satisfied.
     return (
@@ -107,14 +120,18 @@ function App() {
         {data?.repositoryOwner ? (
           <Body {...data.repositoryOwner} owner={owner} />
         ) : (
-          <SignIn handleChange={handleChange} loading={owner && loading} />
+          <SignIn
+            handleChange={handleChange}
+            loading={owner && loading}
+            error={error && owner}
+          />
         )}
       </>
     );
   };
   return (
     <ApolloProvider client={client}>
-      <div className="App">
+      <div className="App ">
         <RepoOwner />
       </div>
     </ApolloProvider>
