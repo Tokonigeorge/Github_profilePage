@@ -15,11 +15,11 @@ const Activity = ({ year, month, _data, loading, error }) => {
           </p>
           <span className="border-t border-gray-400 border-opacity-20 ml-4 flex-auto"></span>
         </div>
-        {_data?.totalCommitContributions > 0 &&
-          _data?.totalPullRequestContributions > 0 &&
-          _data?.totalRepositoryContributions > 0 &&
-          _data?.totalPullRequestReviewContributions > 0 &&
-          _data?.totalIssueContributions > 0 && (
+        {!_data?.totalCommitContributions > 0 &&
+          !_data?.totalPullRequestContributions > 0 &&
+          !_data?.totalRepositoryContributions > 0 &&
+          !_data?.totalPullRequestReviewContributions > 0 &&
+          !_data?.totalIssueContributions > 0 && (
             <p className="text-navIcon text-xs text-center">
               No activities for{" "}
               {getMonth(`${year}-${month ? month : "11"}-01`, "long")}

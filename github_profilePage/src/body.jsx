@@ -89,8 +89,9 @@ const Body = ({
       to: convertToIsoString(`${from}-12-31`),
     },
   });
+  //overflow-x-hidden overscroll-x-none
   return (
-    <div className="bg-navbg overflow-x-hidden sm2:bg-bodyBg overscroll-x-none">
+    <div className="bg-navbg  sm2:bg-bodyBg h-auto relative">
       <Navbar avatarUrl={avatarUrl} />
       <Topbar
         github_name={login}
@@ -101,7 +102,7 @@ const Body = ({
         starredRepositories={starredRepositories?.totalCount}
         avatarUrl={avatarUrl}
       />
-      <div className="hidden md:block">
+      <div className="hidden md:block sticky top-0">
         <OverviewTab
           repo_number={repositories?.totalCount}
           profileShow={profileShow}
@@ -194,11 +195,13 @@ const Body = ({
         <Footer />
       </div>
       <div className="md:hidden">
-        <OverviewTab
-          repo_number={repositories?.totalCount}
-          avatarUrl={avatarUrl}
-          github_name={login}
-        />
+        <div className=" sticky top-0">
+          <OverviewTab
+            repo_number={repositories?.totalCount}
+            avatarUrl={avatarUrl}
+            github_name={login}
+          />
+        </div>
         {pinnedItems.totalCount > 0 ? (
           <OverviewBar pinnedItems={pinnedItems} />
         ) : (

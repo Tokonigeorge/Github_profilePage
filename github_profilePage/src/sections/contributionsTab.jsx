@@ -35,7 +35,7 @@ const ContributionsTab = ({ contributions, year, error }) => {
         </div>
       </div>
       <div className="h-auto rounded-t-md ring-1 ring-gray-600 ring-opacity-50 p-2 md:p-4 md:pr-10 mt-2 overflow-hidden">
-        <div className="hidden md:block">
+        <div className="hidden sm2:block">
           <CalendarHeatMap value={_values} year={year} from="01" to="12" />
         </div>
         <div className="sm2:hidden">

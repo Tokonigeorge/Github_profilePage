@@ -131,7 +131,7 @@ function App() {
   };
   return (
     <ApolloProvider client={client}>
-      <div className="App">
+      <div className="App ">
         <RepoOwner />
       </div>
     </ApolloProvider>

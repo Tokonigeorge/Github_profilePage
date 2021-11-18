@@ -1,49 +1,42 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../utils/styles.css";
 
-const OverviewTab = ({ repo_number, profileShow, avatarUrl, github_name }) => {
-  // const overviewRef = useRef();
-  // const [fixed, setFixed] = useState(false);
-  // const [offset, setOffset] = useState(60);
+const OverviewTab = ({ repo_number, avatarUrl, github_name }) => {
+  const [visible, setVisible] = useState(false);
 
   // const handleLoad = () => {
   //   const { offsetTop } = overviewRef?.current || {};
   //   setOffset(offsetTop ? offsetTop : null);
   // };
-  // const onScroll = (e) => {
-  //   // if (!offset) return handleLoad();
-  //   if (
-  //     document.documentElement.scrollTop >= offset ||
-  //     document.body.scrollTop >= offset
-  //   ) {
-  //     setFixed(true);
-  //   } else {
-  //     setFixed(false);
-  //   }
-  // };
-  // useEffect(() => {
-  //   document.addEventListener("load", handleLoad, true);
-  //   return () => document.removeEventListener("load", handleLoad);
-  // }, []);
-  // useEffect(() => {
-  //   document.addEventListener("scroll", onScroll, true);
-  //   return () => document.removeEventListener("scroll", onScroll);
-  // }, []);
+  const onScroll = (e) => {
+    if (
+      document.documentElement.scrollTop >= 400 ||
+      document.body.scrollTop >= 400
+    ) {
+      setVisible(true);
+    } else {
+      setVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("scroll", onScroll, true);
+    return () => document.removeEventListener("scroll", onScroll);
+  }, []);
   // ${
   //      fixed ? "fixed top-0 pt-5 bg-bodyBg w-screen" : "pt-7"
-  //    }
+  //    }overflow-x-auto
   return (
     <div
-      className={`text-sm md:bg-bodyBg text-navIcon flex items-center pl-4 border-b border-gray-400 border-opacity-20 pb-2.5
-     overflow-x-auto pt-10 md:pt-7 overflow-y-hidden
+      className={`text-sm bg-navbg  md:bg-bodyBg text-navIcon flex items-center pl-4 border-b border-gray-400 border-opacity-20 pb-2.5
+     pt-5 mt-5 md:pt-3 md:mt-4 overflow-x-auto
      
      `}
-      // ref={overviewRef}
     >
       <div
         className={`${
-          profileShow ? "visible z-30" : "invisible"
-        } md:flex md:items-center hidden md:w-72 md:pl-6 lg:pl-8 lg:w-80 lg2:w-88 lg2:pl-16 `}
+          visible ? "visible z-30" : "invisible"
+        } md:flex md:items-center hidden  md:w-72 md:pl-6 lg:pl-8 lg:w-80 lg2:w-88 lg2:pl-16 `}
       >
         <img
           src={
