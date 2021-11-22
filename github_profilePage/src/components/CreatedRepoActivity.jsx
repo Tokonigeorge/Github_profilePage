@@ -32,7 +32,7 @@ const CreatedRepoActivity = ({
           {name}
         </a>
       </span>
-      <span className="flex items-center">
+      <span className="flex items-center mr-1">
         <span
           className="w-2.5 h-2.5 rounded-full ring-1 ring-gray-600 mr-1"
           style={_color}

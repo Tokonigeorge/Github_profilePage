@@ -35,6 +35,7 @@ function App() {
   });
   //the query to be passed contains a variable, "owner" and the type is set to String, the var is passed in the useQuery hook.
   //we also want to fetch the basic data for the Body component before it renders.
+  // Comments kpk
   const repoOwner_details = gql`
     query ($owner: String!) {
       repositoryOwner(login: $owner) {
@@ -113,6 +114,7 @@ function App() {
     const handleChange = (value) => {
       setOwner(value);
     };
+
     //loading = {owner && loading} => this is because loading is set to true as it still fecthes result when owner state is empty,
     //adding owner && makes it truthy only when both are satisfied.
     return (
@@ -122,8 +124,8 @@ function App() {
         ) : (
           <SignIn
             handleChange={handleChange}
-            loading={owner && loading}
-            error={error && owner}
+            loading={owner.length > 0 && loading}
+            error={error && owner.length > 0}
           />
         )}
       </>

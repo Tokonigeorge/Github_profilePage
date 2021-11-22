@@ -39,7 +39,7 @@ const ContributionsTab = ({ contributions, year, error }) => {
           <CalendarHeatMap value={_values} year={year} from="01" to="12" />
         </div>
         <div className="sm2:hidden">
-          <CalendarHeatMap value={_values} year={year} from="07" to="11" />
+          <CalendarHeatMap value={_values} year={year} from="06" to="11" />
         </div>
         {/* <div className="hidden sm2:block md:hidden">
           <CalendarHeatMap value={_values} year={year} from="05" to="11" />
