@@ -108,7 +108,7 @@ function App() {
   const RepoOwner = () => {
     //the variable owner is passed here.
     const { loading, error, data } = useQuery(repoOwner_details, {
-      variables: { owner },
+      variables: owner.length > 0 && { owner },
     });
     //handleChange function is passed as a prop to Body to be called so the owner state can be updated in this component
     const handleChange = (value) => {
